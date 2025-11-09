@@ -94,7 +94,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-11-07T12:58:00.000Z">
-<meta property="article:modified_time" content="2025-11-09T07:11:03.284Z">
+<meta property="article:modified_time" content="2025-11-09T08:21:17.701Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="智能合约论文">
 <meta name="twitter:card" content="summary">
@@ -408,8 +408,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-11-09 15:11:03</span>
-            <span class="mobile">2025-11-09 15:11:03</span>
+            <span class="desktop">2025-11-09 16:21:17</span>
+            <span class="mobile">2025-11-09 16:21:17</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -461,7 +461,7 @@
 <p><a href=""><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.7-table1.jpg"
+                     data-src="/../../../images/blogImage/11.7-table1.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>在基于机器学习的检测领域，仍然存在一些挑战。机器学习解决方案没有按照它们检测到的漏洞进行一致的分类，限制了比较分析。现有的研究往往缺乏对研究差距的全面评估，这是指导未来努力所需要的。基本设计要求有效的基于ml的检测仍未确定。本文解决了这些挑战，并提出了以下关键贡献</p>
@@ -476,7 +476,7 @@
 <p><a href=""><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.8-fig.1.jpg"
+                     data-src="/../../../images/blogImage/11.8-fig.1.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>Zheng等人根据SC生命周期阶段将SC漏洞分为四组，其中每个阶段都有可能导致漏洞的不同挑战。其他研究人员采用了类似的方法，根据漏洞在以太坊架构层（应用程序、数据、共识和网络）中的位置对漏洞进行分类。大多数已知的SC漏洞发生在应用层。</p>
@@ -488,23 +488,23 @@
 <p>我们观察到SC漏洞通常来自三个来源：安全问题、编程语言限制或开发缺陷。图2说明了这种分类，其目的是通过使团队能够专注于特定的问题类型来简化SC审计。</p>
 <h2 id="3-传统智能合约漏洞检测的ML策略"><a href="#3-传统智能合约漏洞检测的ML策略" class="headerlink" title="3 传统智能合约漏洞检测的ML策略"></a>3 传统智能合约漏洞检测的ML策略</h2><h3 id="3-1-基于监督ml的检测模型"><a href="#3-1-基于监督ml的检测模型" class="headerlink" title="3.1 基于监督ml的检测模型"></a>3.1 基于监督ml的检测模型</h3><p>区分良性和脆弱的SCs是一个二元分类任务。S-ML被广泛应用于该任务，因为它能够从标记数据中学习，并且在结构化环境中表现出色。本节回顾了50种现有的基于s - ml的检测方法，并根据它们所处理的漏洞进行了分类。</p>
 <h4 id="3-1-1-庞氏骗局"><a href="#3-1-1-庞氏骗局" class="headerlink" title="3.1.1 庞氏骗局"></a>3.1.1 庞氏骗局</h4><p>美国证券交易委员会（SEC）将庞氏骗局定义为用新参与者的资金向现有投资者支付回报的骗局。Charles Ponzi于1919年首次提出，其结构类似于金字塔：第一级的用户为第一级的用户提供资金，使早期参与者受益，而后期参与者则遭受损失。当募集放缓或出现大规模撤资时，此类计划就会崩溃。它们分为树形、链形、瀑布形和交接型。sc使自动化，增加投资者风险和威胁区块链安全。补充材料表S4总结了基于ml的庞氏骗局 SC检测方法。</p>
-<p><a href=""><img  
+<p><a href="img"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.8-table-2.jpg"
-                      alt="App Platorm"
+                     data-src="/../../../images/blogImage/11.8-table-2.jpg"
+                      alt="img"
                 ></a></p>
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.8-table-3.jpg"
+                     data-src="/../../../images/blogImage/11.8-table-3.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>研究强调了基于代码和基于交易的特征在检测庞氏SCs和零日攻击方面的有效性。XGB模型表明，庞氏检测在没有源代码的情况下是可行的，通过结合操作码和交易特征提高了性能。RF比XGB实现了更高的方差减少，并且可以在使用操作码特征部署后立即检测庞氏合约，但这两个模型都依赖于单一操作码频率，忽略了代码语义。基于代码的零日功能优于基于交易的功能（RF召回率：96% vs. 84%）。CatBoost和J48也达到了97%的召回率，具有排名第一的功能是基于代码.庞氏合约经常模仿交易特征中的正常行为，从而增加了错误分类的风险.</p>
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.8-table-4.jpg"
+                     data-src="/../../../images/blogImage/11.8-table-4.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>结合AST和基于交易的特征改进了DT、SVM和Multinomial NB (MNB)，每个都达到了94%的召回率，MNB总体上略好。来自源代码、操作码和交易数据的TF-IDF向量等混合特征增强了gb和ET的软投票集合，实现了89.67%的准确率和2.14%的FPR。在三个精心设计的数据集上进行的测试表明，删除非贡献行为特征可以提高性能，但召回率仍低于49%。具有纯代码和混合特征的基于射频的模型显示了交易数据的边际收益（召回率提高约2%）。ADASYN过采样与AdaBoost对3克操作码特征仍然产生适度的正类召回。</p>
@@ -521,7 +521,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.8-fig.2.jpg"
+                     data-src="/../../../images/blogImage/11.8-fig.2.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>Eth-PSD用于检测使用84,664个以太坊交易的网络钓鱼骗局。通过复制网络钓鱼样本来平衡数据集，并使用多种排序技术进行特征选择。60倍交叉验证的KNN准确率为98.11%，FPR为0.9%。输入、块高度和时间戳被认为是最有信息的特征。结合历史账户活动、网络架构特征和过采样改进的集成模型。然而，缺乏类分布报告降低了调查结果的可靠性。</p>
@@ -678,7 +678,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.3.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.3.jpg"
                       alt="App Platorm"
                 ></a></p>
 <h3 id="5-1-检测阶段方法"><a href="#5-1-检测阶段方法" class="headerlink" title="5.1 检测阶段方法"></a>5.1 检测阶段方法</h3><p>SC漏洞通常通过三种主要方法检测：部署前、部署后和零日检测。预部署方法，如在部署前分析SC源代码，以识别漏洞并确保安全发布。部署后的方法，例如，监视事务行为以检测异常。</p>
@@ -713,7 +713,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.4.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.4.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>算法驱动的方法修改了学习过程本身。其中包括类权重调整和集成学习，以减轻偏差并提高鲁棒性。虽然这些方法保留了原始数据，但它们需要仔细地进行超参数调优，如果配置不当，可能会出现覆盖或遗漏的问题。混合方法结合了这两种策略，以利用它们的优势，同时减轻个体的缺陷。然而，在选择最佳重采样比和调谐参数方面仍然存在挑战</p>
@@ -731,7 +731,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.5.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.5.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>基于代码的特性是研究最广泛的。基于令牌的特性（补充材料的图S8）提供了丰富的语法和语义信息，但需要源代码，而源代码通常是不可用的。代码重用也会导致跨sc的字节码重复，增加数据集冗余。</p>
@@ -760,19 +760,19 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.6.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.6.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.7.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.7.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.8.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.8.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>一些研究，使用SC漏洞分析工具作为评估ML模型的基线。然而，这些工具无法检测所有类型的SC漏洞，限制了它们进行全面性能比较的有效性。</p>
@@ -798,7 +798,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.9.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.9.jpg"
                       alt="App Platorm"
                 ></a></p>
 <p>最近的进展结合了结构和语义分析来提高覆盖率。gnn通过对代码依赖关系进行建模来增强结构推理，而转换器和llm则捕获上下文和语言级语义。元学习和对比学习促进了低数据场景下的泛化，从而能够检测新出现的漏洞。然而，在可解释性、可伸缩性和部署方面仍然存在挑战。</p>
@@ -808,7 +808,7 @@
 <p><a target="_blank" rel="noopener" href="https://file+.vscode-resource.vscode-cdn.net/Users/a1ex/Documents/MyBlog/source/_posts/"><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../images/BlogImage/11.9-fig.10.jpg"
+                     data-src="/../../../images/blogImage/11.9-fig.10.jpg"
                       alt="App Platorm"
                 ></a></p>
 <blockquote>
@@ -848,7 +848,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-11-09 15:11:03
+                    :</strong> 2025-11-09 16:21:17
             </li>
         
         <li>
