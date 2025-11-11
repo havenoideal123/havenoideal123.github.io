@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="A1ex">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/11/10/区块链安全大语言模型：系统文件综述/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链安全大语言模型：系统文件综述">
+<meta property="og:url" content="http://example.com/2025/11/10/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E7%BB%BC%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-10T08:41:43.000Z">
+<meta property="article:modified_time" content="2025-11-11T00:51:54.152Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="智能合约论文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            区块链安全大语言模型：系统文件综述 | A1ex&#39;s blogs.
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Welcome to A1ex's security blogs.","subtitle":{"text":["Focus on smart contract audit and reverse engineering"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":50,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":"蝴蝶","artist":"陶喆","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E8%9D%B4%E8%9D%B6.mp3","cover":"https://i.ytimg.com/vi/1wkI80-fpPw/hqdefault.jpg","lrc":null},{"name":"歌谣","artist":"李荣浩","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E6%AD%8C%E8%B0%A3.mp3","cover":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-pyZey8DKVpsr5qL5JDfPLOVcv6mDH3yVjQ&s","lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"FreeTalk":{"path":"/shuoshuo","icon":"fa-regular fa-chart-bar"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                A1ex&#39;s blogs.
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/shuoshuo"
+                                        >
+                                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                                    FREETALK
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/shuoshuo"
+                        >
+                            <span>
+                                FREETALK
+                            </span>
+                            
+                                <i class="fa-regular fa-chart-bar fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">区块链安全大语言模型：系统文件综述</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/avatar.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">A1ex</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-10 16:41:43</span>
+        <span class="mobile">2025-11-10 16:41:43</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-11 08:51:54</span>
+            <span class="mobile">2025-11-11 08:51:54</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87/">智能合约论文</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="区块链安全大语言模型-系统文件综述"><a href="#区块链安全大语言模型-系统文件综述" class="headerlink" title="区块链安全大语言模型-系统文件综述"></a>区块链安全大语言模型-系统文件综述</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>大型语言模型（llm）已经成为网络安全各个领域的强大工具。值得注意的是，最近的研究越来越多地探索LLM在区块链安全（BS）背景下的应用。然而，对于llm在区块链安全性方面的全部应用范围、影响和潜在约束的全面理解仍然存在差距。为了填补这一空白，我们进行了一项文献综述，重点是将llm应用于区块链安全（LLM4BS）的研究。</p>
+<p>我们的研究旨在全面分析和理解现有的研究，并阐明llm如何有助于提高区块链系统的安全性。通过对现有文献的彻底检查，我们深入研究了llm与区块链安全的各个方面的集成。我们探索了llm可以增强区块链安全性的机制，包括它们在智能合约审计、交易异常检测、漏洞修复、智能合约程序分析以及作为加密货币社区参与者方面的应用。此外，考虑到可扩展性、隐私问题和道德问题等因素，我们评估了与利用llm增强区块链安全性相关的挑战和限制。我们的全面审查揭示了LLM4BS任务的机会和潜在风险，为研究人员，从业者和政策制定者提供了有价值的见解。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>随着数字时代的推进，人工智能与区块链技术的融合成为一项突破性的发展，特别是在大型语言模型（Large Language Models, llm）与不断发展的区块链安全领域相交的关键时刻。llm已经上升到区块链安全的前沿，在文本生成和理解，特别是在源代码分析方面展示了深刻的能力，这些能力反映了模仿人类的熟练程度。这种变革性的影响归功于它们庞大的数据集、复杂的架构和支撑其运营框架的深度神经网络。</p>
+<p>llm在识别和综合数据中的复杂模式方面的健壮性使它们成为增强区块链系统内安全措施的宝贵资产。具体来说，智能合约的细粒度分析，交易的细致审查，以及自动代码（resp.）。文本)生成是llm擅长的关键任务之一，并且效果显著。</p>
+<p>然而，将这些认知功能集成到区块链安全性中会遇到一系列需要考虑的挑战。应对不断发展的网络安全威胁的复杂动态，解决人工智能部署带来的道德问题，使这条轨迹既充满希望，又充满要求。尽管取得了进展，但仍然缺乏全面描述LLM在区块链安全中的应用现状和未来发展前景的工作。</p>
+<p>为了填补这一空白，我们试图深入研究llm在区块链安全领域的多方面作用，探索llm在区块链安全（LLM4BS）任务上的综合范围。我们首先描述跨不同领域（§2.1）的大型语言模型（LLM）应用程序的当代景观，以及区块链技术所涉及的无数安全威胁（§2.2）。然后，如表1所示，我们详细说明了LLM4BS任务的合并和进展，涉及智能合约审计、块交易检测、合约动态分析、智能合约开发和加密货币社区贡献者（§3）。此后，我们精心选择了LLM4BS任务的三个典型案例来阐明最先进的LLM4BS任务（§4），包括LLM4FUZZ ， SMARTINV , BLOCKGPT。最后，我们对LLM4BS范围内目前面临的挑战进行了深刻的论述，并为这一新兴领域的未来研究和发展提供了前瞻性的轨迹（§5）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-2-table.1.jpg"
+                      alt="image"
+                ></p>
+<p>本文的贡献如下：</p>
+<ul>
+<li>据我们所知，在对现有文献进行了细致的回顾之后，我们进行了第一次系统的检查，重点是将大型语言模型应用于区块链安全领域内的任务，为先进的人工智能和分布式账本系统之间的相互作用提供了开创性的探索。</li>
+<li>在我们的全面调查中，我们细致地记录了区块链安全领域中大型语言模型应用的现状。我们深入研究了如何在各种场景中使用大型语言模型的详细分析，从增强智能合约的可靠性到加强分布式账本系统的完整性。这揭示了这项尖端技术的多方面贡献。</li>
+<li>在研究的基础上，我们严格整理和总结了一系列与Large应用相关的实践学术成果加强区块链安全性的语言模型（llm）。我们还为未来的研究提出了几个有希望的途径，预计这些将在这个新兴的交叉领域催化实质性的进步和创新。</li>
+</ul>
+<h2 id="2-LLM4BS概述"><a href="#2-LLM4BS概述" class="headerlink" title="2.LLM4BS概述"></a>2.LLM4BS概述</h2><p>我们在本节中提供有关LLM4BS任务的基本知识，包括§2.1中的LLM应用程序和§2.2中的区块链安全威胁。</p>
+<h3 id="2-1-大语言模型的介绍"><a href="#2-1-大语言模型的介绍" class="headerlink" title="2.1 大语言模型的介绍"></a>2.1 大语言模型的介绍</h3><p>本小节将解释大型语言模型（llm）的定义、特征和各种应用。</p>
+<h4 id="2-1-1-LLM的定义和特点"><a href="#2-1-1-LLM的定义和特点" class="headerlink" title="2.1.1 LLM的定义和特点"></a>2.1.1 LLM的定义和特点</h4><p>大型语言模型（llm）代表了人工智能领域的突破性进步，特别是在自然语言处理（NLP）领域。这些模型的特点是它们巨大的尺寸、深度和复杂性，使它们能够以惊人的流畅性和连贯性处理和生成类似人类的文本。llm的核心是转换器架构，这是一个强大的序列建模框架，它彻底改变了NLP领域</p>
+<p>LLM的定义特征包括其前所未有的规模，它涉及对包含数十亿甚至数万亿个单词的庞大文本数据语料库进行训练。这些广泛的训练数据使llm能够捕捉语言的复杂细微差别，包括语法，语义和语用，从而赋予他们对语言结构和惯例的深刻理解。此外，LLM表现出高度的生成能力，能够在广泛的任务和领域中生成上下文相关和连贯的文本。</p>
+<p>此外，LLM具有显著程度的适应性，这要归功于他们通过迁移学习等技术对特定应用或领域进行微调或专门化的能力。通过利用预训练模型并在特定任务数据集上对其进行微调，从业者可以定制llm来解决各种各样的NLP任务，从情感分析和语言翻译到文档摘要和会话代理。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-fig.1.jpg"
+                      alt="image"
+                ></p>
+<p>此外，LLM展示了对语言上下文的高级理解，使他们能够生成对周围文本上下文敏感的响应或预测。这种上下文感知是通过注意机制和位置编码等机制实现的，这些机制使llm能够关注输入序列的相关部分，并有效地为长期依赖关系建模。总的来说，LLM代表了人工智能研究的一个重要里程碑，并为人机交互、内容生成、信息检索等方面开启了新的可能性。它们大规模理解和生成自然语言的能力导致了各个领域的变革性应用，塑造了人工智能驱动技术的未来</p>
+<h4 id="2-1-2-LLM在各个领域的应用"><a href="#2-1-2-LLM在各个领域的应用" class="headerlink" title="2.1.2 LLM在各个领域的应用"></a>2.1.2 LLM在各个领域的应用</h4><p>如图1所示，LLM的多功能性和有效性使其在不同领域和应用中被广泛采用，在这些领域和应用中，LLM表现出了卓越的性能和实用性。LLM的一些值得注意的应用包括：</p>
+<p><strong>自然语言理解（NLU）</strong>：LLM擅长于情感分析、命名实体识别和文本分类等任务，在这些任务中，对语义和上下文的理解至关重要通过利用他们对语言的深刻理解，LLM可以准确地分析和解释文本数据，从而实现社交媒体监控中的情感分析或客户反馈分类等任务。</p>
+<p><strong>自然语言生成（NLG）</strong>：LLM精通为各种应用程序生成类似人类的文本，包括内容创建、对话系统和虚拟助手，他们能够产生连贯的和与上下文相关的反应，这使他们在任务中非常宝贵例如生成产品描述、组合个性化消息，或者在会话界面中促进自然语言交互。</p>
+<p><strong>信息检索和摘要</strong>：LLM在从大量文本中提取相关信息并生成简明摘要，从而促进高效的信息检索和知识提取方面发挥着至关重要的作用。无论是总结新闻文章，从研究论文中提取关键见解，还是为文档生成摘要，LLM都提供了一个强大的解决方案，可以将大量文本数据提炼成易于消化和信息丰富的摘要</p>
+<p><strong>语言翻译</strong>：LLM通过在多种语言之间提供更准确和流畅的翻译，彻底改变了机器翻译。通过利用他们丰富的语言知识和对上下文的理解，LLM可以在翻译中保留原文的意思、语气和风格，从而在包括电子商务、国际外交和多元文化交流在内的各个领域实现跨语言障碍的无缝沟通。</p>
+<p><strong>对话系统：</strong> llm为会话代理和聊天机器人提供了强大的功能，使其能够与用户进行自然且符合上下文的交互。无论是协助客户进行产品查询，提供个性化建议，还是提供客户支持，基于LLM的对话系统都提供了一种用户友好且高效的沟通方式，增强了用户体验和参与度。</p>
+<p><strong>代码生成</strong>：LLM越来越多地被用于生成代码片段，并通过理解和生成各种编程语言的代码来帮助开发人员完成编程任务，通过分析代码存储库和文档，llm可以生成遵循编程约定、语法规则和最佳实践的代码，从而加快开发过程，并帮助代码维护和调试</p>
+<p><strong>科学研究：</strong> LLM通过分析和总结研究论文、提出假设和协助数据解释来支持科学发现。通过摄取大量的科学文献和特定领域的知识，LLM可以帮助研究人员导航不断扩大的科学文献，识别相关出版物，并提取有价值的见解，以告知他们的研究工作</p>
+<p>这些应用强调了LLM在广泛领域和行业中的广泛实用性和变革潜力，突出了它们在推进人工智能能力和实现人机交互方面的重要性以前所未有的复杂程度进行交互。随着LLM的不断发展和完善，他们对各个领域的影响预计将在未来几年增长，推动创新，效率和发现。</p>
+<h3 id="2-2-区块链安全基础"><a href="#2-2-区块链安全基础" class="headerlink" title="2.2 区块链安全基础"></a>2.2 区块链安全基础</h3><p>本节将讨论区块链系统的关键组件和常见安全威胁。</p>
+<h4 id="2-2-1-区块链安全的关键组件"><a href="#2-2-1-区块链安全的关键组件" class="headerlink" title="2.2.1 区块链安全的关键组件"></a>2.2.1 区块链安全的关键组件</h4><p>区块链安全是一项多方面的工作，旨在保护在区块链网络中存储和处理的数据的完整性、机密性和可用性。区块链安全的关键组件包括：</p>
+<p><strong>密码学</strong>：密码学是区块链安全性的核心，用于加密数据、验证参与者并确保事务的完整性。使用散列、数字签名和加密密钥等技术来保护数据并验证区块链上事务的真实性</p>
+<p><strong>共识机制：</strong> 共识机制是管理如何验证事务并将其添加到区块链的协议。通过在网络参与者之间达成一致，共识机制确保了分布式账本的不变性和完整性。流行的共识机制包括工作量证明（PoW）权益证明（PoS）和委托权益证明（DPoS）每个人都有自己的长处和弱点。</p>
+<p><strong>去中心化</strong>：去中心化是区块链安全的核心原则，在节点网络上分配控制和决策权。通过消除单点故障并降低审查或操纵的风险，去中心化增强了区块链网络的弹性和安全性。然而，实现真正的去中心化需要仔细考虑节点分布、治理结构和网络激励等因素</p>
+<p><strong>智能合约安全</strong>：智能合约是自动执行的合约，具有在区块链上编码的预定义规则和条件。确保智能合约的安全性对于防止漏洞、利用和未经授权的访问至关重要。正式验证、代码审计和安全开发实践等技术被用来减轻与智能合约相关的风险，包括重入攻击、整数溢出&#x2F;下溢和未检查的外部调用</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-fig.2.jpg"
+                      alt="image"
+                ></p>
+<h4 id="2-2-2-区块链系统常见安全威胁"><a href="#2-2-2-区块链系统常见安全威胁" class="headerlink" title="2.2.2 区块链系统常见安全威胁"></a>2.2.2 区块链系统常见安全威胁</h4><p>尽管区块链技术具有固有的健壮的安全措施，但各种安全威胁和漏洞对区块链系统的完整性和功能构成了风险。我们在图2中说明了这些威胁。区块链系统中常见的安全威胁包括：</p>
+<p><strong>基于共识的攻击：</strong> 基于共识的攻击利用共识机制中的漏洞进行比较。例如包括51%攻击，其中单个实体或联盟控制了网络的大部分哈希率，使他们能够操纵交易确认或执行双重支出攻击。同样，自私挖矿、日食攻击、远程攻击等攻击，都是针对特定共识协议的弱点，破坏区块链网络的安全性和可靠性</p>
+<p><strong>智能合约漏洞</strong>：智能合约漏洞对区块链安全构成重大风险，因为它们可以被利用来执行未经授权的交易、消耗资金或触发意外行为。常见的智能合约漏洞包括重入攻击，攻击者在前一次调用完成之前反复调用易受攻击的合约的函数，使他们能够操纵合约的状态并窃取资金。其他漏洞，如整数溢出&#x2F;下溢、未检查的外部调用和gas限制漏洞，也可以被利用来破坏智能合约和底层区块链网络的安全性</p>
+<p><strong>DeFi协议漏洞</strong>：去中心化金融（DeFi）协议由于其复杂的交互和可组合性带来了新的安全挑战。DeFi协议中的漏洞，如闪贷攻击、oracle操纵和治理漏洞，可能会给用户造成重大的经济损失，并破坏对DeFi的信任。此外，特定DeFi协议中的漏洞可能会对其他互联协议产生级联效应，从而放大安全漏洞和DeFi领域内系统风险的影响。</p>
+<p><strong>辅助服务漏洞</strong>：辅助服务，如钱包、交易所、oracle和分散应用程序（DApps），是攻击者利用漏洞和破坏区块链系统安全性的入口点。辅助服务中的安全漏洞，如交易所黑客攻击、钱包漏洞或oracle操纵攻击，可能导致资金损失、对用户数据的未经授权访问或对链上交易的操纵。此外，区块链生态系统中辅助服务的互联特性放大了安全漏洞的影响，因为一个服务中的漏洞可能会传播到其他服务，从而导致大范围的中断和经济损失</p>
+<p>解决这些安全威胁和漏洞需要一种综合的方法，包括技术措施、最佳实践和社区协作，以加强b区块链系统的弹性和安全性。通过了解区块链安全的关键组成部分并减轻常见的安全威胁，利益相关者可以在分散的生态系统中促进更大的信任、透明度和采用，从而为全球用户推动创新和价值创造。</p>
+<h2 id="3-LLM4BS任务的分类"><a href="#3-LLM4BS任务的分类" class="headerlink" title="3 LLM4BS任务的分类"></a>3 LLM4BS任务的分类</h2><p>在本节中，我们将介绍一个主题分类法，该分类法旨在系统地对与区块链安全（LLM4BS）的大型语言模型相关的任务进行分类，并强调LLM在这些上下文中的功能。图3描述了LLM4BS任务的五种应用，包括智能合约代码审计§3.1、异常交易分析§3.2、智能合约动态分析§3.3、智能合约开发§3.4、加密货币社区参与者§3.5和其他潜在方向§3.6。</p>
+<h3 id="3-1-LLM作为智能合约代码审核员"><a href="#3-1-LLM作为智能合约代码审核员" class="headerlink" title="3.1 LLM作为智能合约代码审核员"></a>3.1 LLM作为智能合约代码审核员</h3><p>LLM在智能合约代码审计和漏洞检测领域的应用可以简单概括如下：高级工具，如SMARTINV[31]、GPTScan[14]、David et al.[32]、Karanjai等，ContractArmor [34]， Ortu等人[35]，ASSBert [36]，PSCVFinder [37], LLM4Vuln [38], TrustLLM [39], AuditGPT [40]， Chen等[42]，Jain等[43]，PropertyGPT [41], SolGPT [44], defaligner [45], RepairBench [46], LLM-SmartAudit [47], Hyperion [48], AdvSCanner [49], S ‘ oley [50]， Jiang等[51]，XPLOGEN[52]。如表2所示，这些由大型语言模型提供支持的工具标志着从传统的、基于模式的分析方法向更具上下文意识和更全面的检查技术的巨大转变。这些尖端工具通过将不同的信息线索（包括详细描述智能合约的预期功能和事务结构的自然语言文档的细微方面）编织在一起，将其分析能力扩展到静态模式之外。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-fig.3.jpg"
+                      alt="image"
+                ></p>
+<p>通过多模态镜头集成代码和上下文数据，使这些工具具有揭示复杂逻辑疏忽和识别微妙的“机器不可审计”漏洞的能力，否则这些漏洞将逃避检测。通过吸收和解读更丰富的人类文化语言解释与代码相结合，基于LLM的工具更深入地研究了智能合约交互的复杂网络。从这种方法中获得的深刻理解不仅揭示了隐藏的漏洞，而且还加强了智能合约抵御可能导致重大财务影响的无数风险的能力。</p>
+<p>从本质上讲，将大型语言模型集成到智能合约分析中，标志着区块链技术在保障基础设施完整性方面的重大飞跃。它强调了人工智能与软件开发实践融合以加强安全措施的不断发展的前景。在LLM提供的敏锐见解的推动下，这种主动识别和纠正智能合约中的弱点，有助于巩固区块链交易中的信任和可靠性，从而减轻潜在的金融负债，并加强数字合约的基础。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.2.jpg"
+                      alt="image"
+                ></p>
+<p>进一步扩展llm所扮演的关键角色，值得注意的是，这些模型在增强智能合约开发的整个生命周期方面具有巨大的潜力[134]。从一代到维护，LLM都是如此制定更安全、更稳健的智能合约。他们可能会在开发阶段提供建议，建议最佳实践，甚至生成符合安全指导原则的代码片段。在整个审计过程中，像gtscan和SMARTINV这样的工具可以不断学习和适应区块链技术和网络威胁不断发展的新漏洞模式。这种动态学习过程是至关重要的，因为它允许开发越来越精细的模型，这些模型甚至能够检测到最隐蔽和最复杂的漏洞。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.3.jpg"
+                      alt="image"
+                ></p>
+<p>此外，LLM吸收上下文和理解与业务逻辑相关的代码的能力使他们在合同协议复杂且具有复杂逻辑的场景中特别有效。这在金融等领域尤其重要，在这些领域，智能合约管理着涉及巨额资金和众多利益相关者的交易。这样一个领域的漏洞可能会产生灾难性的影响，不仅在财务上，而且在相关实体的声誉损害方面。因此，准确有效的智能合约审计的重要性不容小觑。</p>
+<p>llm还通过促进开发人员、审计人员和最终用户之间的共同理解来增强整个行业的协作努力。他们用自然语言解析和解释代码的能力弥合了沟通的差距，使具有不同技术专业水平的利益相关者能够就智能合约的安全性和功能进行有意义的对话。这种合作环境促进了一种共同承担责任和积极参与解决和预防安全问题的文化。</p>
+<h3 id="3-2LLM作为异常交易的分析师"><a href="#3-2LLM作为异常交易的分析师" class="headerlink" title="3.2LLM作为异常交易的分析师"></a>3.2LLM作为异常交易的分析师</h3><p>llm在区块链交易分析中的应用，如BLOCKGPT [28]， Nicholls等[53]和ZipZap[54]，强调了它们在进行实时监测以检测不规则或异常迹象或是可疑的行为方面的关键作用。表3中的这些工具代表了该领域的重大进步，因为它们提供了一种更动态、适应性更强的方法来识别区块链事务中的潜在威胁。</p>
+<p>与静态的、基于规则的系统不同，LLM能够实时处理和学习大量的交易数据，这使他们不仅能够发现已知的欺诈活动类型，还能够发现随着技术和攻击方法的发展而出现的新模式。通过利用机器学习的力量，这些模型可以不断更新他们对正常交易行为构成的理解。这种持续的学习过程对于适应区块链技术不断变化的环境和恶意行为者采用的复杂策略至关重要。</p>
+<p>此外，llm的适应性不仅限于模式识别，它们在理解事务上下文方面也表现出色。这包括对智能合约交互、执行跟踪、gas价格和其他交易元数据的分析，这些元数据可以提供有关交易合法性的提示。上下文分析允许LLM区分合法的，尽管不寻常的交易行为和真正的异常，这些异常可能表明欺诈活动，如洗钱，网络钓鱼或利用合同漏洞。</p>
+<p>除了识别潜在的欺诈交易外，LLM还有助于风险评估和监管合规。通过根据当前的合规标准和风险模型分析交易数据，法学硕士可以帮助金融机构管理其风险敞口，并遵守反洗钱（AML）和了解客户（KYC）法规。它们复杂的分析功能可以为合规官员和监管机构提供有价值的见解，允许采用更主动的方法来检测和预防金融犯罪。</p>
+<p>总之，LLM在区块链交易分析中的应用反映了对加强数字金融系统安全措施的承诺。通过将深度学习算法与广泛的交易数据集相结合，llm成为一道强大的防线，不仅能够实时识别异常活动，还能够随着威胁的发展而发展，确保管理基于区块链的交易的弹性和安全框架。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.4.jpg"
+                      alt="image"
+                ></p>
+<h3 id="3-3-LLM作为智能合约的Fuzzer"><a href="#3-3-LLM作为智能合约的Fuzzer" class="headerlink" title="3.3. LLM作为智能合约的Fuzzer"></a>3.3. LLM作为智能合约的Fuzzer</h3><p>大型语言模型（llm）已被越来越多地用于提升模糊化过程，特别是在智能合约安全分析领域，如LLM4FUZZ[55]、ACFIX[56]和Sun等。表4中的方法涉及利用llm来准确评估智能合约中特定代码区域的复杂性和漏洞可能性。因此，这些指标用于指导模糊测试者的方向和焦点，将他们引导到更有可能包含潜在安全威胁的代码段。</p>
+<p>llm应用于模糊测试练习，通过缩小模糊测试通常导航的巨大状态空间，显著提高了这些操作的效率。这种精确定位的模糊方法有助于提高覆盖率，并比传统工具揭示更多漏洞，特别是那些与传统方法可能忽略的智能合约代码的复杂性质有关的漏洞.</p>
+<p>此外，这种改进的模糊测试技术允许集成用户定义的不变量和手动插入的断言，以便在模糊测试期间监视和管理状态。这种方法可以减少勘探开销，并改进对常规模糊例程可能错过的更深刻逻辑问题的检测。在现实世界的去中心化金融（DeFi）项目中，对这种llm增强模糊方法的评估已经证明了它的有效性，优于基线模糊参数，并发现了重大漏洞。这些漏洞如果不被发现和利用，可能会造成重大的经济损失。</p>
+<p>总之，将llm融合到模糊工作流程中，为智能合约的自动安全分析所面临的挑战提供了一个有前途的智能解决方案，强调了它们增加基于区块链平台稳健性的潜力。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.5.jpg"
+                      alt="image"
+                ></p>
+<h3 id="3-4-LLM作为智能合约的开发人员"><a href="#3-4-LLM作为智能合约的开发人员" class="headerlink" title="3.4 LLM作为智能合约的开发人员"></a>3.4 LLM作为智能合约的开发人员</h3><p>表5中最近的研究，如Storhaug等人的[29]、karanjai等人的[33]、Petrovic等人的[61]、Zhao等人的[62]、Haque等人的[63]、MazzumaGPT[58]、Du等人的[59]和GPTutor[60]，已经开始考察ChatGPT和谷歌Palm2等大型语言模型（llm）在自动生成智能合约中的有效性和可靠性。这些智能合约是区块链生态系统不可或缺的一部分，无需中介即可执行协议，其准确性和安全性至关重要。该研究主要构建了一个测试框架，从多个方面评估智能合约，即有效性、正确性、效率、安全性和可维护性.</p>
+<p>这些结果表明，尽管llm在理解合同条款和生成语法正确的Solidity代码方面表现得很熟练，但通常生成的合同存在相当大的安全漏洞。这个发现表明了代码运行质量中的一个关键问题。评估表明，虽然LLM可以简化合同创建过程，但如果不进行彻底审查，生成的代码可能会被利用，这是一个潜在的风险。</p>
+<p>重要的是，这些研究强调了有效的提示工程的作用。结果表明，LLM的产出受到提示的特异性和清晰度的显著影响，必须精心设计提示，以尽量减少产生歧义或有缺陷的代码的风险。这尤其具有挑战性，因为生成智能合约需要精度，并且模型必须正确解释和应用法律术语的语义。</p>
+<p>这些工作指出了综合分析以及LLM所采用的方法的改进的重要性。人们乐观地认为，LLM的未来迭代，通过更好的培训和及时的设计考虑，可以提高人工智能生成的智能合约的质量和安全性。它还暗示了这些工具通过减少所需的时间和精力来彻底改变合同生成的潜力，同时也表明了对更强大的安全措施和测试方法的迫切需求。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.6.jpg"
+                      alt="image"
+                ></p>
+<p>这样的研究分析为智能合约生成中LLM应用的现状提供了一个总体视图。这些发现是对过度依赖人工智能而没有进行充分检查的警示，但也为未来的进步制定了路线图，可以负责任地利用人工智能的全部潜力。</p>
+<h3 id="3-5-LLM作为加密货币社区的参与者"><a href="#3-5-LLM作为加密货币社区的参与者" class="headerlink" title="3.5. LLM作为加密货币社区的参与者"></a>3.5. LLM作为加密货币社区的参与者</h3><p>大型语言模型（llm），如GPT-3.5和ChatGPT，正在成为加密货币社区的强大工具，如Trozze等人[64]，Axelsen等人[65]，Liu等人[66]，Ziegler等人[67]和GPTutor[68]，尽管它们各自具有优势和劣势。表6中的相关作品共同描绘了LLM在高风险、高度不稳定的加密货币领域内变革治理和法律流程的潜力。</p>
+<p>治理成为一个主要主题，因为LLM可以为这个基本上不受监管的领域的结构和透明度做出重大贡献。第一份文件概述了人工智能系统面临的更广泛的治理挑战，建议区块链作为引入可验证性和问责制的可行解决方案。另一方面，LLM在捕捉法律推理的复杂性方面的局限性得到了强调，这一问题在三个研究中得到了不同程度的回应。</p>
+<p>这些模式在法律环境中的实际应用，特别是在第二和第三个文件中详细说明，强调了它们在起草法律申诉中的创新作用。这一发展为与加密货币法规和诉讼相关的法律工作未来带来了希望，因为它表明LLM可以减轻人类专家的一些工作量，尽管仍然需要人类监督。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.7.jpg"
+                      alt="image"
+                ></p>
+<p>虽然治理和法律援助主导了话语，但在整个文本中都有一种谨慎乐观的基调。人们认识到LLM在加密货币领域的变革潜力，但也明确认识到人工智能技术需要进一步发展，以充分融入复杂的决策过程，其中法律和道德考虑至关重要。</p>
+<p>从本质上讲，这三份文件的集体叙述集中在一个前提上，即LLM对加密货币社区的治理和法律部门具有变革潜力，但必须克服理解上的挑战，才能完全信任他们的自治角色.</p>
+<h3 id="3-6-杂项"><a href="#3-6-杂项" class="headerlink" title="3.6. 杂项"></a>3.6. 杂项</h3><p>如表7所示，LLM还应用于其他bb0安全领域，包括智能合约编译器[69]、零知识证明[70]、模型训练[22,71]、NFT生成[72]。我们将在以后详细介绍它们的应用。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-table.8.jpg"
+                      alt="image"
+                ></p>
+<h2 id="4-LLM4BS的案例研究"><a href="#4-LLM4BS的案例研究" class="headerlink" title="4 LLM4BS的案例研究"></a>4 LLM4BS的案例研究</h2><p>在本节中，我们将通过三个不同的案例研究进行深入研究，每个案例研究都有助于说明和阐明区块链系统（LLM4BS）的大型语言模型的各种具体应用。表8中的这些案例经过精心挑选，涵盖了广泛的场景，包括LLM4FUZZ[55]§4.1、SMARTINV[31]§4.2、BLOCKGPT [28]</p>
+<h4 id="4-1-LLM4Fuzz"><a href="#4-1-LLM4Fuzz" class="headerlink" title="4.1. LLM4Fuzz"></a>4.1. LLM4Fuzz</h4><p>如图4所示，LLM4FUZZ[55]是网络安全领域的一项创新技术，特别是在区块链网络中的智能合约安全领域。它将大型语言模型（llm）的强大功能与模糊测试方法复杂地结合在一起，主动发现可能危及智能合约完整性的漏洞。</p>
+<p>LLM是高度复杂的人工智能模型，在理解和生成类似人类的文本方面取得了重大进展，最近，它们已被证明善于理解编程语言和代码结构。LLM4FUZZ通过部署llm来智能地指导模糊测试过程，从而利用了这种能力。这导致对智能合约进行更深刻和细致的探索，将测试工作集中在法学硕士认为最有可能包含安全漏洞的领域。通过这样做，LLM4FUZZ不仅成功地简化了异常检测过程，而且提高了其准确性和深度。</p>
+<p>在区块链技术的世界里，智能合约作为不可变的协议，根据编码条件自动执行，安全漏洞的潜在负面影响就会加剧。智能合约控制着重要的数字资产，对分布式应用程序（dApps）的功能至关重要。区块链的不可变特性增加了一层复杂性，因为部署的智能合约一旦提交给区块链，就无法更改。因此，先发制人的安全保证对于确保它们的可靠性和保护它们所管理的资产和过程变得至关重要。</p>
+<p>LLM4FUZZ通过识别和确定智能合约代码中潜在问题区域的优先级，提供了一种新颖的安全分析层。这种优先级是通过LLM对历史上或通常与漏洞相关的代码模式的学习理解来实现的.该方法增强了传统的模糊测试策略，传统的模糊测试策略通常采用一种更散弹枪的方法，即用随机数据输入轰击代码。LLM4FUZZ的目标测试不仅更高效，而且在发现可能被遗漏的复杂漏洞方面也更有效。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-fig.4.jpg"
+                      alt="image"
+                ></p>
+<p>在实现之后，LLM4FUZZ已经针对现有的模糊测试技术进行了基准测试，并始终表现出卓越的性能。它加快了漏洞检测过程，增加了可以检测到的安全缺陷的广度，从而加强了整体安全态势。</p>
+<p>LLM4FUZZ的案例象征着将人工智能整合到网络安全制度中的远见。它概括了人工智能对改进和重新定义现有技术流程的变革性影响，特别是在对蓬勃发展的数字经济至关重要的领域。通过它的镜头，我们瞥见了智能合约安全的未来——人工智能驱动的工具不仅可以预测，还可以积极参与对抗网络威胁的持续战斗。</p>
+<h3 id="4-2-SMARTINV"><a href="#4-2-SMARTINV" class="headerlink" title="4.2. SMARTINV"></a>4.2. SMARTINV</h3><p>为了提高区块链智能合约的可靠性和安全性，SMARTINV[31]代表了该领域的重大突破。它的主要功能是推断智能合约中的不变量，这可以在自动化识别难以捉摸的错误的过程中不可或缺，这些错误通常会避开传统的机器审计方法。图5显示了SMARTINV的架构。</p>
+<p>SMARTINV的独特之处在于它的多模式学习策略，它承认真正理解智能合约的操作行为需要一个多方面的方法——一个结合和分析不同类型的信息或模式的方法。SMARTINV特别利用了智能合约中的静态代码和动态交易数据。通过将代码模式与事务行为相关联，SMARTINV准备揭示指向智能合约在其整个生命周期中的预期和预期状态的不变条件。这种整体方法确保对可能导致未来漏洞和利用的潜在安全弱点进行更彻底的检查和更高的检测率。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-fig.5.jpg"
+                      alt="image"
+                ></p>
+<p>该框架运行的前提是，没有单一的信息模式可以完全表达智能合约的复杂逻辑和潜在的边缘情况。因此，通过融合多个数据源，SMARTINV可以更准确地描述智能合约的功能，从而显着减少误报和更精确的错误检测。这种集成的智能合约分析方法促进了其部署和操作的更大保证，这在安全性和信任至关重要的区块链应用程序中是一个关键问题。</p>
+<p>在部署SMARTINV时，研究人员通过对一系列智能合约进行测试来证明其有效性，它不仅显示出高度的准确性，而且在可扩展性方面也表现出令人印象深刻的能力。SMARTINV成为智能合约开发和审计领域的宝贵资产，为未来的方法树立了先例，以其多模态分析框架为基础，在不断发展的区块链技术领域增强安全措施。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../images/blogImage/11.10-3-fig.6.jpg"
+                      alt="image"
+                ></p>
+<h3 id="4-3-BLOCKGPT"><a href="#4-3-BLOCKGPT" class="headerlink" title="4.3. BLOCKGPT"></a>4.3. BLOCKGPT</h3><p>如图6所示，BLOCKGPT[28]作为区块链安全领域的典范转变，作为最先进的入侵检测系统（IDS），专门用于抵消和识别区块链网络中的潜在恶意交易。IDS以高度复杂的大型语言模型为基础，该模型经过了来自以太坊区块链的大量交易数据的精心训练，以太坊区块链是业内使用最广泛的平台之一。</p>
+<p>BLOCKGPT的创新之处在于，它脱离了传统的主要依赖于预定规则或已知模式的检测方法。相反，BLOCKGPT采用了一种主动的、基于学习的方法，使其能够识别一系列异常情况，包括可以绕过传统基于规则的系统的复杂和以前未见过的威胁。</p>
+<p>BLOCKGPT在测试场景中取得了巨大的成功，证明了其检测能力的强大。它熟练地识别并适当地将124个经过验证的攻击交易中的49个排在各自受害者合同中发生的最不正常的三个交易中。这种高精确度表明该系统的精确异常识别算法，表明区块链的IDS领域取得了实质性进展。</p>
+<p>除了检测精度之外，BLOCKGPT的效率还体现在其处理速度上，平均每秒处理2,284笔交易，偏差相对较小。这种能力不仅是理论上的，而且表明系统已经准备好部署在实时监控和响应的现实区块链环境中至关重要的。</p>
+<p>BLOCKGPT的适应性扩展到各种区块链架构和应用，从金融到智能合约。这种多功能性与其实时处理能力相结合，提供了一个强大且可扩展的解决方案，可以无缝集成到现有区块链基础设施中，以增强其抵御各种安全威胁的弹性</p>
+<p>随着区块链技术继续融入数字交易和智能合约部署的结构，BLOCKGPT等系统代表了保护这些平台的重要组成部分。随着BLOCKGPT所基于的机器学习模型的采用，b区块链IDS的未来似乎越来越安全，为更安全、更可靠的区块链操作铺平了道路。</p>
+<h2 id="5-LLM4BS任务的未来方向与挑战"><a href="#5-LLM4BS任务的未来方向与挑战" class="headerlink" title="5 LLM4BS任务的未来方向与挑战"></a>5 LLM4BS任务的未来方向与挑战</h2><p>在深入研究区块链安全的大型语言模型（LLM4BS）的未来时，学术界与一系列关键的焦点领域进行了竞争，这些领域需要协调一致的学术努力来解决固有的挑战并扩展LLM在区块链系统中的实用性。为了反映这一研究领域固有的细微差别和复杂性，本文阐述了以下重点：</p>
+<p>跨学科关系：不可否认，LLM4BS下一阶段的本质是基于人工智能、网络保护机制和分布式账本技术领域之间的协调相互作用[136,137,13]。这种跨学科合作不仅是叠加的，而且是协同的，因为它利用了每个学科的优势和见解，形成了抵御网络仇恨的强大屏障。学术界和工业界都在呼吁建立一个强大的联盟，强调认知计算与加密弹性和分散架构的融合可以导致区块链网络安全的范式转变。</p>
+<p>监管和合规挑战：监管框架的变化不仅要求合规，还要求LLM4BS领域的学者和从业者积极参与监管机构[5,138]。这种关系是相互的；随着监管机构对将人工智能集成到b区块链的影响有了更深入的了解，这一领域的参与者有责任倡导鼓励创新的法规，同时保持强大的安全措施。尖端技术和监管之间的动态相互作用是一种微妙的平衡，为区块链安全解决方案的增长和适应提供了一个稳定而灵活的平台。</p>
+<p>动态安全威胁：网络威胁范围类似于嵌合兽——不断变异并呈现不可预见的挑战[18,139]。像LLM4BS这样的安全模型必须具有固有的可塑性，允许它们与它们所要对抗的威胁一起发展。LLM与区块链安全的整合不是一种静态的解决方案，而是一种不断适应的保障措施，需要一种广泛的网络安全方法，以应对复杂网络攻击的扩散以及目标破坏的微妙之处。保持b区块链事务的完整性取决于先发制人地识别和消除这些多变的威胁</p>
+<p>道德治理和偏见缓解：LLM4BS运作的道德毯是丰富而复杂的，要求对可能无意中传播偏见或不公平结果的安全实践进行认真的检查和解决[144,141]。对公平算法的追求超越了技术领域，涉及到技术部署的社会文化动态和道德层面。因此，超越统计偏见的研究，涉及哲学、社会学和伦理学，共同努力对于营造一种氛围至关重要，在这种氛围中，人工智能不仅可以加强安全，还可以以对正义和公平的潜在承诺为基础。</p>
+<p>能源考虑和人工智能可持续性：在解决区块链运营的碳足迹问题时，还迫切需要面对训练和部署大型语言模型的能源密集型特性[142,143,144]。这些人工智能系统的生态影响需要双重战略：提高算法效率以减少计算负荷，并探索可以可持续地为这些活动提供动力的替代能源。在LLM4BS应用中对生态和谐的追求必须反映出区块链技术各方面对可持续性的更广泛承诺，确保安全能力的加速不会以不可持续的环境成本为代价。</p>
+<p>人工智能中的伦理考虑：在LLM4BS实施的轨迹中，伦理的作用不能被夸大，因为它支撑着人工智能应用的各个方面——从数据来源到算法的透明度，再到人工智能或借助人工智能做出的决策的问责制。为LLM4BS实施一个强有力的道德框架需要一个深刻的拷问指导人工智能开发的原则，鼓励渗透到模型设计、部署和监控的每一层的审查。因此，创造一种环境，在这种环境中，对人工智能驱动的安全措施的信任不仅是假设，而且是通过负责任的做法精心培养的。</p>
+<p>数据质量和访问：健壮的LLM4BS部署的核心是数据的基本元素——它的口径、范围和提供给它的可访问性。这里存在着挑战：构建和维护数据库，这些数据库不仅要全面和具有代表性，而且要着眼于提高大型语言模型在检测异常和加强区块链事务中的安全参数方面的有效性。这项任务扩展到制定协议，以确保数据完整性和符合道德标准的采购，从而维护这些人工智能系统的神圣性和可靠性。解决这些问题需要一种战略性的、方法学的方法来充分利用LLM4BS的潜力。这包括对正在进行的研究的承诺，严格的道德审查，以及与技术和监管环境同步发展的协同努力。对这些要点有了基本的了解，社区就能更好地为LLM4BS增强b区块链安全措施的弹性和效率铺平道路。</p>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a>6 总结</h2><p>总之，我们对将大型语言模型（llm）集成到区块链安全中的回顾突出了LLM4BS组合所带来的技术进步和复杂挑战。llm在区块链中增强安全协议的潜力是显而易见的，为智能合约、异常交易检测和加密货币社区发展提供了创新的解决方案。然而，要实现这一潜力，需要对可扩展性、隐私、不断发展的网络威胁以及人工智能的伦理影响保持警惕。LLM在区块链安全领域的成功不仅取决于持续的技术改进，还取决于道德实践、监管一致性和知情的社区参与。LLM与区块链安全的整合标志着一个变革的时代，需要一种协作的方式，平衡创新与审慎的监督，以建立一个有弹性和公平的安全未来。</p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 区块链安全大语言模型：系统文件综述</li>
+        <li><strong>Author:</strong> A1ex</li>
+        <li><strong>Created at
+                :</strong> 2025-11-10 16:41:43</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-11-11 08:51:54
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/10/区块链安全大语言模型：系统文件综述/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87/">#智能合约论文</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/11/07/%E5%88%A9%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%8F%90%E9%AB%98%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9A%E6%BC%8F%E6%B4%9E%E5%92%8C%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E6%9F%A5/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">利用机器学习模型提高智能合约安全性：漏洞和检测方法的调查</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'havenoideal123/giscus_storage',
+                'data-repo-id': 'R_kgDOQMJJcA',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDOQMJJcM4CxQZl',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'bottom',
+                'data-loading': 'not-lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">区块链安全大语言模型：系统文件综述</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B-%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E7%BB%BC%E8%BF%B0"><span class="nav-text">区块链安全大语言模型-系统文件综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-LLM4BS%E6%A6%82%E8%BF%B0"><span class="nav-text">2.LLM4BS概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 大语言模型的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80"><span class="nav-text">2.2 区块链安全基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-LLM4BS%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">3 LLM4BS任务的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-LLM%E4%BD%9C%E4%B8%BA%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%A0%B8%E5%91%98"><span class="nav-text">3.1 LLM作为智能合约代码审核员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2LLM%E4%BD%9C%E4%B8%BA%E5%BC%82%E5%B8%B8%E4%BA%A4%E6%98%93%E7%9A%84%E5%88%86%E6%9E%90%E5%B8%88"><span class="nav-text">3.2LLM作为异常交易的分析师</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-LLM%E4%BD%9C%E4%B8%BA%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84Fuzzer"><span class="nav-text">3.3. LLM作为智能合约的Fuzzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-LLM%E4%BD%9C%E4%B8%BA%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98"><span class="nav-text">3.4 LLM作为智能合约的开发人员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-LLM%E4%BD%9C%E4%B8%BA%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%8F%82%E4%B8%8E%E8%80%85"><span class="nav-text">3.5. LLM作为加密货币社区的参与者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E6%9D%82%E9%A1%B9"><span class="nav-text">3.6. 杂项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-LLM4BS%E7%9A%84%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6"><span class="nav-text">4 LLM4BS的案例研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-SMARTINV"><span class="nav-text">4.2. SMARTINV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-BLOCKGPT"><span class="nav-text">4.3. BLOCKGPT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-LLM4BS%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91%E4%B8%8E%E6%8C%91%E6%88%98"><span class="nav-text">5 LLM4BS任务的未来方向与挑战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%80%BB%E7%BB%93"><span class="nav-text">6 总结</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">A1ex</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        5 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
