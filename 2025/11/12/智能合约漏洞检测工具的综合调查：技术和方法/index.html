@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="A1ex">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/11/12/智能合约漏洞检测工具的综合调查：技术和方法/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能合约漏洞检测工具的综合调查：技术和方法">
+<meta property="og:url" content="http://example.com/2025/11/12/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%9A%84%E7%BB%BC%E5%90%88%E8%B0%83%E6%9F%A5%EF%BC%9A%E6%8A%80%E6%9C%AF%E5%92%8C%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-12T13:21:24.000Z">
+<meta property="article:modified_time" content="2025-11-13T09:14:07.239Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="智能合约论文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            智能合约漏洞检测工具的综合调查：技术和方法 | A1ex&#39;s blogs.
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Welcome to A1ex's security blogs.","subtitle":{"text":["Focus on smart contract audit and reverse engineering"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":50,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":"蝴蝶","artist":"陶喆","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E8%9D%B4%E8%9D%B6.mp3","cover":"https://i.ytimg.com/vi/1wkI80-fpPw/hqdefault.jpg","lrc":null},{"name":"歌谣","artist":"李荣浩","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E6%AD%8C%E8%B0%A3.mp3","cover":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-pyZey8DKVpsr5qL5JDfPLOVcv6mDH3yVjQ&s","lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"FreeTalk":{"path":"/shuoshuo","icon":"fa-regular fa-chart-bar"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                A1ex&#39;s blogs.
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/shuoshuo"
+                                        >
+                                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                                    FREETALK
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/shuoshuo"
+                        >
+                            <span>
+                                FREETALK
+                            </span>
+                            
+                                <i class="fa-regular fa-chart-bar fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">智能合约漏洞检测工具的综合调查：技术和方法</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/avatar.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">A1ex</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-12 21:21:24</span>
+        <span class="mobile">2025-11-12 21:21:24</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-13 17:14:07</span>
+            <span class="mobile">2025-11-13 17:14:07</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87/">智能合约论文</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="智能合约漏洞检测工具的综合调查：技术和方法"><a href="#智能合约漏洞检测工具的综合调查：技术和方法" class="headerlink" title="智能合约漏洞检测工具的综合调查：技术和方法"></a>智能合约漏洞检测工具的综合调查：技术和方法</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>区块链技术的广泛使用突显出智能合约是数字交易的关键组成部分。然而，它们易受漏洞的影响，对安全性和可靠性提出了重大挑战。本调查对256种智能合约分析工具进行了全面评估，按模糊测试、机器学习、符号执行和形式化验证等方法进行了分类。通过理论和实践评估，本文提供了对智能合约漏洞检测工具的当前前景的见解。此外，本文系统地评估了基于现实世界数据集的选择工具。结果表明，虽然许多工具表现良好，但它们并不能完全准确地覆盖所有漏洞类型，这突出了改进检测方法集成的必要性。研究结果旨在弥补现有方法的不足，指导未来改进区块链应用程序的安全性。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>区块链技术的快速扩展和广泛使用使智能合约（SCs）成为安全和自动化数字交易的关键要素。sc通常被称为自动执行协议，直接在区块链网络上运行，消除了中介机构，提高了透明度。它们简化流程、建立信任和降低成本的能力使它们对现代基于区块链的应用程序至关重要。因此，这些合同广泛用于不同的领域，例如金融、供应链管理和医疗保健。</p>
+<p>然而，使SCs具有吸引力的不变性和自主性也带来了重大的安全挑战。一旦部署，sc就无法更改，这意味着其代码中的任何漏洞都可能导致不可逆转的损失。因此，确保SCs的安全性和可靠性已成为该领域研究人员和从业人员关注的焦点。这项研究强调了sc迫切需要有效的漏洞检测工具，以提高基于区块链的应用程序的安全性和可靠性。我们的研究在理论见解和实际应用的基础上对当前的工具进行了全面的评估。</p>
+<p>SCs的脆弱性复杂且不断变化，使其研究具有挑战性。本文通过全面审查和分类256种工具来应对这一挑战，使用一种平衡的方法，包括理论研究和实际测试。这项工作需要大量的投入，在理论工作上花费了780小时，在实际评估上花费了1300小时。为了确保相关性和准确性，该分析侧重于该领域的出版物，强调到2024年的进展。目的是创建一个全面的资源，概述了SCs漏洞检测的现状，并作为这一关键领域未来研究和改进的指南。</p>
+<p>本文首先概述了搜索方法，其中解释了用于收集SCs检测工具文献的两种方法。它强调了彻底和公正地收集数据的重要性，使用特定的标准来选择只关注这些工具的高质量研究。接下来，先前的调查分析和动机部分回顾了18篇现有的调查论文，将它们分为实验、理论和比较分析三类。本文献综述突出了现有调查中的差距，例如缺乏深度或对漏洞检测关键方面的关注不足。这有助于确定当前研究中的差距，并确定在该领域进一步发展的机会。</p>
+<p>SCs分析可用工具部分彻底检查了256个已识别的工具，并根据它们的方法（如模糊测试、机器学习、符号执行和形式化验证）对它们进行了分组。这些工具分为检测和识别类型，提供了一个清晰的和有组织的视图，以加强SCs安全的作用。对于每种方法，将根据工具的功能（包括它们可以检测到的漏洞类型及其特定技术）进一步分析工具。在此之后，评估标准，分析，讨论部分通过将工具划分为学术和行业类别，并将它们分类为静态、动态或混合方法来评估工具。这种结构化的评估提供了详细的理解，解决了学术研究和行业应用的具体需求。</p>
+<p>本文的一个关键部分是SCs漏洞工具的实际分析部分，其中选择了来自学术界和工业界的工具，使用最新数据集进行了全面评估。本节强调了该研究的实际重要性，重点介绍了在检测漏洞方面的有效性所选择的七个工具。大量的时间和精力投入到这一实际分析中，表明了对推进该领域的坚定承诺。</p>
+<p>综上所述，本研究对SCs漏洞检测工具进行了全面的理论和实践分析，为当前形势提供了有价值的见解，并为未来的发展奠定了基础。本研究的主要贡献包括：(1)对现有的关于SCs漏洞的调查和技术论文进行了全面的审查和分类，(2)基于模糊测试、机器学习、符号执行和形式化验证等方法对256种工具进行了详细的分类和评估，(3)根据学术和行业需求对工具进行了系统的评估，按静态、动态和混合方法进行了分类。(4)对所选工具进行广泛的实际分析，弥合理论与实际应用之间的差距。本文致力于理论严谨性和实际实用性，旨在显著提高sc在不断发展的数字环境中的安全性和可靠性。</p>
+<p>本文的其余部分组织如下：第2节描述了搜索和收集相关文献的方法。第3节回顾了以前的调查，对它们进行了分类，并确定了激励本研究的差距。第4部分考察了SC分析的工具，重点是模糊测试、符号执行和形式化验证等方法。第5节根据定义的标准评估这些工具，并提出主要发现。第6节提供了使用最新数据集的选定工具的实际分析。第7节解释了结果，讨论了它们对SC安全的意义，并讨论了研究的局限性。第8部分提出了未来研究的想法，重点是开放的挑战和需要进一步调查的重要问题。最后，第9节总结了本文的关键见解和贡献</p>
+<h2 id="2-搜索方法"><a href="#2-搜索方法" class="headerlink" title="2 搜索方法"></a>2 搜索方法</h2><p>搜索方法是至关重要的研究过程，确保相关文献的全面和公正的收集。在本研究中，采用了两种不同的方法来实现这一点：一种用于调查文献，另一种用于技术论文。在这两个方向上，从不同的学术数据库中编译了针对SCs漏洞分析和检测的学术论文和文章。两种方法都使用筛选和排除标准来选择最相关和高质量的研究。本节概述了收集和选择SCs检测工具相关文献的搜索方法。</p>
+<h3 id="2-1-调查文献检索方法"><a href="#2-1-调查文献检索方法" class="headerlink" title="2.1. 调查文献检索方法"></a>2.1. 调查文献检索方法</h3><p>在现有数据库中进行了全面的搜索，以收集有关SCs检测工具的调查论文，形成第一阶段。这种搜索策略建立在一组精心挑选的关键字上，特别是使用“智能合约”和“工具”。这些关键词在多个学术出版数据库中使用，包括Web of Science、IEEE explore、ACM Digital Library、Elsevier ScienceDirect和施普林格，涵盖2018年至2024年的出版物。最初的搜索结果是199个调查</p>
+<p>在第二阶段，为确保本次综述的相关性和质量，建立了明确的排除标准：</p>
+<ul>
+<li>非英语写作的研究。</li>
+<li>与计算机科学领域无关的研究</li>
+<li>与SCs安全无关的研究。</li>
+<li>没有全文可用的研究。</li>
+<li>研究尚未发表，但在arXiv上有记录。</li>
+<li>重复研究。</li>
+</ul>
+<p>这一筛选过程排除了155项调查，留下了一组精炼的相关研究。第三阶段包括审查标题和摘要以检查其与研究目标的一致性，然后是全文审查以确认相关性。图1显示了这种方法的各个阶段和相关结果。</p>
+<h3 id="2-2-技术文献检索方法"><a href="#2-2-技术文献检索方法" class="headerlink" title="2.2. 技术文献检索方法"></a>2.2. 技术文献检索方法</h3><p>本节定义了一种策略，用于查找用于检测sc中漏洞的工具的技术论文。它包括两个主要步骤：彻底搜索和详细筛选。第一步，使用“智能合约”、“工具”、“安全”、“检测”、“漏洞”等特定关键词在学术出版物数据库中进行搜索。这些数据库包括Elsevier ScienceDirect、IEEE explore、ACM Digital Library和SpringerLink，重点关注2016年以后的出版物。表1总结了相关论文的数量在每个数据库中识别每个关键字。</p>
+<p>在收集了大量的论文之后，在第二步中采用仔细的筛选过程来选择最相关的论文。在本次筛选中，根据以下标准排除论文：</p>
+<ul>
+<li>非英语写作的研究。</li>
+<li>与计算机科学领域无关的研究。</li>
+<li>与SCs工具无关的研究。</li>
+<li>没有全文可用的研究。</li>
+<li>重复研究。</li>
+</ul>
+<p>然后仔细审查选定的论文，重点关注其摘要、方法、结果和结论，以确保它们与开发检测SCs漏洞的工具直接相关。总共选择了256篇与本研究直接相关的论文。图2为科技论文检索方法。</p>
+<h2 id="3-之前的调查分析和动机"><a href="#3-之前的调查分析和动机" class="headerlink" title="3 之前的调查分析和动机"></a>3 之前的调查分析和动机</h2><p>根据2.1节中的调查，本节对这18篇调查论文进行了详细的分析。为了评价它们，这些调查论文被分为三类：实验分析、理论分析和比较分析。表格总结了所选调查论文的关键点，以加强分析。这种方法澄清了当前的状态，并确定了该领域未来发展的研究差距和机会。</p>
+<p>一些调查侧重于工具的实验性评估，测试各种工具以评估其性能指标或执行时间。Durieux等人（2020b）使用两个数据集评估了9个工具：一个数据集包含69个带注释的易受攻击的sc，用于精度评估，另一个数据集包含来自Etherscan的47,518个以太坊合约。他们开发了SmartBugs，这是一个专门的框架，用于促进工具的集成和比较。分析显示，只有42%的漏洞被所有工具一致检测到，其中Mythril以27%的准确率领先。Kushwaha等人（2022a）使用solidfi基准对16种工具进行了实验分析，发现Slither、Solhint和SmartCheck的执行时间最好。同时，Mythril、Slither和Oyente表现出更好的检测能力。尽管有这些评价，挑战仍然存在。Lashkari和Musilek（2023）对交易能源系统的工具进行了特定领域的评估。他们的研究结果显示，与非能源合同相比，能源合同有更多的漏洞和更慢的处理时间，突出了领域特定特征对检测准确性的影响。这些论文建议，未来的工作应该扩大漏洞覆盖范围，提高工具质量以减少误报，并将分析更无缝地集成到开发过程中。</p>
+<p>相反，一些论文采取了更理论化的方法，描述了工具及其功能。di Angelo和Salzer（2019）评估了27种用于分析以太坊sc的工具，通过涵盖学术、社区和企业起源的工具，填补了现有文献中的空白。Almakhour等人（2020）对13种用于检测sc漏洞的工具进行了全面分析。这些工具是根据它们的类型、级别和验证技术进行分类的。Vacca等人（2021）根据其技术方法、分析技术以及在各种区块链平台上检测SCs漏洞的有效性，讨论了26种工具。López Vivar等人（2020）回顾了18个开源SCs安全工具，检查了它们的操作机制、安装复杂性以及在多个区块链平台内部和跨平台检测漏洞的有效性。Rameder（2021）提出了140种安全分析工具的分类，简要描述了它们检测sc漏洞的方法。Wu等人（2024）为SCs分类了32种漏洞检测的工具，重点关注审计、正式验证和异常检测等方法，同时强调它们的优势和局限性。Hewa等人（2021）简要回顾了17种检测工具及其方法，并提供了SCs的总体概述，包括其原理、应用、挑战和未来前景。</p>
+<p>Chu等人（2023）在这一类别中进一步扩展，根据检测方法对20种工具进行了分类，对于每种工具，本文一般解释了操作框架、输入要求以及这些工具旨在识别SCs中的漏洞类型。Liu and Liu（2019）根据其检测方法对11种工具进行了分类，并对每种工具的操作框架、输入要求以及工具旨在识别SCs中的漏洞类型进行了一般解释。Tolmach等人（2021）提供了34种采用形式化验证技术的工具的简要概述，概述了它们的关键功能。Zheng等人（2020）简要描述了12种SC漏洞检测工具，讨论了字节码分析和机器学习等关键方法，并概述了重入和庞氏骗局等常见漏洞。Hu等人（2021b）根据其底层技术和目标漏洞系统地对40种工具进行了分类，并在各自的类别中对每种工具进行了讨论，以提供对其功能和应用的清晰理解。这些论文强调未来的研究需要整合静态和动态分析，以更广泛的脆弱性覆盖和更少的误报。他们还强调需要全面的基准和标准化的度量来确保跨平台的一致的工具性能。</p>
+<p>此外，一些调查通过进行从不同角度评估工具的比较研究来促进讨论。Harz和Knottenbelt（2018）回顾了10种验证工具和方法，检查了它们的方法、自动化级别、覆盖范围、与不同语言的兼容性以及开源状态。Li et al.（2023）根据16种工具的检测方法，综合考虑其漏洞覆盖率、开源状态和检测准确性，对16种工具进行了对比分析。López Vivar等人（2020）对18种工具进行了比较，根据输入类型（字节码或Solidity）、分析方法、易于安装、总体有用性和更新频率等标准对其进行评估，以确保货币和所需的依赖关系。Rameder（2021）基于不同方面比较了140种工具，包括它们接受的输入类型、它们的主要目标、分析的性质（静态或动态）、它们用于代码转换的方法（如模型形式化），以及它们是利用形式化、动态还是其他方法。</p>
+<p>Kushwaha等人（2022b）继续进行比较研究，根据关键参数系统地比较了27种工具：工具的输入是字节码还是固体码，进行的分析类型（静态或动态），工具起源的性质（基于学术或基于行业），用于实现的编程语言，以及工具的公共可用性。di Angelo和Salzer（2019）从不同角度评估了27种工具，包括它们的分析方法（从静态分析到动态分析）、实现细节（包括开发连续性和维护实践等方面），以及它们在识别特定安全漏洞方面的熟练程度。Kushwaha等人（2022a）基于诸如它们的起源（学术或公司）、源代码的可用性、接口类型（命令行或web）、发布年份和编程语言等标准评估了86种工具。尽管存在这些广泛的比较，但在标准化漏洞基准和开发增强编程指南以改进sc语言方面仍然存在挑战。</p>
+<p>除了对18篇调查论文进行了详细分析外，其他论文对SCs漏洞检测工具的主题进行了简要讨论。例如，Bartoletti等人（2025）提到了Mythril、Oyente和Securify等工具，但主要关注智能合约语言及其功能，而不是详细的工具评估。同样，Ressi等人（2024）提到了异常检测等人工智能驱动方法增强区块链安全性的潜力，但没有分析具体的漏洞检测工具或其性能。这些论文提供了有价值的背景，但与本节的范围不完全一致，本节的重点是对工具的全面调查。</p>
+<p>表2总结了早期的讨论，突出了所审查的研究的优点和缺点，并提供了每次调查中使用的方法的概述，包括分析是实验性的，理论的还是比较的。该表对每个调查检查的工具数量进行了编目，并区分了两种类型的漏洞引用：相关的漏洞，明确地与能够检测它们的特定工具相关联，以及不相关的漏洞，仅以一般术语提及，而没有指定哪些工具处理它们。该表还详细说明了每个工具使用的方法的数量，并指出了调查描述了一种方法而没有指定应用哪种工具的情况。</p>
+<p>根据这个表，很明显，之前的大多数调查要么分析了有限数量的工具，要么没有阐明它们之间的关系，它们使用的方法，以及它们所针对的漏洞。例如，具体的调查，如López Vivar等人（2020）和Rameder(2021)，一般讨论了漏洞，但没有指定每种工具可以检测的漏洞类型。此外，一些调查没有注意到与这些工具相关的具体方法。Harz和Knottenbelt（2018）以及Kushwaha等人（2022b）等调查只提到了几种通用方法，而不是深入研究工具的各种方法。这在现有的文献中出现了一个明显的差距，因为需要进行彻底的评估，不仅要单独解释每个工具，还要描述相关的工具漏洞和与之相关的方法。</p>
+<p>撰写新调查的主要动机是通过对迄今为止发布的工具进行全面分析来弥合现有的差距。它将检查每个工具针对的漏洞，探索它们使用的方法，并根据已建立的标准提供详细的比较。此外，它还包括对首选工具的实验比较。目标是全面概述所有现有的SCs检测工具，确定当前方法中的差距，并为未来的研究方向提出建议，以提高SCs检测工具的有效性和适应性。</p>
+<h2 id="4-智能合约分析可用工具"><a href="#4-智能合约分析可用工具" class="headerlink" title="4 智能合约分析可用工具"></a>4 智能合约分析可用工具</h2><p>根据2.2节中识别的论文，本节分析了256种可用的SCs漏洞检测和识别工具论文。检测工具的目的是识别潜在的弱点，并确保安全编码的安全性和功能性。他们采用各种技术，如模糊测试、机器学习、符号执行和形式化验证，来执行彻底的分析。与检测工具不同，识别工具不仅检测漏洞，而且对每个检测到的漏洞进行分类和指定类型。这些工具使用诸如符号执行、机器学习和静态分析等高级技术来提供对漏洞本质的详细见解。通过识别特定类型的问题，它们可以帮助开发人员理解和解决SCs代码中的确切问题。</p>
+<p>本节根据这些工具的方法和功能对它们进行分类和解释。虽然一些论文专注于开发测试套件以提高智能合约测试的效率和覆盖率，例如Górski（2024）的工作，但这些研究的目的是优化测试过程，而不是检测或分类漏洞。因此，它们不包括在本分析中，本分析侧重于为漏洞检测和识别而设计的工具。</p>
+<p>本综述中的工具是通过分析每篇论文中的方法来组织的，以确定它们检测和识别漏洞的方法。然后根据这些方法在方法上的相似性对其进行分组，从而产生14个不同的类别。涵盖的方法包括抽象解释、基于人工智能的方法、代码插装、控制流分析、反汇编分析、形式验证、模糊测试、基于模型的测试、突变测试、模式匹配和语法分析、运行时验证、符号执行、污点分析和可视化分析。每种方法中的工具进一步分为检测和识别类别。例如，形式化验证工具分为形式化验证-检测和形式化验证-识别。</p>
+<h3 id="4-1-“抽象解释”工具"><a href="#4-1-“抽象解释”工具" class="headerlink" title="4.1 “抽象解释”工具"></a>4.1 “抽象解释”工具</h3><p>这个类别包括创建程序行为的抽象模型，以分析其属性并检测潜在的漏洞。通过使用数学抽象，这些工具可以系统地探索所有可能的执行路径，并识别通过传统测试方法可能不容易检测到的问题。在下面列出的为抽象解释开发的工具中，前两个侧重于检测，其余是SCs中的识别工具。</p>
+<ol>
+<li>Asparagus-detector（Cai et al., 2023a）：利用多面体和实代数几何合成SCs的参数gas上界。它在适用性和绑定紧密性方面优于现有的gas感知SCs分析平台（GASTAP）等方法。asparagus于2023年发布，可检测包括“gas限制低估”、“out of gas异常”和“循环中过量gas消耗”在内的漏洞。</li>
+<li>MichelsonLiSA-detector 它于2024年推出，是为Tezos sc设计的基于抽象解释的静态分析工具。它使用静态分析库（LiSA）框架来分析迈克尔逊语言，进行翻译将低级的基于堆栈的代码转换成高级的中间表示（IR）。该工具支持各种分析，例如污染和数据流分析，通过检查控制流图（cfg）和语义检查器来识别sc中的“不可信交叉契约调用”。</li>
+<li>Gastap-identifier: Gastap于2019年发布，是一个气体感知分析平台，通过自动推断以太坊sc中公共功能的gas上限来防止“气不足”漏洞。它输入Solidity源代码或以太坊虚拟机（Ethereum Virtual Machine， EVM）字节码，并使用CFG构造、大小分析和气体方程生成来提供精确的gas消耗边界。Gastap对于调试、验证和认证gas使用是有效的，并且可以通过web界面使用。</li>
+</ol>
+<p>该类别提供了使用数学模型分析sc以探索不同执行路径的有效方法。这种方法有助于检测和识别漏洞，例如gas消耗问题和未处理异常。讨论的工具显示了抽象解释如何成功识别风险，从而实现更安全的SCs。</p>
+<h3 id="4-2-“基于人工智能”的工具"><a href="#4-2-“基于人工智能”的工具" class="headerlink" title="4.2. “基于人工智能”的工具"></a>4.2. “基于人工智能”的工具</h3><p>第二类工具利用了基于人工智能的技术。该方法采用先进的人工智能算法来分析和检测sc中的漏洞。利用机器学习和深度学习模型，这些工具可以高精度、高效地识别模式、异常和潜在的安全风险。以下是基于人工智能的工具：前24个用于检测的工具和33个用于漏洞识别的工具。</p>
+<blockquote>
+<ol>
+<li>Block-Gram-detector (Xie et al., 2023)：该工具从以太坊字节码中提取低维、知识特征，提高漏洞检测效率。它将字节码转换为操作码，对它们进行分段，并挖掘块和属性特征。该方法利用Shapley加性解释（SHAP）值显著降低了检测延迟，提高了特征可解释性。Blockgram于2023年发布，可以检测各种漏洞，包括“整数溢出和下溢”、“调用堆栈深度攻击”、“事务顺序依赖（TOD）”、“时间戳依赖”和“可重入漏洞”。</li>
+<li>跨模态互学习漏洞检测器-检测器（Qian et al., 2023b）：该框架于2023年开发，通过使用源代码和字节码训练的教师网络和仅使用字节码训练的学生网络来改进SCs漏洞检测。这种相互学习的方法结合了多种模式来更准确地识别漏洞，包括“可重入性”、“时间戳依赖性”、“整数溢出&#x2F;下溢”和“委托调用”。</li>
+<li>CodeNet-detector (Hwang et al., 2022)：发布于2022年，是一种基于卷积神经网络（CNN）的SCs漏洞检测架构。它将sc转换为图像，同时保留其语义和上下文。CodeNet使用独特的数据预处理方法和专门的卷积来检测漏洞，包括“重入性”，“未检查的低级调用”，“时间戳依赖”和“txt .origin”。</li>
+<li>contractaror - detector （Özdemir Sönmez和Knottenbelt， 2024）：它于2024年发布，作为在Solidity SCs中生成攻击面的工具，结合了基于规则的引擎和ChatGPT API进行安全分析。ContractArmor通过数值、关键变量和复杂查询来识别漏洞，这些都是在真实世界的合约上进行评估的。</li>
+<li>基于深度学习的恶意SCs检测方案检测器（Gupta等人，2022）：于2022年推出，它使用长短期记忆（LSTM），人工神经网络（ANN）和门控制循环单元（GRU）模型将sc分类为安全或恶意。它将字节码转换为操作码，应用单热编码，并生成用于分类的特征向量。</li>
+<li>基于深度学习的漏洞检测框架-检测器（Narayana和Sathiyamurthy， 2023）：该框架使用人工神经网络、自动编码器和多标签分类模型来识别sc中的漏洞，特别是“重入性”、“拒绝服务（DoS）”和“事务源”漏洞。它于2023年开发，从Solidity代码的抽象语法树（ast）中提取功能，并应用深度学习技术。</li>
+<li>深度学习和基于专家规则的漏洞检测机制-检测器（Liu et al., 2023a）：该工具将深度学习与专家规则相结合，以改进以太坊sc中的漏洞检测。它于2023年发布，使用图神经网络（gnn）进行初始检测，并使用专家规则来验证和阻止EVM级别的风险交易。该框架可以检测诸如“重入性”、“带硬编码气体量的调用”、“时间戳依赖”和“代码注入”等漏洞。</li>
+<li>deepinference - detector (Zhao et al., 2023)：这是一个基于深度学习的框架，用于推断函数签名和EVM字节码的返回值。它于2023年发布，将字节码提升到IR中以保持语义，并使用gnn提取与类型相关的知识。蒸馏器- mlp &#x2F;LSTM重入检测器（Lê Hông等人，2023年）：该工具于2023年开发，使用自定义标记器和基于蒸馏器的模型来检测sc中的“重入”漏洞。该模型经历了三个阶段：使用自定义词汇表进行标记化，在屏蔽语言模型上进行预训练，以及使用多层感知器（MLP）和LSTM进行二元分类的微调。</li>
+<li>Dynamit-detector (Eshghie et al., 2021)：这是2021年设计的机器学习框架，用于检测以太坊sc中的“重入性”漏洞。它监控交易，并提取天然气使用和余额差异等特征，将其分类为良性或有害。Dynamit使用随机森林分类器来分析事务元数据，而不需要源代码或工具。</li>
+<li>EA-RGCN-detector (Chen et al., 2023)：它是2023年发布的一种用于SCs漏洞检测的新型图卷积网络模型，为每个函数构建语义图。利用残差图卷积网络和边缘关注模块提取内容和语义特征，识别漏洞，包括“算术”、“可重入”、“时间戳依赖”和“未检查的低调用”。</li>
+<li>基于集成模型的数字取证框架检测器（JJ et al., 2023）：这是2023年引入的一种使用自然语言处理和机器学习的新方法。它利用特征提取与集成建模相结合的混合系统对漏洞进行分类，包括“DoS”、“访问控制”、“算术整数溢出”、“坏随机性”、“可重入性”、“未检查的低级调用”和“时间戳依赖性”。该框架通过合成少数派过采样技术（SMOTE）和词频-逆文档频率（TF-IDF）、连续词袋（CBOW）和Skip-N Gram模型等技术提高了准确性并减少了误报。</li>
+<li>扩展的多模态AI框架检测器（Jie et al., 2023）：该工具于2023年开发，使用多模态AI方法在以太坊sc中进行漏洞检测。它结合了静态分析和各种人工智能模型来创建一个全面的框架。该工具利用基于构建的源代码数据和EVM字节码。它使用具有自关注的双向长短期记忆（bi-LSTM）、textCNN和随机森林等模型进行训练和推理。该框架支持带有或不带有源代码的契约，并且在特性融合技术方面表现出色。</li>
+<li>HGAT检测器（Ma et al., 2023a）：分层图注意网络（HGAT）利用分层图注意网络通过使用AST和CFG将函数抽象为代码图来检测SCs漏洞。该算法于2023年发布，利用图关注机制提取节点特征，拼接向量，检测“可重入性”、“时间戳依赖”、“整数溢出和下溢”等漏洞。</li>
+<li>基于dl的集成漏洞检测器（Jain and Tripathi, 2024）：于2023年推出，采用两步分层方法增强漏洞检测的特征提取。第一步使用变压器提取操作码关系，并使用双向门控循环单元（BiGRU）聚合顺序信息。第二步利用Text-CNN和空间注意力捕捉局部特征，强调重要的语义，以改进漏洞检测。它可以检测到13种类型的sc漏洞。这些漏洞包括“可重入性”、“访问控制”、“算术整数溢出&#x2F;下溢”、“低级调用的未检查返回值”、“拒绝服务”、“坏随机性”、“前端运行（TOCTOU）”、“时间操纵”、“短地址”、“调用堆栈”、“错误处理异常”、“事务顺序依赖”和“无保护地使用自毁”。</li>
+<li>基于ml的SCs漏洞检测器（Mughaid et al., 2023）：该模型于2023年推出，使用机器学习来识别有效和无效的SCs。通过采用k近邻（KNN）、朴素贝叶斯（Naive Bayes）、支持向量机（SVM）和随机森林等模型，它检测与事务相关的漏洞，包括“事务起源”、“check-effectsinteraction”、“潜在的重入错误”、“内联汇编”、“块时间戳”、“低级调用”、“块哈希”和“自毁交易商”。</li>
+<li>MSgram - detector (Yang et al., 2020a)：多语义图（MSgram）通过生成文本、结构和组合序列三种标记化标准的序列来增强SCs漏洞审计。MSgram于2020年开发，使用Ngram语言模型捕获多个语义上下文，并应用交集和联合策略整合来自不同语义角度的审计结果。它可以检测漏洞，包括“重入”，“时间戳依赖”，“整数溢出&#x2F;下溢”，“未检查的低级调用”，“自毁使用”，“调用堆栈深度”和“tx”。起源的使用”。</li>
+<li>多模态决策融合模型检测器（Deng et al., 2023）：该方法采用深度学习和多模态决策融合来检测sc中的漏洞。它从源代码、操作代码和控制流图中提取特征，并通过多模态决策融合对它们进行集成。该工具于2023年开发，可检测“算术漏洞”、“可重入性”、“TOD”和“锁定以太漏洞”。</li>
+<li>SC-Defender - detector (Mittal et al., 2023): SC-Defender于2023年发布，旨在检测支持物联网（IoT）的sc中的漏洞。它使用solid代码的AST和基于树的卷积神经网络（TBCNN）进行漏洞检测，特别关注“重入性”缺陷。该工具包括AST修剪技术，以去除多余的节点，提高检测效率。</li>
+<li>S-HGTNs检测器（Liu et al., 2022c）：空间异构图变压器网络（S-HGTNs）于2022年开发，是为以太坊上的sc欺诈而设计的异常检测模型。它构建了一个异构信息网络（HIN）利用变压器网络自动生成元路径，实现对金融欺诈、非法融资和洗钱行为的检测。</li>
+<li>基于语义ml的重入性检测器-检测器（Yan et al., 2022）：发布于2022年，它利用机器学习通过分析语义结构来检测sc中的“重入性”漏洞。该工具通过将AST数据与机器学习模型相结合来识别漏洞并提供纠正反馈。</li>
+<li>SG-EA-RGCN漏洞检测器（Yuan et al., 2023）：签名图实体对齐关系图卷积网络（SG-EA-RGCN）漏洞检测器是一种基于图的sc漏洞检测工具。它构建语义图，并使用残差GCNs与边缘关注分析和识别漏洞，包括“重入性”，“时间戳依赖性”，“tx”。“未检查发送”、“未处理异常”、“算术漏洞（溢出&#x2F;下溢）”和“TOD”。该方法于2023年开发，通过关注SCs代码中的关系和相互作用，可以精确检测。</li>
+<li>SVScanner - detector (Zhang et al., 2023d)：智能漏洞扫描器（SVScanner），于2023年发布，使用深度学习技术检测以太坊sc中的漏洞。它结合了代码令牌序列和AST功能，使用TextCNN进行有效的漏洞检测。它检测“重入性”漏洞、“整数错误”和“时间戳依赖”漏洞。</li>
+<li>使用LSTM网络检测器进行基于交易的分析（Hu等人，2021a）：该方法于2021年发布，重点是基于交易行为对恶意以太坊sc进行分类和检测。它使用LSTM网络来训练从合约交易中提取的特征模型，例如余额变化和以太流相关性。该工具根据交易行为检测庞氏骗局、赌博和高风险合约。</li>
+<li>ABCNN - identifier (Sun and Gu, 2021): ABCNN于2021年推出，是一种基于注意力的CNN模型，旨在检测SCs漏洞。它将CNN与自关注机制相结合，提高了检测的准确性和速度。该模型对操作码序列进行预处理，并使用特征提取和分类层来识别“重入性”、“算术问题”和“时间操纵”等漏洞。</li>
+<li>ASSBert - identifier (Sun et al., 2023): ASSBert于2023年引入，采用主动和半监督（ASS）学习结合来自变形金刚（BERT）模型的双向编码器表示。它使用主动学习有效地标记数据，并通过半监督学习提高模型性能。它解决了诸如“时间戳依赖性”、“调用深度问题”、“重入性”、“事务顺序依赖性”、“算术错误”和“tx”等漏洞。起源的使用”。</li>
+<li>AWD-LSTM - identifier (Gogineni et al., 2020)：平均随机梯度下降加权LSTM （AWD-LSTM）于2020年推出，使用LSTM模型的一种变体对sc进行分类，如自杀、浪子、贪婪和正常。该模型采用受自然语言处理技术启发的预训练编码器来提高分类效率。分析操作码序列可以解决诸如“调用深度”问题之类的漏洞</li>
+<li>AMEVulDetector - identifier (Liu et al., 2021)：细心的多编码器漏洞检测器（AMEVulDetector）于2021年提出，将深度学习与专家模式相结合，用于检测sc漏洞，包括“重入性”、“块时间戳依赖性”和“无限循环”。它采用自动工具提取专家模式，为代码构建语义图，并使用多编码器网络对图进行融合特性和模式，为特性的重要性提供可解释的权重。</li>
+<li>BiGAS检测模型-标识符（Zhang et al., 2023b）： BiGAS于2024年提出，将双向门控循环单元（BiGRU）与注意机制和支持向量机（SVM）相结合，用于检测SCs中的“重入性”漏洞。它将sc处理成标记序列，并使用功能模型提取和分类特征。</li>
+<li>带有注意力漏洞检测器-标识符的Bi-GRU (Jain and Tripathi, 2023)：该工具于2023年提出，该工具使用带有注意力机制的BiGRU来检测以太坊sc中的漏洞。它使用操作码序列提取和向量表示来关注“重入性”和“时间戳依赖”漏洞。该模型捕获上下文信息并强调输入序列的相关部分。</li>
+<li>Blass - identifier (Ren et al., 2023): Blass于2023年推出，使用带有注意机制的Bi-LSTM对sc漏洞进行分类。它针对诸如“可重入性”、“整数溢出”、“时间戳依赖”和“危险的委托调用”等问题。通过构建具有完整语义代码结构特征的程序切片，与传统方法相比，Blass显著提高了漏洞检测能力。</li>
+<li>CBGRU - identifier (Ren et al., 2023)：于2022年提出的卷积双向门控循环单元（Convolutional Bidirectional Gated Recurrent Unit， CBGRU），将CNN和BiGRU与Word2Vec和FastText词嵌入相结合，检测多个SCs漏洞。它关注的漏洞包括“无限循环”、“可重入性”、“时间戳依赖”、“调用堆栈深度攻击”、“整数溢出”和“整数下溢”。混合模型通过集成卷积和递归神经网络的能力来增强特征提取和分类。</li>
+<li>CGE - identifier (Liu et al., 2023b)：契约图嵌入（Contract Graph Embedding， CGE）于2023年提出，将GNN与专家知识相结合，用于SCs漏洞检测。它构造契约图来表示控制和数据流语义，通过规范化过程突出显示关键节点。该工具通过集成时间消息传播和安全模式特征来检测“重入性”、“时间戳依赖性”和“无限循环”漏洞。</li>
+<li>Cider - identifier (Liu et al., 2022a): Cider于2022年提出，采用强化学习来推断契约不变量，专门用于证明sc中的算法安全性。它将不变量生成问题表述为马尔可夫决策过程，并使用神经策略来预测有价值的不变量。该工具通过减少运行时断言和提高推断不变量的质量来增强验证过程，特别是针对“算术溢出”漏洞。</li>
+<li>ContractWard - identifier (Wang et al., 2021)：在2020年提出，ContractWard可以检测六种漏洞：“整数溢出”、“整数下溢”、“TOD”、“调用堆栈深度攻击”、“时间戳依赖”和“可重入性”。它采用从简化的操作代码中提取的双字特征，并利用XGBoost等五种机器学习算法来检测漏洞。ContractWard还设计用于检测快速批次。</li>
+<li>基于深度学习的漏洞检测器-标识符（Wu et al., 2022）：该工具于2022年提出，使用CNN、LSTM、CNN- bilstm等深度学习算法和残差网络检测SCs漏洞。它关注的漏洞包括“整数溢出”、“整数下溢”、“调用堆栈深度攻击”、“TOD”、“时间戳依赖”和“可重入性”。该工具通过单图和双图特征提取和修改词频-逆文档频率优化来提高检测性能。</li>
+<li>DeeSCVHunter - identifier (Yu et al., 2021b): Deep SCs Vulnerability Hunter （DeeSCVHunter）开发于2021年，是一种基于深度学习的框架，用于检测SCs中的“可重入性”和“时间依赖性”漏洞。它使用漏洞候选片（VCS）通过利用数据和控制依赖来增强检测。该框架包括cnn和循环神经网络（rnn）等模型，以学习漏洞模式。该工具的代码和数据集是公开的</li>
+<li>DL4SC - identifier (Liu et al., 2024)：发布于2024年的DL4SC是一种基于深度学习的框架，用于检测sc中的漏洞。它结合了转换器编码器和cnn来分析操作码序列，检测“重入性”、“算术”和“时间戳依赖性”漏洞。该工具使用麻雀搜索算法（SSA）优化超参数。数据集和工具是公开的。</li>
+<li>DR-GCN和TMP-identifier (Zhuang et al., 2020)：这些工具于2020年开发，利用gnn进行SCs漏洞检测。他们创建了捕获语法和语义方面的契约图。DR-GCN在这些图上使用无度卷积，而TMP使用时间消息传播来维护时间数据关系。他们的方法识别的漏洞包括“可重入性”、“时间戳依赖性”和“无限循环”。</li>
+<li>ESCORT - identifier (Sendner et al., 2023)：高效SCs优化和风险工具（ESCORT）于2023年推出，是一种用于检测以太坊sc漏洞的深度学习工具。它使用一个通用的特征提取器和多个分支来检测各种漏洞类型，包括“重入性”、“整数溢出”、“整数下溢”、“调用堆栈深度攻击”、“事务顺序依赖”、“时间戳依赖”、“未检查发送”、“tx”。“Origin usage”、“断言冲突”、“可访问自毁”和“带函数类型变量的任意跳转”同时进行。ESCORT在字节码上运行，并支持迁移学习，以最少的数据添加新的漏洞类型，减少了对多种工具的需求，并最大限度地减少了检测时间。</li>
+<li>Eth2Vec - identifier (Ashizawa et al., 2021)：以太坊字节码矢量（Eth2Vec）于2020年发布，是一种基于机器学习的静态分析工具，用于分析代码相似性以检测以太坊sc中的漏洞。它使用自然语言处理的神经网络自动学习EVM字节码的特征，使其对代码重写具有鲁棒性。</li>
+<li>HAM - identifier (Wu et al., 2023a)：混合注意机制（Hybrid Attention Mechanism， HAM）模型于2023年提出，利用单头和多头注意机制的组合来检测sc中的漏洞。HAM通过针对关键漏洞点提取代码片段，提高了对“重入性”、“算术漏洞”、“未检查返回值”、“时间戳依赖”和“tx”的检测精度。起源”问题。使用公共数据集来证明其有效性。</li>
+<li>基于机器学习的漏洞检测方案-标识符（Xing等人，2020年）：该工具于2020年提出，专注于检测以太坊sc中的三个特定漏洞：“短地址”，“流量”和“贪婪”。利用一种新颖的切片矩阵方法提取特征，提高了漏洞检测的准确性。该工具采用了各种机器学习模型，包括神经网络和随机森林，证明了其在GitHub公共数据集上的有效性。</li>
+<li>MANDO-GURU-identifier (Nguyen et al., 2022)：这个开源工具是为sc中的漏洞检测而设计的，利用异构图嵌入来分析控制流和调用图。MANDO-GURU于2022年发布，确定了七种类型的漏洞，包括“重入性”、“前跑”、“算术错误”、“控制流问题”、“调用图问题”，“符号执行错误”和“数据流漏洞”在行级和合同级。</li>
+<li>MODNN - identifier (Zhang et al., 2022b)：多目标检测神经网络（MODNN）是2022年开发的一种基于机器学习的工具，用于检测sc中的漏洞。它利用COS （critical Operation Sequence）进行特征提取，通过显式和隐式特征识别已知和未知漏洞。MODNN可以检测到12种类型的漏洞，包括“整数溢出和下溢”、“调用堆栈深度攻击”、“TOD”、“时间戳依赖”、“重入”、“未检查发送”、“tx”。“Origin”、“assert failure”和“block timestamp”，并支持多个漏洞的并行检测，提高了可扩展性，降低了培训成本。</li>
+<li>多任务学习漏洞检测模型-标识符（Huang et al., 2022）：该模型采用多任务学习框架来检测和识别sc中的漏洞。它于2022年推出，使用共享底层来学习语义信息，并与cnn一起使用特定任务层来进行检测和分类。该模型有效地处理了诸如“算术错误”、“可重入性”和“未知地址”等漏洞。</li>
+<li>RLRep - identifier (Guo et al., 2023): RLRep是一种基于强化学习的工具，于2024年推出，用于为SCs漏洞提供修复建议。它使用编码器-解码器模型和策略梯度算法来建议修复，而不需要大量标记数据。该工具有效识别并建议修复漏洞，包括“异常紊乱”、“整数溢出”、“可重入”、“TOD”和“txt .origin”。</li>
+<li>S-gram-identifier (Liu et al., 2018b): Sgram于2020年推出，是以太坊sc的语义感知安全审计工具。它利用一种新颖的S-gram模型来捕获契约代码中的语义模式以检测漏洞。通过分析令牌序列和对潜在漏洞进行排序，S-gram提供了全面的安全审计，识别复杂的漏洞，包括“重入性”、“整数溢出&#x2F;下溢”、“时间戳依赖”和“未检查的底层调用”，这些都是传统基于语法的工具可能忽略的。</li>
+<li>SCLMF - identifier (Yang et al., 2023b)：语义分类和元学习框架（SCLMF）于2023年引入，是一种基于元学习的框架，用于检测以太坊sc中的漏洞。它将字节码转换为RGB图像，并采用学习者-元学习者架构来执行少量学习。该模型利用cnn和模型不可知元学习（model - agnostic Meta-Learning， MAML）算法，在有限的数据下准确识别漏洞。</li>
+<li>SCVDIE - identifier (Zhang et al., 2022c): sc漏洞检测与集成集成（SCVDIE）是一种基于机器学习的工具，于2022年推出，利用神经网络集成来检测以太坊sc中的漏洞。结合CNN、RNN、transformer等模型，提高检测精度，主要针对“整数下溢”、“调用栈深度攻击”、“TOD”、“时间戳依赖”、“重入性”等漏洞。</li>
+<li>SecBERT - identifier (Vu et al., 2023)：安全增强的双向编码器表示（SecBERT）使用基于bert的架构进行sc中的多标签漏洞检测。它于2023年推出，使用预训练的SecBERT模型从字节码中提取特征，并使用MLP进行分类。</li>
+<li>sGuard -identifier (Gao et al., 2024): sGuard于2020年推出，是一种机器学习引导的自动漏洞修复工具。它使用二元分类模型，根据特征在功能级别检测每种类型的漏洞从sc的源代码和字节码中提取。该工具完善并扩展了sGuard的修复规则，保留了原有的业务逻辑，减少了天然气开销。</li>
+<li>SmartConDetect - identifier (Jeon et al., 2024): SmartConDetect是一个静态分析工具，用于检测solid sc中的安全漏洞。它于2023年发布，采用预训练的BERT模型来分析代码片段并识别易受影响的代码模式。该工具可检测出“气体耗尽”、“未检查函数调用”、“误用视图函数”、“误用纯函数”、“此”等23个漏洞。余额相等检查点”，“不正确的返回类型”，“msg。”“值零”、“误用可见性”、“数组长度操纵”、“使用不安全的数学函数”、“冗余回退拒绝”、“锁定醚”、“使用私有函数时数据泄漏”、“误用ERC20库中的批准函数”、“坚实编译器0.5.0版本错误”、“误用var”、“误用内部和私有函数中的多个返回值”、“误用循环中的传递函数”、“误用内联汇编”、“地址硬编码”、“废弃的结构”，“ERC20的错误返回”和“对revert require的滥用”。</li>
+<li>SmartEmbed - identifier (Gao et al., 2019a): SmartEmbed是一种通过结构代码嵌入来检测SCs克隆和错误的工具。它于2019年推出，使用深度学习和相似性检查技术来高效准确地识别代码克隆和与克隆相关的错误。该工具使用代码嵌入向量进行漏洞检测。</li>
+<li>SmartMixModel - identifier (Shakya et al., 2022): SmartMixModel是针对solididity SCs的基于机器学习的漏洞检测模型。它于2022年发布，利用高级语法和低级字节码特性来提高检测精度。该模型识别的漏洞包括“不安全的数组长度操纵”、“昂贵循环”、“锁定货币”、“使用txt .origin进行授权”、“严格检查余额相等性”、“冗余回退功能”、“硬编码地址”、“额外的gas消耗”、“发送而不是转移”、“循环内ETH转移”。</li>
+<li>slicing - jgnn - identifier (Cai et al., 2023b)：切片关节图神经网络（slicing - jgnn）使用GNN来检测sc中的漏洞，该网络于2023年引入。它结合了ast、控制流图和程序依赖图。采用程序切片的方法剔除无关信息，有效识别“块信息依赖”、“危险委托调用”、“整数溢出”、“重入”、“自杀式契约”、“短地址攻击”、“时间戳依赖”、“TODy”和“未检查调用返回值”等漏洞。</li>
+<li>TP-Detect - identifier (Srinivasan et al., 2023): triram PixelDetect （TP-Detect）是一种基于机器学习的漏洞检测工具，用于以太坊sc，它使用triram特征提取和像素值提取来创建一个全面的数据集。它于2023年推出，采用朴素贝叶斯和随机森林等模型识别漏洞，包括“整数下溢”、“调用堆栈深度攻击”、“事务顺序依赖”、“时间戳依赖”和“可重入漏洞”。</li>
+<li>VulDeeSmartContract - identifier (Qian et al., 2020)：漏洞深度sc （VulDeeSmartContract）在以太坊sc中使用BiLSTM和关注机制进行“重入检测”。它于2020年开发，分析合同片段以捕获基本语义信息和控制流依赖关系。</li>
+</ol>
+</blockquote>
+<p>总之，基于人工智能的工具提供了一种最先进的方法来准确识别SCs中的漏洞。通过使用先进的机器学习和深度学习技术，这些工具可以发现复杂的安全问题。讨论的工具突出了基于人工智能的方法在增强SCs的安全性和可靠性方面的优缺点。</p>
+<h3 id="4-3-“代码插桩”工具"><a href="#4-3-“代码插桩”工具" class="headerlink" title="4.3. “代码插桩”工具"></a>4.3. “代码插桩”工具</h3><p>第三类工具使用代码插装。该技术涉及修改sc的源代码或字节码，以插入用于监视、分析或安全性增强目的的附加代码。通过检测代码，这些工具可以检测漏洞，执行安全策略，并在不改变其预期功能的情况下确保合约的健壮性。以下是为sc中的代码检测开发的三种检测工具：</p>
+<blockquote>
+<ol>
+<li><p>HermHD检测器（Hou et al., 2023）： Hermes高密度（HermHD）是2023年设计的自动化安全增强工具，用于通过代码混淆保护以太坊sc。它使用六种混淆模式，包括控制流扁平化和各种指令级技术，在不影响功能的情况下重写字节码。HermHD通过防止反向静态分析工具破解合同来增强安全性。</p>
+</li>
+<li><p>SMARTSHIELD - detector (Zhang et al., 2020a): SCs整流和屏蔽系统（SMARTSHIELD）于2020年开发，是一种自动字节码整流系统，旨在修复SCs中三种典型的安全漏洞：“外部调用后状态变化”、“超出边界的算术运算缺失检查”和“外部调用失败缺失检查”。通过分析和转换EVM字节码，同时保留语义并优化气体使用，SMARTSHIELD可确保安全的sc部署。</p>
+</li>
+<li><p>solanalyzer - detector (Akca et al., 2019)：发布于2019年，solanalyzer结合了静态和动态分析，用于Solidity sc中的自动漏洞检测。它使用带有断言的代码插装、自动输入生成和执行跟踪分析来检测漏洞。该工具支持八种不同的漏洞类型，并包括一个故障播种组件来评估其分析的有效性。它检测的漏洞包括“整数溢出&#x2F;下溢”、“除零”、“时间戳依赖”、“交易源误用”、“未检查发送”、“重复调用函数”和“排气条件”。</p>
+</li>
+</ol>
+</blockquote>
+<p>总之，代码检测工具通过添加用于监视和执行的额外代码来增强SCs的安全性。上面讨论的工具演示了如何使用混淆、字节码纠正和静态-动态组合分析等多种方法来检测和预防关键漏洞。这些技术有效地平衡了合约功能的维护，同时引入了健壮的安全层。</p>
+<h3 id="4-4-“控制流分析”工具"><a href="#4-4-“控制流分析”工具" class="headerlink" title="4.4. “控制流分析”工具"></a>4.4. “控制流分析”工具</h3><p>第四类侧重于控制流分析。这种方法包括检查安全系统的控制流程，以识别潜在的漏洞和安全风险。通过构建控制流程图和分析执行路径，这些工具可以检测到可能危及合同安全性的关键问题。以下是为SCs控制流分析开发的两种检测工具：</p>
+<blockquote>
+<ol>
+<li>MadMax - detector (Grech et al., 2018): MadMax是一个静态程序分析工具，用于检测以太坊sc中以gas为中心的漏洞。它结合了基于控制流分析的反编译器和声明式程序结构查询。MadMax于2018年开发，分析SCs以捕获动态数据结构和安全可恢复循环等高级概念，有效识别“无界大规模操作”、“钱包悲伤”和“循环溢出”等漏洞。</li>
+<li>WaLi - detector (Yang et al., 2022): WaLi（开发于2022年）是一种基于控制流的分析器，用于检测Wasm sc中的安全漏洞。它从Wasm字节码构造一个控制流图，并识别可能包含漏洞的关键路径。WaLi使用Wasm虚拟机模拟运行时环境来跟踪这些路径，并根据预定义的模式检测诸如“访问控制漏洞”之类的漏洞。</li>
+</ol>
+</blockquote>
+<p>控制流分析工具是通过关注漏洞的执行路径来发现漏洞的关键。通过构建和分析控制流图，这些工具可以识别潜在的安全风险，如以气体为中心的漏洞和访问控制缺陷。本节重点介绍的工具演示了控制流分析如何有效地解决sc中的关键弱点。</p>
+<h3 id="4-5-“反汇编分析”工具"><a href="#4-5-“反汇编分析”工具" class="headerlink" title="4.5. “反汇编分析”工具"></a>4.5. “反汇编分析”工具</h3><p>第五类涉及拆卸分析。该技术的重点是将sc的字节码分解为更可读的形式。通过反汇编字节码，这些工具有助于理解底层操作并检测潜在的漏洞。它们生成控制流图并将低级字节码转换为高级表示，从而促进全面的安全性分析。以下工具使用拆卸分析，前两个侧重于检测，另一个侧重于sc内的识别。</p>
+<blockquote>
+<ol>
+<li>Octopus - detector (FuzzingLabs, 2024): Octopus于2020年开发，是WebAssembly模块和区块链sc的开源安全分析框架，包括以太坊、比特币、EOS和NEO。它提供了字节码反汇编、控制流、调用流分析和符号执行。Octopus通过生成控制流图和将字节码转换为高级静态单赋值（SSA）形式来提供全面的分析。</li>
+<li>Porosity检测器（Suiche, 2017）：Porosity是2017年开发的EVM字节码的开源反编译器。它将EVM字节码转换为可读的Solidity语法，帮助进行静态和动态分析。此工具可检查已编译的sc，透过生成更容易理解的代码，帮助识别漏洞，包括“可重入漏洞&#x2F;竞争条件”、“调用堆栈漏洞”和“时间依赖漏洞”。</li>
+<li>etherproof - identifier （Linoy等人，2021年）：发布于2021年，etherproof是一种来源感知工具，结合了静态和动态分析来检测、分析和缓解安全问题，包括以太坊sc中的“液体以太”、“重入”和“限制写入”。它使用CFG工具和数据查询来进行高效的安全性分析。EtherProv可以识别多个合约和交易历史中的漏洞，为部署的合约提供实时缓解。</li>
+</ol>
+</blockquote>
+<p>反汇编分析工具通过将复杂的字节码转换为更易于理解的表示形式，提供了对sc的深入了解。这些工具通过分解低级代码和生成控制流图来促进漏洞的检测和分析。本节介绍的工具强调了反汇编分析如何通过使开发人员更好地了解潜在风险来增强sc的安全性。</p>
+<h3 id="4-6-“合规验证”工具"><a href="#4-6-“合规验证”工具" class="headerlink" title="4.6. “合规验证”工具"></a>4.6. “合规验证”工具</h3><p>第六类工具围绕形式验证和定理证明展开。该方法使用数学证明和逻辑推理来确保SCs遵守其预期的规范和行为。通过将SCs转换为正式模型，并根据精确的标准进行验证，这些工具有助于保证合同的有效性，正确性和安全性。在为形式验证和定理证明开发的工具中，前8个用于检测，其余17个侧重于sc中的漏洞识别。</p>
+<blockquote>
+<ol>
+<li>Celestial-detector (Dharanikota et al., 2021)：这是2021年开发的一个框架，用于使用&lt;s:1&gt;百科-验证solid sc。它将契约转换为针对区块链语义的格式验证，然后擦除规范以生成可部署的solid代码。Celestial通过自动化验证过程和为开发人员提供较低的入门门槛来确保功能的正确性。</li>
+<li>ConCert - detector (Nielsen et al., 2023): ConCert是一个使用Coq验证sc的框架，侧重于功能正确性和安全性。它允许提取经过验证的合同，以CameLIGO等语言执行区块链代码。ConCert于2020年推出，支持对合约交互进行推理，使其适用于复杂的分散应用程序。使用Coq的证明辅助功能有助于检测与功能正确性和安全属性相关的漏洞。</li>
+<li>Ether - detector(Yang and Lei, 2019)：正式以太（FEther）是一个可扩展的定义解释器，于2019年发布，用于Coq中的以太坊sc验证。它结合了符号执行和高阶逻辑定理，证明了sc与其形式模型之间的一致性。FEther具有执行和验证的自动策略，在Coq中具有经过验证的功能正确性。</li>
+<li>HoRStify - detector (Holler et al., 2023)：敌意抵抗静态分析（HoRStify），于2023年开发，是一个完善的以太坊sc静态分析工具，专注于依赖分析以验证安全属性。它使用正式的证明框架进行静态程序切片和逻辑编码。这确保了sc中“时间戳依赖”和“单入口”等漏洞的检测。</li>
+<li>NuSMV模型检查框架检测器（Nehaïet al., 2018）：该工具于2018年开发，采用模型检查技术来验证以太坊sc的正确性。将solid代码翻译成新符号模型验证器（NuSMV）输入语言并使用时间逻辑形式化属性计算树逻辑（CTL）系统地检查所有可能的状态序列，以确保符合指定的行为属性。这个框架有助于检测与“状态可达性”、“安全属性”、“活动性”和“功能正确性”相关的漏洞。</li>
+<li>PROMELA和SPIN模型检查框架检测器（Osterland和Rose， 2020）：该框架于2020年推出，采用简单PROMELA解释器（SPIN）模型检查器，通过将solid代码翻译成过程元语言（PROMELA）模型来验证sc的正确性。它使用断言、死锁检测和线性时序逻辑（LTL）系统地根据指定的属性检查契约的逻辑。</li>
+<li>safevm检测器（Albert et al., 2019a）：它是为以太坊sc设计的验证工具，使用最先进的C程序验证引擎。它将EVM字节码反编译为带有SV-COMP验证注释的C代码，允许像CPAchecker、SeaHorn和VeryMax这样的工具进行验证。SAFEVM于2019年推出，有效处理“一般安全注释”和“数组访问验证”，通过将无效字节码操作转换为可验证的C程序断言，提供sc安全性的全面分析。</li>
+<li>VeriMove检测器（Keilty et al., 2022）： VeriMove（2022）是一个模型检查框架，旨在验证Move sc。建立在VeriSolid框架之上，VeriMove将其功能扩展到Move语言，允许跨多个函数执行验证全局属性。该框架主要针对“可重入性”和“整数溢出&#x2F;下溢”等漏洞。</li>
+<li>2Vyper - identifier (Bräm等人，2021):2Vyper是一个基于2021可满足模理论（SMT）的以太坊sc自动验证工具，用Vyper编写。它使用了一种为SCs量身定制的新颖规范方法，即使在未经验证的代码和任意的“重新进入”中也能进行合理而精确的推理。该工具支持关于协作契约的模块化推理。它包括特定于领域的资源和资源传输规范。</li>
+<li>EtherTrust - identifier (Grishchenko et al., 2018): EtherTrust于2018年提出，是以太坊字节码的可靠静态分析工具。它使用基于horn子句解析的可达性分析技术来检测诸如“重入性”和“事务环境依赖性”等关键漏洞。</li>
+<li>eThor - identifier (Schneidewind et al., 2020): eThor于2020年发布，是以太坊sc的一个健全和自动化的静态分析器。它使用基于horn条款的可达性分析来检测诸如“单入口”之类的安全属性。eThor提供了正式的安全保证，并支持EVM字节码的分析，在现实世界的合约上展示了大规模评估的准确性。</li>
+<li>esbmc - solid - identifier (Song et al., 2022): ESBMC-Solidity于2022年推出，是一种基于smd的Solidity sc模型检查器。它使用一个新的前端将Solidity JSON AST转换为符号执行的IR。该工具对“整数溢出”、“整数下溢”、“通过txt .origin授权”、“静态数组越界”、“动态数组越界”等漏洞进行验证，并针对检测到的每个问题提供反例。</li>
+<li>FSPVM-E - identifier (Yang et al., 2020b): Formal Symbolic Process Virtual Machine for Ethereum (FSPVM-E)，发布于2020年，是在Coq中实现的以太坊sc的混合形式验证系统。它将符号执行和高阶逻辑定理证明相结合，利用FSPVM来保证sc的可靠性和安全性。FSPVM-E包括一个正式的内存框架、一个中间编程语言（Lolisa）和一个经过正式验证的解释器（FEther）。它可以检测“整数溢出”、“堆栈溢出”、“未检查发送错误”、“除零”等漏洞。</li>
+<li>（Bhargavan et al., 2016）：发布于2016年，是一种正式的验证工具，可以将以太坊sc转换为用于综合分析的&lt;s:2&gt; -百科函数式编程语言。它支持Solidity源代码和EVM字节码，允许通过形式化方法和关系推理进行运行时安全性和功能正确性验证。</li>
+<li>基于谓词抽象的验证框架-标识符（Godoy等人，2022）：该工具使用谓词抽象通过从合同代码构建有限标记转换系统来验证sc。它于2022年发布，通过识别函数调用序列和检查合同行为与需求之间的对应关系来支持审计人员。该工具可以通过使用基于所需子句和枚举类型状态变量的谓词来暴露缺陷。</li>
+<li>security - identifier (Tsankov et al., 2018): Securify是以太坊sc的实用且可扩展的安全分析器，于2018年推出。此静态分析工具使用遵从性和违例模式来验证安全属性并有效地检测违例。通过对合约的依赖关系图进行符号编码，Securify有助于识别诸如“重入性”、“无限制写入存储”、“锁定以太坊”、“TOD”、“异常处理”、“未检查调用返回值”和“整数溢出&#x2F;下溢”等问题，并将误报最小化。</li>
+<li>SmartFast - identifier (Li et al., 2022c): SmartFast是以太坊sc的形式化分析工具。它引入了一种新的中间表示，SmartIR，它使用预设规则和污点跟踪来识别和定位合同代码中的漏洞。SmartFast于2022年开发，能够以高精度和召回率检测各种漏洞。这些漏洞可分为15类，包括“可重入性和调用漏洞”、“访问控制和授权”、“状态管理和初始化”、“逻辑和计算问题”、“数学错误”、“合同设计和标准”、“安全最佳实践”、“SCs标准遵从性”、“气体优化和成本管理”、“代码质量和可读性”、“数据处理和逻辑流”、“执行和功能”、“错误处理和恢复”，“汇编和低级操作”，以及“杂项问题”。</li>
+<li>Solc-verify - identifier (Hajdu and jovanoviki, 2020): Solc-verify是以太坊sc的源代码级验证工具。它于2020年发布，使用模块化程序分析和SMT求解器通过直接分析源代码中的注释来验证Solidity合约。它检测各种漏洞，如“可重入性”、“溢出”和“断言失败”。</li>
+<li>Solicitous - identifier (Marescotti et al., 2020): Solicitous是集成到官方Solidity编译器中的正式验证工具。它于2020年推出，使用受限的Horn子句（CHCs）来准确地模拟SCs的行为，允许使用泛型定理证明器进行全自动验证。Solicitous擅长于证明“无界安全属性”和生成违反属性的反例。</li>
+<li>固化标识符（Antonino和Roscoe， 2021）：固化是Solidity sc的有界模型检查器，它使用延迟契约部署和精确内存建模。它于2021年推出，使用Boogie（一种中间验证语言）对Solidity和以太坊区块链进行编码。该工具通过探索语义属性而不是特定模式来解决漏洞，从而确保精确和格式良好的状态操作。</li>
+<li>Vandal - identifier （Brent等人，2018年）：Vandal于2018年发布，是以太坊sc的安全分析框架，可将低级EVM字节码转换为语义逻辑关系。它使用基于数据的逻辑规范来检测漏洞，包括“未经检查的发送”、“可重入”、“不安全的余额”、“可销毁的合约”和“使用起源”。Vandal的逻辑驱动方法允许对新的漏洞分析进行轻松定制和快速原型化。</li>
+<li>VERISMART - identifier (So et al., 2020): VERISMART是以太坊sc的安全验证器，专注于“算术安全”。它于2020年推出，使用一种新的特定于领域的算法来自动发现事务不变量，确保在不影响精度或可扩展性的情况下进行详尽的验证。VERISMART有效地检测漏洞，如“整数溢出和下溢”，减少误报。</li>
+<li>VERISOL - identifier (Wang et al., 2018): VERISOL是Azure区块链中sc的正式验证器，于2019年推出。它将Solidity程序翻译成Boogie中间验证语言，利用Boogie验证管道执行语义一致性检查和自动验证。VERISOL已被用于查找Azure区块链工作台的契约中以前未知的错误。</li>
+<li>VeriSolid - identifier (Mavridou et al., 2019): VeriSolid是一个正式验证以太坊sc的框架，使用具有严格操作语义的基于过渡系统的模型。它于2019年推出，允许开发人员在高层次抽象上推理和验证合约行为。VeriSolid能够从经过验证的模型中生成Solidity代码，从而促进sc的正确设计开发。它可以检测诸如“重入性”、“TOD”、“整数溢出&#x2F;下溢”、“访问控制问题”和“死锁自由”等漏洞。</li>
+<li>ZEUS - identifier (Kalra et al., 2018): ZEUS是一个正式的验证框架，旨在分析SCs的安全性。它于2018年推出，结合了抽象解释和符号模型检查来验证合同的正确性和公平性。ZEUS能够检查是否遵守安全编程实践和业务逻辑，检测漏洞，包括“重入性”、“未检查发送”、“整数溢出&#x2F;下溢”、“事务状态依赖”、“块状态依赖”和“TOD”。</li>
+</ol>
+</blockquote>
+<p>总之，形式化验证工具使用数学方法来验证sc的正确性和安全性。通过将契约转换为正式模型，这些工具有助于确保契约按预期执行。本节中提到的工具强调了在构建可靠和安全的sc时正式验证的重要性。</p>
+<h3 id="4-7-“模糊”工具"><a href="#4-7-“模糊”工具" class="headerlink" title="4.7. “模糊”工具"></a>4.7. “模糊”工具</h3><p>第七类工具强调模糊测试。模糊测试（fuzzing）是一种动态测试技术，它涉及提供无效的、意外的或随机的数据作为sc的输入，以发现编码错误和安全漏洞。这种方法对于识别漏洞和确保sc的健壮性特别有效。模糊测试工具通常结合符号执行和进化模糊测试等技术来生成有意义的事务序列，并为彻底的测试优化突变过程。为模糊测试开发的前20个工具侧重于漏洞检测，而其余10个工具是为sc中的漏洞识别而设计的。</p>
+<blockquote>
+<ol>
+<li>混淆检测器（Torres et al., 2021）：它是2021年为sc开发的混合模糊器，结合了符号执行和进化模糊。它使用约束求解复杂条件和动态数据依赖分析生成有意义的事务序列。它检测的漏洞包括“断言失败”、“整数溢出”、“可重入”、“TOD”、“块依赖”、“未处理的异常”、“不安全的委托调用”、“泄漏以太”、“锁定以太”和“无保护的自毁”。</li>
+<li>CrossFuzz-detector (Yang et al., 2024)：它是一个交叉合约模糊测试工具，用于检测2024年发布的以太坊sc中的漏洞。它通过跟踪数据传播路径生成构造函数参数，并利用契约间数据流优化事务序列突变。CrossFuzz可以检测一系列漏洞，包括“可重入性”、“未处理的异常”、“断言失败”和“块依赖”。</li>
+<li>Echidna-detector (Grieco et al., 2020)：这是一个SCs模糊器，它使用随机事务生成来检测违规行为，包括以太坊sc中的“重入”、“断言违规”、“气体限制问题”、“整数溢出和下溢”和“自定义属性违规”。它与Slither集成进行初始契约分析，然后运行模糊测试活动，利用应用程序二进制接口和常量。Echidna于2020年推出，擅长快速识别财产违规行为，估计天然气使用量，并以最少的配置支持各种开发框架。</li>
+<li>EF cf检测器（Rodler等人，2023年）：2023年推出的高性能模糊器将EVM字节码转换为本机C代码，以实现有效的模糊测试。它为SCs事务序列使用结构感知的突变引擎，并利用合约的ABI生成有效的输入。EF CF精确地模拟了复杂的交互，包括“可重入性”、“交叉契约交互”、“访问控制错误”、“整数溢出”、“委托调用滥用”和“组合可重入性”。</li>
+<li>etherdifference - detector (Kim and Hwang, 2023)：它对以太坊节点的远程过程调用（RPC）服务执行差分测试。它使用并发事务和传播延迟生成非确定性链。于2023年发布，创建并执行测试用例以检测错误处理和返回值中的偏差，识别错误和不一致，包括“无效参数处理”，“气体估计差异”，“叔块访问不一致”，“实现错误（例如，崩溃和DOS）”，“方法支持不一致”和“字段和格式变化”。</li>
+<li>ethploit检测器（Zhang et al., 2020b）：这是一个SCs漏洞生成器，它使用模糊测试结合静态污染分析来生成针对漏洞的事务。它采用动态种子策略和仪表EVM来处理区块链行为和约束。EtherDiffer检测漏洞，包括“崩溃bug”、“DoS bug”和合同执行的“错误气体估计”。</li>
+<li>EVMFuzzer-detector (Fu et al., 2019a)：它是一种差分模糊测试工具，用于检测EVM实现中的漏洞。它生成和改变种子契约，并在多个evm上运行它们，以识别执行差异。它使用动态优先级调度和基准evm作为交叉引用的oracle来有效地检测安全问题。EVMFuzzer于2019年开发，可检测包括“非法堆栈操作”、“DoS错误”和“分段错误”在内的漏洞。</li>
+<li>fuzzdelsol探测器（Smolka et al., 2023）：于2023年推出，它是Solana sc的二进制覆盖引导模糊器。它模拟运行时的细节，如sc交互，并生成事务来发现漏洞，包括“缺少签名者检查”、“缺少所有者检查”、“任意跨程序调用”、“缺少密钥检查”、“整数错误”和“lamport盗窃”。</li>
+<li>GasFuzzer-detector (Ashraf et al., 2020)：这是一种2020年设计的模糊测试工具，用于检测面向气体的异常安全漏洞，包括以太坊sc中的“异常紊乱”和“out- gas”。该工具采用了两阶段策略：一种是“贪气”策略，该策略优先考虑重气交易以进行突变；另一种是“气均衡”策略，该策略通过操纵气量来暴露漏洞。</li>
+<li>HFContractFuzzer-detector (Ding等人，2021)：它是一种用于检测Hyperledger Fabric sc漏洞的模糊测试工具。它使用Go -fuzz和用Go编写的sc，利用MockStub类的单元测试来模拟区块链状态。该工具于2021年开发，通过初始语料库和突变算法增强来优化模糊过程，有效识别漏洞，包括“类型转换错误”、“逻辑漏洞”和“整数溢出”。</li>
+<li>Hydra - detector (Breidenbach et al., 2019): Hydra是2019年设计的一个框架，用于在以太坊sc上进行原则性的自动错误赏金。它将n个版本的编程与自动漏洞赏金支付相结合，运行多个版本的程序来检测和隔离漏洞。元程序协调行动以确保安全，通过赏金奖励激励披露。Hydra检测到的漏洞包括“逻辑错误”、“重入攻击”和其他可利用的漏洞，通过确保识别不同版本程序之间的差异，并奖励奖励以鼓励报告。</li>
+<li>IcyChecker-detector (Ye et al., 2023)：这是一个基于模糊的框架，设计于2023年，用于检测sc中的状态不一致（SI）错误。它重播链上的历史事务以收集准确的上下文信息，然后生成和改变事务序列，通过观察状态差异来识别SI错误。这种方法有效地揭示了分散应用程序中的“状态不一致错误”、“可重入性”、“提前运行”、“访问控制违规”和“坏随机性”等漏洞。</li>
+<li>基于不变量的稀缺性缺陷检测器（Sun et al., 2022）：该方法于2022年发表，使用不变量分析检测区块链数字资产的稀缺性缺陷。它将转移和交换不变量定义为测试oracle，并使用confzzius模糊测试工具生成测试输入，有效地识别sc中的“稀缺性缺陷”。</li>
+<li>ILF检测器（He et al., 2019）： ILF于2019年开发，是用于以太坊sc的基于模仿学习的模糊器，结合了符号执行和模糊技术。ILF有效地检测诸如“泄漏”、“自杀”、“锁定”、“块依赖”、“未处理异常”和“受控委托调用”等漏洞。它从符号执行专家生成的输入中学习模糊策略，以提高代码覆盖率和漏洞检测。</li>
+<li>ItyFuzz - detector (showet al., 2023)：发布于2023年，ItyFuzz是一个基于快照的以太坊sc模糊器。它用状态快照替换事务序列，以减少重新执行开销。该工具采用数据流和比较路径点对感兴趣的状态进行优先级排序，从而实现快速高效的漏洞检测。ItyFuzz可以识别漏洞，如“重入”，“整数溢出”，“时间戳依赖”，“气外”，“未处理的异常”和“短地址攻击”。</li>
+<li>语言不可知模糊框架检测器（Pani et al., 2022）：该框架于2022年推出，使用单个模糊器通过将其转换为低级虚拟机（LLVM） IR来检测用不同编程语言编写的sc中的漏洞。它采用美国模糊Lop （AFL）、Honggfuzz和libFuzzer来执行模糊测试，增强了企业开发和运营（DevOps）设置的可扩展性和可维护性。</li>
+<li>MagicMirror - detector (Feng et al., 2023): MagicMirror是2023年为sc设计的高覆盖率模糊测试工具。它将动态符号执行与传统模糊检测相结合，增强了对漏洞的检测能力。MagicMirror通过动态污点分析，确保全面的漏洞检测，有效缓解SCs中的“整数溢出”、“时间戳依赖”、“重入”、“未处理异常”、“out- gas”和“短地址攻击”等安全问题。</li>
+<li>ReDefender - detector (Li et al., 2022d): ReDefender是一个全自动动态分析工具，旨在检测2022年推出的以太坊sc中的“重入漏洞”。使用模糊测试，它对契约进行预处理以创建候选池，生成模糊测试输入以模拟攻击，并分析执行日志以验证漏洞。</li>
+<li>seqfuzzy - detector (Ji et al., 2023)：它是2023年发布的用于SCs测试的引导突变模糊器，结合了动态依赖学习（DDL）和动态变量分析（DVA）。DDL通过分析状态变量依赖关系生成事务序列，而DVA使用动态分析处理外部参数。SeqFuzz通过关注相关的突变来增强分支覆盖和bug检测。SeqFuzz检测到的漏洞包括“任意写入”、“块状态依赖”、“控制劫持”、“以太泄漏”、“整数错误”、“错误处理异常”、“多次发送”、“可重入”、“自杀式合约”和“事务源使用”。</li>
+<li>syntest - solid - detector (Olsthoorn et al., 2022)：开发于2022年，它是Solidity sc的自动化测试用例生成和模糊测试框架。它采用各种元启发式搜索算法，包括随机搜索和遗传算法，如非支配排序遗传算法II （NSGA-II）和动态多目标排序算法（DynaMOSA），以优化测试用例的生成。该工具提供了命令行界面和web服务，使开发人员可以轻松访问和使用。</li>
+<li>ContractFuzzer - identifier (Jiang et al., 2018): ContractFuzzer于2018年推出，使用模糊测试技术来测试以太坊sc的漏洞。它生成要执行的随机输入契约和应用预定义的规则来识别漏洞，如“可重入性”、“时间戳依赖”、“整数溢出”、“未检查调用”、“异常无序”和“气不足”。这种方法通过模拟各种攻击场景来帮助识别潜在的安全问题</li>
+<li>Etherolic - identifier (Ashouri, 2020): Etherolic于2020年推出，是用于以太坊sc安全性分析的强大而高效的模糊测试工具。它结合了动态污染跟踪和聚合测试来分析字节码、识别漏洞并生成漏洞。Etherolic能够检测广泛的漏洞，如“整数溢出和下溢”，“坏随机性”，“重入”，“锁定以太”，“未处理异常”，“拒绝服务”，“短地址攻击”，“竞争条件”和“影子内存”，以及字节码级别的零日攻击，即使没有访问源代码，同时通过识别代码中的保护方法最大限度地减少误报。</li>
+<li>GFuzzer - identifier (Li et al., 2022e): GFuzzer于2022年发布，是EOSIO sc的灰盒模糊测试工具。它使用执行反馈来指导模糊测试并改进分支覆盖率。GFuzzer可以检测到“假EOS转账”、“伪造转账通知”、“区块信息依赖”等漏洞。采用基于距离的突变策略生成覆盖难以到达的分支的测试用例，确保全面的安全性分析。</li>
+<li>哈维识别器（w&lt;s:1&gt; stholz和Christakis， 2020）：哈维是一种为sc设计的灰盒模糊器，于2020年推出。它通过预测可能覆盖新路径或暴露漏洞的新输入来增强标准的灰盒模糊测试。Harvey还模糊了事务序列，以探索不同的合约状态，旨在检测诸如“断言违规”和“内存访问错误”等漏洞。使用公共数据集来证明其有效性。</li>
+<li>NeoDiff - identifier (Maier et al., 2021): NeoDiff是SCs虚拟机的微分模糊测试框架。它于2021年发布，使用覆盖引导和状态引导模糊测试来探索虚拟机行为并发现关键差异。NeoDiff已应用于各种区块链平台，包括以太坊和Neo，发现差异和“内存损坏问题”。该工具可以轻松地移植到新的sc平台。</li>
+<li>guard - identifier (Liu et al., 2018a): ReGuard是一种基于模糊的分析仪，用于自动检测以太坊sc中的“重入错误”。它通过生成随机和多样化的事务来执行模糊测试，然后根据运行时跟踪动态识别可重入漏洞。ReGuard于2018年发布，将sc代码转换为C语言进行全面分析。</li>
+<li>RLF - identifier (Su et al., 2022)：强化学习模糊器（RLF）于2022年开发，是一种强化学习引导的模糊测试工具，旨在在以太坊sc中生成易受攻击的交易序列。通过将模糊过程建模为马尔可夫决策过程，RLF有效地识别需要特定事务序列的复杂漏洞。它集成了漏洞和代码覆盖奖励来检测多种类型的漏洞，包括“以太坊泄漏”、“自杀式契约”、“块状态依赖”、“未处理的异常”、“危险的delegatcall”和“以太坊冻结”，特别是涉及多个功能交互的漏洞。</li>
+<li>SMARTIAN - identifier (Choi et al., 2021)：物联网和网络应用的符号模型分析推理工具（SMARTIAN）是一种SCs模糊器，通过静态和动态数据流分析增强模糊。该系统于2021年推出，系统生成关键事务序列，查找“断言失败”、“任意写入”、“块状态依赖”、“控制流劫持”、“以太坊泄漏”、“冻结以太坊”、“整数bug”、“错误处理异常”、“可重入性”、“需求违反”和“自杀式契约”，利用数据依赖来指导模糊测试。这种混合方法显著提高了bug检测和代码覆盖率。</li>
+<li>sFuzz - identifier (Nguyen et al., 2020): sFuzz是以太坊平台上Solidity sc的自适应模糊测试工具。它将基于afl的模糊测试与轻量级的自适应策略集成在一起，以实现高代码覆盖率并发现漏洞。该工具于2020年推出，通过优化的反馈引导流程生成和执行大量测试用例，有效识别包括“无气发送”、“异常无序”、“可重入”、“时间戳依赖”、“块号依赖”、“危险的委派调用”、“整数溢出&#x2F;下溢”和“冻结以太”在内的问题。</li>
+<li>WASAIUP - identifier (Wang et ., 2023): WASAIUP于2023年推出，是用于EOSIO sc的需求驱动型concolic zzzzer。它可以检测特定的漏洞，包括“假EOS”、“假通知”、“回滚”、“缺少授权验证”和“blockinfo依赖”。这种混合工具结合了符号和具体执行，以提高检测效率和准确性。</li>
+</ol>
+</blockquote>
+<p>总体而言，模糊测试工具提供了一种自适应方法，通过生成多样化和不可预测的输入来识别SCs中的漏洞。尽管模糊测试有局限性，比如大量的计算资源和潜在的覆盖缺口，但它仍然是在意外条件和边缘情况下测试合同的有效方法。这里强调的工具展示了模糊测试在提高sc安全性方面的价值</p>
+<h3 id="4-8-“基于模型的测试”工具"><a href="#4-8-“基于模型的测试”工具" class="headerlink" title="4.8. “基于模型的测试”工具"></a>4.8. “基于模型的测试”工具</h3><p>第八类使用基于模型的测试。该方法包括创建SCs的抽象模型，以指导测试用例的生成并验证契约行为。使用正式模型和状态机，这些工具可以系统地探索不同的执行路径并检测潜在问题，从而确保sc的彻底测试和验证。在下面的工具列表中，前五个工具利用抽象解释进行漏洞检测，而其余六个工具用于sc中的漏洞识别。</p>
+<blockquote>
+<ol>
+<li>ADF-GA检测器（Zhang et al., 2020c）：基于遗传算法的自适应模糊（ADF-GA）是一种基于遗传算法的方法，用于生成Solidity sc的测试用例。ADF-GA于2020年推出，可构建控制流图，执行数据流分析以识别变量用途，并通过改进的适应度函数优化测试生成。ADF-GA检测漏洞，如“重入错误”，“不正确的状态转换”和“整数溢出&#x2F;下溢问题”。</li>
+<li>FSolidM检测器（Mavridou和Laszka， 2018）： FSolidM于2018年开发，是一个旨在使用有限状态机（FSMs）创建安全以太坊sc的框架。它包括一个指定fsm的图形化编辑器，一个用于生成Solidity代码的代码生成器，以及增强安全性和功能的插件。然而，由于FSolidM专注于帮助开发人员创建安全合约，而不是检测现有合约中的漏洞，因此它不包括在本次调查的工具理论和实践分析中。FSolidM通过提供一个正式的模型、减少手工编码错误、集成常见的安全模式（如“重入”、“事务排序”和“访问控制”）来帮助开发人员。</li>
+<li>ModCon-detector (Liu et al., 2020)：它是一个基于模型的测试平台，适用于无许可和许可区块链上的sc。它使用用户指定的模型来定义测试oracle，指导测试生成，并度量测试的充分性。通过基于web的界面，ModCon支持定制的测试过程。通过指定状态定义、转换关系和前后条件，彻底验证复杂sc。ModCon于2020年开发，可检测复杂SCs应用中的“状态转换错误”、“功能正确性问题”和安全漏洞。</li>
+<li>SCs建模和行为验证检测器（Abdellatif和brussmiche， 2018）：该工具使用基于行为交互优先级的形式化建模方法来验证SCs行为。它于2018年推出，对sc、用户和区块链交互进行建模，通过统计模型检查来识别潜在的漏洞。模拟不同的攻击场景可以深入了解安全漏洞，并为健壮的SC实现提供设计改进建议。它可以检测漏洞，包括“事务重排序攻击”、“待处理事务数据泄漏”和“网络窃听”。</li>
+<li>SmartInspect-detector (Bragagnolo等人，2018)：它是一个Solidity SCs检查器，使用反编译技术和基于镜像的架构来表示和解释合同状态。它于2018年开发，反编译合约的二进制结构并将其映射到源代码，允许开发人员检查和理解合约状态，而无需重新部署或额外的代码。</li>
+<li>Elysium - identifier (Ferreira Torres et al., 2022): Elysium是2022年推出的字节码级补丁工具，用于自动修复sc中的漏洞。它集成了Osiris、Oyente和Mythril来检测和修补诸如“整数溢出”、“可重入性”和“未处理的异常”等问题。使用CFG和污染分析，Elysium生成有效的补丁。该工具解决了七种类型的漏洞，包括“同函数重入”、“跨函数重入”、“delegatcall滥用”、“基于创建的重入”、“事务起源”、“自杀式合约”和“整数溢出和下溢”，并可在GitHub上获得。</li>
+<li>ESAF - identifier (Vivar et al., 2021)：以太坊安全分析框架（ESAF）于2021年推出，是一个综合框架，集成了多个现有的sc漏洞分析工具。它通过统一输出格式和通过容器化管理依赖关系来简化分析过程。ESAF支持持久的安全监控和单独的漏洞分析，利用了Oyente、Mythril和Securify等工具的组合功能。</li>
+<li>SecSEC - identifier (Yashavant, 2024): secure Smart Ethereum Contracts （SecSEC）于2024年推出，使用逻辑回归集成了多个sc分析工具，以增强漏洞检测。这种混合方法结合了各种工具的优势，并在标有漏洞的现实世界合同的大型数据集上进行训练。</li>
+<li>SmartBugs - identifier (Ferreira et al., 2020): SmartBugs是一个可扩展的执行框架，旨在简化Solidity sc的分析。它于2020年开发，支持多种分析工具和数据集，实现可重复研究和全面漏洞检测。SmartBugs集成了HoneyBadger、Maian和Mythril等工具，并提供了各种漏洞类型的详细报告，如“重入”、“整数溢出和下溢”、“未检查发送”、“拒绝服务（DoS）”、“时间戳依赖”、“TOD&#x2F;提前运行”、“未初始化存储指针”、“tx”。“原始身份验证”，“锁定醚”，“访问控制问题”和“坏随机性”使用Docker镜像和用户友好的命令行界面。</li>
+<li>SmartBugs 2.0 - identifier (Ferreira et al., 2020): SmartBugs 2.0是一个用于自动分析以太坊sc的执行框架。它于2023年发布，集成了19个分析工具，并支持Solidity源代码和EVM字节码。该框架检测各种漏洞，包括“可重入性”、“算术问题（溢出&#x2F;下溢）”、“访问控制违规”、“未检查的低级调用”、“拒绝服务”、“恶意随机性”、“时间戳依赖性”、“提前运行”、“短地址攻击”、“未检查返回值”、“不安全的delegatecall使用”、“整数错误”、“gas消耗问题”、“身份验证绕过”、“断言违规”、“事务源使用”、“竞争条件”、“遮蔽变量”和“自杀式合同”。该框架将输出格式标准化，并将结果映射到SWC分类法，从而促进大规模、可重复的分析。</li>
+<li>SoliAudit - identifier (Liao et al., 2019): SoliAudit是一种SCs漏洞评估工具，结合了机器学习和模糊测试。它于2019年推出，可以检测13种类型的漏洞，包括“重入性”、“算术溢出”、“访问控制”、“未检查的低级调用”、“拒绝服务”、“坏随机性”、“提前运行”、“时间操纵”、“短地址”、“调用深度”、“事务起源”、“内联汇编”和“自毁”，而不需要专家知识或预定义模式。solidaudit采用静态机器学习分类器，使用solididity机器代码特征和动态模糊器进行在线交易验证。</li>
+</ol>
+</blockquote>
+<p>基于模型的测试工具提供了一种使用抽象模型和状态机分析SCs的结构化方法。虽然构建这些模型可能很耗时，但它们可以通过探索各种执行路径来帮助确保sc按预期工作。讨论的工具说明了基于模型的测试如何提高SC的可靠性。</p>
+<h3 id="4-9-“突变测试”工具"><a href="#4-9-“突变测试”工具" class="headerlink" title="4.9. “突变测试”工具"></a>4.9. “突变测试”工具</h3><p>第九类使用突变检测。该技术涉及在sc的源代码中引入小的、有意的更改或突变，以模拟潜在的错误。然后对修改后的契约或突变进行测试，以确定现有的测试套件是否可以检测并处理这些错误。这个过程有助于提高测试套件的有效性和彻底性。下面列出的工具利用突变测试，前三个是检测工具，其余两个用于SCs中的识别目的。</p>
+<blockquote>
+<ol>
+<li>RegularMutator - detector (Ivanova and Khritankov, 2020): RegularMutator于2020年推出，是一种针对Solidity SCs的突变检测工具。它使用正则表达式通过在源代码中引入常见错误来创建突变。然后，根据测试套件检测这些突变的能力来评估测试套件的有效性。通过检测额外的缺陷，并提供比线路覆盖度量更可靠的评估，该工具被证明在提高测试套件的质量方面是有效的。</li>
+<li>ReSuMo - detector (Barboni et al., 2024): ReSuMo，发表于2023年，是Solidity SCs的回归突变测试工具。它使用静态和文件级技术来选择要突变的sc子集和要在回归突变测试活动期间重新运行的测试文件子集。通过使用以前的测试结果增量地更新结果，ReSuMo加速了演进项目的突变测试过程，同时确保了全面的充分性评估。</li>
+<li>SuMo - detector (Barboni et al., 2022): SuMo是一种用solid编写的SCs突变检测工具。它支持独立的命令行界面和带有REST API的web服务，以最小的工作量实现自动化的突变测试。《SuMo》于2022年出版，使用了44种不同的突变操作者，并与松露和Ganache集成编写和测试SCs，提供了关于突变测试过程和结果的全面报告。</li>
+<li>MuRE - identifier (Zhu et al., 2023): 2023年引入的可重入检测工具Evaluation （MuRE）的突变测试方法，采用突变测试在以太坊sc中生成分类的“可重入”漏洞集。它使用符号执行来识别潜在的可重入路径，并应用突变操作符来生成可重入突变。MuRE通过比较重入检测工具检测这些分类突变的能力来评估它们的有效性。</li>
+<li>MuSC - identifier (Li et al., 2019)：以太坊sc （MuSC）突变测试工具于2019年推出，专注于突变测试，以评估sc测试的稳健性。它使用一组为Solidity量身定制的新颖突变操作符生成突变，并执行自动操作，如创建测试网、部署和执行测试。该工具通过修改代码的特定部分来评估测试覆盖率和有效性，从而帮助暴露SCs中的各种缺陷。</li>
+</ol>
+</blockquote>
+<p>总之，突变测试工具为评估和提高SCs测试套件的质量提供了一个框架。突变测试引入了受控的修改，并评估测试是否可以捕获这些错误。这种方法衡量测试覆盖率，揭示测试中的漏洞，提高sc的整体可靠性和安全性。</p>
+<h3 id="4-10-“模式匹配和语法分析”工具"><a href="#4-10-“模式匹配和语法分析”工具" class="headerlink" title="4.10. “模式匹配和语法分析”工具"></a>4.10. “模式匹配和语法分析”工具</h3><p>第十类使用模式匹配和语法分析。该方法包括分析SCs的结构和语法，以识别模式并检测潜在的漏洞。通过利用预定义的模式和语法规则，这些工具可以有效地发现契约中的安全风险和编码问题。在下面使用模式匹配和语法分析的工具中，前14个是针对漏洞检测的，而其余21个侧重于sc内的漏洞识别。</p>
+<blockquote>
+<ol>
+<li>DeFiRanger-detector (Wu et al., 2023)：它是去中心化金融（DeFi）应用程序中价格操纵攻击的检测工具。它于2023年发布，从原始交易构建现金流树（CFT），将低级语义提升到高级语义，并应用预定义模式来检测“价格操纵攻击”。</li>
+<li>Ethlint - detector (Dua, 2024): Ethlint，最初被称为Solium，于2016年开发，是一个用JavaScript实现的静态分析工具，用于检查Solidity代码的风格和安全问题。它标准化了跨组织的sc实践，并与构建系统无缝集成。Ethlint提供了一个易于使用的命令行界面（CLI）来检测Solidity文件，支持多种输出格式和自动代码修复。</li>
+<li>Horus-detector (Ferreira Torres et al., 2021)：于2021年开发，它通过利用逻辑驱动和图形驱动的方法自动检测和分析对以太坊sc的攻击。它从交易中提取与执行相关的信息，使用Datalog查询识别攻击，并使用图形数据库跟踪被盗资产。在Python中实现，Horus提供了对安全问题的详细见解，促进了攻击识别和分析。</li>
+<li>MSmart - detector (Fei et al., 2023): MSmart通过引入额外规则和改进现有规则来增强Smartcheck静态分析工具，以检测2023年开发的Solidity sc中的漏洞。它可以识别诸如“整数溢出”、“时间戳依赖”、“自毁”、“delegatcall”和“DOS”等问题，同时支持批量检测以简化大型数据集的分析。</li>
+<li>Naga检测器（Yan et al., 2023）： Naga是2023年设计的一种工具，用于检测分散生态系统中的“集中安全风险”，专门针对以太坊加密钱包和sc。它使用ir进行数据依赖性分析，识别和分析七个集中的安全风险。</li>
+<li>SafelyAdministrated-detector (Ivanov et al., 2021)：该工具于2021年推出，使用基于九个语法特征的模式识别来识别以太坊主网上受管理的以太坊请求评论20 （ERC20）令牌。该工具全面分析和分类管理令牌，以突出其普遍性和相关的危险。SafelyAdministrated检测到的具体漏洞包括“自毁”、“合约弃用”、“地址更改”、“参数更改”和“挖矿和焚烧能力”。</li>
+<li>SCGraphs - detector (Zhang et al., 2023c)：语义契约图（Semantic Contract Graphs, SCGraphs）于2023年发布，是一种基于Weisfeiler-Lehman图核，使用语义契约图和近似图匹配的SCs漏洞检测工具。它从sc构建scgraph，然后计算相似矩阵来检测漏洞，如“重入性”、“时间戳依赖性”、“delegatcall误用”和“整数溢出”。该工具从手动审计的契约中构建一个漏洞scgraph库，这有助于识别新的漏洞。</li>
+<li>SIF检测器（Peng et al., 2019）： Solidity Instrumentation Framework （SIF）是一个用于在AST上运行的Solidity合约分析和仪器的框架，它可以查询、修改和生成Solidity合约的代码。SIF包括功能列表、调用图生成、控制流图生成和故障播种工具，便于进行深度安全性和优化分析。SIF于2019年发布，可检测包括“除零”、“溢出”和“下溢”等漏洞。</li>
+<li>SolChecker - detector (Dong et al., 2022): SolChecker于2022年开发，是一种自动静态分析工具，用于查找Solidity sc中的漏洞。它使用AST来分析代码的控制和数据流。通过对47000多个真实世界的合约进行检查，SolChecker在检测常见的安全问题方面显示了其有效性，包括“未初始化变量”、“恶意地址”、“函数返回默认值”、“直接更改数组长度”、“滥用块信息”、“可重入”、“未初始化存储变量”、“未检查发送和调用”、“先除后乘”、“构造函数名称错误”、“平衡严格相等”和“滥用txt .origin”。</li>
+<li>Solhint - detector (Protofire, 2024): Solhint是Solidity代码的开源检查工具，提供安全性和风格指南验证。它提供了一系列可以通过配置文件定制的规则，以强制执行编码标准并检测潜在问题。2017年推出的Solhint可以自动修复某些问题</li>
+<li>SolGuard - detector (Praitheeshan et al., 2021): SolGuard是一个安全分析插件，与Solhint linter集成，用于检测Solidity sc中的“外部呼叫问题”。它于2021年开发，定义了三条安全规则：检查状态变量声明的顺序，避免构造函数中的地址参数，以及确保回退函数。</li>
+<li>TokenScope - detector (Chen et al., 2019): TokenScope是2019年设计的一种工具，用于检测以太坊加密货币令牌中的不一致行为。它通过对比源自核心数据结构、标准接口和标准事件的行为，检查令牌与用户和第三方工具之间的交互。TokenScope的分析涵盖了7472个令牌，并识别了3,259,001个触发不一致的交易，揭示了诸如“整数溢出”，“假存款”，“缺乏标准事件”，“不正确的余额更新”和“不匹配的令牌转移行为”等缺陷。</li>
+<li>UBF-ChaincodeScan - detector （Shah等人，2023年）：Universal区块链Framework Chaincode Scanner （UBF ChaincodeScan）检测2023年发布的Hyperledger Fabric中基于node .js的sc中的漏洞。它具有两阶段架构：验证和扫描。验证阶段包括脚本命令验证、sc语言识别和语法验证，而扫描阶段执行扫描并生成JSON格式的报告。UBF-ChaincodeScan可以识别诸如“全局变量”、“随机数生成器”、“系统命令执行”、“外部文件库”、“未检查错误”、“范围查询风险”、“读写冲突”和“外部API”等问题。</li>
+<li>Vulpedia - detector (Ye et al., 2022)：开发于2022年的Vulpedia是一个静态分析工具，它使用抽象的漏洞签名来检测以太坊sc中的“Reentrancy”、“滥用text .origin”、“Unexpected Revert”和“self - destructing Abuse”等安全问题。将脆弱签名和良性签名结合，形成检测规则。</li>
+<li>AChecker - identifier (Ghaleb et al., 2023): AChecker于2023年推出，是一种用于静态检测sc中的“访问控制漏洞”的工具。与以前的方法不同，AChecker通过静态数据流分析推断访问控制机制，并使用基于符号的分析来区分预期功能和实际漏洞。</li>
+<li>CloudAudit-identifier (Lai和Luo， 2020)：该工具于2020年提出，使用基于XPath模式的静态分析来检测Solidity sc中的“整数溢出漏洞”。通过在11种类型的整数溢出特性中定义83种XPath模式，该工具可以有效地识别诸如“乘法”、“加法”和“减法溢出”之类的漏洞。</li>
+<li>EOSIOAnalyzer - identifier (Li et al., 2022a): EOSIOAnalyzer于2022年提出，是一个静态分析框架，用于检测EOSIO sc中的漏洞。它识别了“虚假EOS转账”、“伪造转账通知”和“区块信息依赖”等漏洞。该工具将Wasm字节码转换为高级中间表示，并应用上下文敏感的数据流分析算法。</li>
+<li>基于图嵌入的字节码匹配工具-标识符（Huang et al., 2021）：该工具于2021年推出，使用图嵌入和字节码匹配技术检测sc中的漏洞。它对契约字节码进行规范化和切片，以便在已知漏洞和目标契约之间进行精确的相似性度量。该工具可以识别诸如“整数溢出”、“可重入性”、“坏随机性”、“未受保护的所有权”和“处理不当的异常”等漏洞。</li>
+<li>基于匹配规则的SCs审计工具-标识符（Li et al., 2020）：该审计工具于2020年开发，利用匹配规则来评估SCs漏洞。它匹配每个漏洞类型向量来分配威胁级别（高、中、低），并生成一个全面的审计报告。可扩展的工具允许审计人员自定义和添加新规则来处理新出现的威胁。它通过匹配sc中的特定代码模式来检测诸如“重入”、“整数溢出”、“时间戳依赖”和“权限盗窃”等漏洞。</li>
+<li>NeuCheck - identifier (Lu et al., 2021): NeuCheck于2019年推出，使用基于语法树的方法将源代码转换为中间表示，避免语义丢失。它检测各种漏洞，包括“访问控制漏洞”、“可重入漏洞”、“哈希冲突漏洞”、“整数溢出漏洞”、“依赖可预测变量漏洞”。与Securify和Mythril等其他工具相比，NeuCheck提高了分析速度和跨平台部署。</li>
+<li>Remix Solidity静态分析插件标识符（Mohanty and Anand, 2023）：这个静态分析工具集成到Remix IDE中，用于检测Solidity sc中的漏洞。它支持安全、天然气、经济等21个分析模块。在2023年进行评估时，它可以检测“访问控制”、“算术”、“坏随机性”、“拒绝服务”、“提前运行”、“重入”、“短地址”、“时间操纵”和“未检查的低级调用”，在其他漏洞中表现一般。与其他命令行工具相比，该工具的图形用户界面（GUI）使其用户友好。</li>
+<li>SafeCheck - identifier (Chen et al., 2024): SafeCheck是2024年推出的静态分析工具，用于检测以太坊sc中的六种类型的漏洞，包括“重入性”。“时间戳依赖”、“危险的委托调用”、“DoS”、“自毁”和“TOD”。它将契约字节码转换为中间表示提取语义信息，并采用基于datalog的规则进行漏洞检测。</li>
+<li>SASC - identifier (Zhou et al., 2018a): Static Analysis for SCs (SASC)，于2018年开发，是以太坊sc的静态分析工具，专注于拓扑分析和逻辑风险检测。它识别诸如“调用堆栈风险”、“交易顺序风险”、“重入风险”、“时间戳风险”、“tx”等风险。原产地风险”和“零分割风险”。SASC提供HTML格式的详细报告，帮助开发人员减轻漏洞。</li>
+<li>SmartAnvil - identifier (Ducasse et al., 2019): SmartAnvil于2019年推出，是一个用于SCs分析的开源平台。它利用静态分析、部署合约二进制分析和区块链导航来检测Solidity sc中的漏洞。该平台支持各种组件，如用于解析的SmaccSol、用于语义分析的SmartGraph和用于实时状态检查的SmartInspect，可以有效地识别诸如“语义错误”之类的问题。</li>
+<li>SmartCheck - identifier (Tikhomirov等人，2018):SmartCheck是以太坊sc的静态分析工具。该工具于2018年推出，将Solidity代码转换为基于xml的中间表示形式，并根据XPath模式对其进行检查，以检测各种代码问题，包括“余额相等”、“未经检查的外部调用”、“外部合约DoS”、“发送而不是传输”、“可重入”、“恶意库”、“使用txt .origin”、“转发所有gas”、“整数除法”、“锁定货币”、“未经检查的数学”、“时间戳依赖”、“不安全的类型推断”、“字节数组”、“昂贵循环”、“令牌API冲突”、“编译器版本未固定”、“私有修饰符”、“冗余回退函数”和“样式指南冲突”。</li>
+<li>SmartDagger - identifier (Liao et al., 2022): SmartDagger是一种基于字节码的静态分析工具，旨在检测以太坊sc中的“交叉合约漏洞”。它于2022年发布，集成了从字节码中恢复合约属性信息的新机制，准确识别跨合约交互期间的漏洞。SmartDagger选择性地分析功能子集，重用数据流结果以提高效率。</li>
+<li>Smartmuv - identifier (Ayub et al., 2023): Smartmuv是一个基于源代码的自动静态分析工具，用于分析和提取以太坊sc的存储状态。它于2022年开发，使用ast和CFGS来分析状态变量，包括沿着继承层次结构的映射类型。该工具确保准确的存储状态提取，促进sc的无缝升级和迁移。</li>
+<li>SoliDetector - identifier (Hu et al., 2024): SoliDetector是Solidity sc的静态缺陷检测工具，利用知识图来捕获代码中的语法和逻辑关系。它于2023年推出，支持检测20种缺陷，包括“可重入性”、“整数溢出”、“处理不当的异常”、“外部合约DoS”、“使用txt .origin进行认证”、“构造函数缺失”、“锁定货币”、“不安全类型推断”、“时间戳依赖”、“令牌API违规”、“私有修饰符”、“冗余拒绝付款”、“编译器版本问题”、“样式指南违规”、“整数除法”、“隐式可见性级别”、“平衡平等”、“昂贵循环”、“使用定点数字类型”和“byte[]”，使用SPARQL查询来推断复杂关系并准确地定位缺陷。</li>
+<li>SolidityCheck - identifier (Zhang et al., 2019b): SolidityCheck是一个工具，旨在使用正则表达式检测soliditysc中的各种问题。它于2019年推出，确定了20个问题，包括可重入性和整数溢出等安全漏洞。SolidityCheck使用常规匹配和程序检测来快速准确地定位源代码中的问题语句。</li>
+<li>Solidity漏洞扫描器-标识符（Ramakrishnan et al., 2022）： Solidity漏洞扫描器是一个静态分析工具，旨在识别和分类Solidity sc中的漏洞。它于2022年发布，使用解析和模式匹配来检测问题，包括“可重入性”、“整数溢出和下溢”、“浮动pragma”、“拒绝服务”、“坏随机性”、“未受保护的函数”、“未检查的外部调用”、“变量阴影”、“竞争条件”、“错误接口”和“强制以太接收”。该工具逐行提供缓解建议，使其对刚接触Web3安全的开发人员非常友好。</li>
+<li>SPCon - identifier (Liu et al., 2022)：安全策略一致性（SPCon）是2023年设计的一种工具，用于使用角色挖掘和安全策略验证来查找sc中的权限错误。它挖掘过去的合同事务以恢复可能的访问控制模型，并检查各种信息流策略以识别潜在的用户权限错误。SPCon在挖掘用户角色方面表现出卓越的准确性，并有效地检测诸如“未经授权的访问”、“不正确的角色分配”和“与访问控制策略相关的权限错误”等漏洞。</li>
+<li>基于静态分析的漏洞检测方法-标识符（Ghaleb, 2022）：该研究于2022年推出，重点是通过静态分析扩展SCs的安全漏洞检测。它指出了当前静态分析工具的弱点。它解决了诸如“气体相关漏洞”和“访问控制漏洞”之类的问题，使用了不依赖于预先存在的代码模式和规则的新检测方法</li>
+<li>价格哄抬TOD漏洞静态分析器-标识符（Beillahi等人，2022）：该原型工具旨在检测和纠正sc中的“价格哄抬TOD漏洞”。它于2022年开发，使用静态分析方法通过提取数据依赖关系和修改合同代码来定位这些漏洞。该工具使用Slither （Solidity的静态分析器）实现了这种方法。</li>
+<li>SWAT - identifier (Songsom et al., 2022): SWAT（基于SWC的分析工具）是一种静态分析工具，旨在检测根据SCs弱点分类（SWC）标准分类的SCs漏洞。它在Solidity代码上使用模式匹配来识别漏洞，如“SWC-100函数默认可见性”、“SWC-102过时的编译器版本”、“SWC-103浮动pragma”、“SWC-111使用已弃用的Solidity函数”、“SWC-129类型错误”和“SWC-134带有硬编码气体的消息调用”。</li>
+<li>VULTRON - identifier (Wang et al., 2019a): VULTRON是一种漏洞检测工具，用于捕获sc中的不规则事务。它侧重于实际转账金额与内部合约簿记之间的不匹配，识别与交易相关的漏洞，包括“重入”、“异常紊乱”、“无气发送”和“整数溢出&#x2F;下溢”。VULTRON于2019年推出，提供了一种可适用于不同sc平台的通用方法。</li>
+</ol>
+</blockquote>
+<p>模式匹配和语法分析工具通过分析SCs的结构和语法，系统地检测出SCs的漏洞。虽然这些方法依赖于预定义的模式和规则，但它们可以有效地发现安全风险并确保编码的一致性。本节中概述的工具演示了模式匹配和语法分析如何有助于提高SC安全性。</p>
+<h3 id="4-11-“运行时验证”工具"><a href="#4-11-“运行时验证”工具" class="headerlink" title="4.11. “运行时验证”工具"></a>4.11. “运行时验证”工具</h3><p>第十一个工具类别侧重于运行时验证。该方法包括在运行时监视和检查sc的执行，以确保它们遵循指定的行为和属性。通过持续观察契约交互，这些工具可以检测并实时缓解问题，确保sc在执行时的安全性和正确性。下面是使用运行时验证的工具：前六个是检测工具，其他是sc中的识别工具。</p>
+<blockquote>
+<ol>
+<li>ContractLarva - detector (Azzopardi等人，2018):ContractLarva是以太坊sc的运行时验证工具，用Solidity编写，于2018年发布。它将基于正式规范的附加代码插入到sc中，以监视和强制执行正确的行为。ContractLarva捕获控制流和数据流事件来检测违规，并支持自定义修复策略来处理检测到的问题，包括“未经授权的访问”、“不正确的功能执行”和“数据完整性问题”。</li>
+<li>DappGuard-detector (Cook et al., 2017)：它是2017年为Solidity SCs开发的主动监测和防御系统。它分析区块链交易的攻击迹象，如高gas使用率和异常率，并采用规则引擎实时检测和减轻已知漏洞，包括“调用未知”、“gasless send”、“异常无序”、“类型转换”、“重入”、“保密”、“不变性”、“传输中以太丢失”、“TOD”、“堆栈大小限制”、“生成随机性”、“时间戳依赖性”和“整数溢出&#x2F;下溢”。</li>
+<li>ECFChecker-detector (Grossman et al., 2017)：它是一个动态监视器，用于验证以太坊sc中的有效回调自由（ECF）属性，于2017年推出。它使用集成到EVM中的多项式时间在线算法检测非ecf执行。该工具通过确保无回调的执行路径来防止像“DAO”错误这样的漏洞。</li>
+<li>EVM检测器（Ma et al., 2019）：这是2019年设计的强化EVM，用于实时防止危险交易。它使用监控策略、操作代码结构维护和EVM工具来检测和停止可能利用漏洞的操作，包括“溢出错误”和“时间戳错误”。</li>
+<li>EVM-Shield检测器（Zhang et al., 2024）： EVM-Shield是一种新的运行时工具，可以对sc内的敏感状态进行细粒度访问控制。它利用混合存储分析器动态识别存储位置，并采用基于多级缓存的过滤器有效地防止意外状态访问。EVM-Shield于2024年开发，可以检测各种漏洞，包括“重入性”、“整数溢出”和“未经授权的状态修改”。此工具通过防止试图在没有适当权限的情况下访问敏感状态或以太的事务来增强安全性。</li>
+<li>Xscope - detector (Zhang et al., 2022): Xscope于2023年发布，是一种用于检测跨链桥中安全违规的自动工具。它通过提供运行时监视和脱机分析功能来解决新出现的安全问题。Xscope在跨链桥中发现了三个新的安全bug类：“无限制存款释放”、“不一致事件解析”和“未授权解锁”。该工具使用安全属性和模式来描述和检测这些漏洞。</li>
+<li>ÆGIS-identifier (Ferreira Torres等人，2020)：ÆGIS于2020年推出，是一个动态分析工具，可以检测诸如“同功能重入”，“跨功能重入”，“委托重入”，“基于创建的重入”，“奇偶钱包黑客1”和“奇偶钱包黑客2”等漏洞。它保护sc在运行时不被利用。它使用针对以太坊sc定制的特定领域语言描述的攻击模式，能够实时检测和还原恶意交易。该工具通过基于scs的投票机制支持分散和透明的安全更新。</li>
+<li>ContractGuard - identifier (Wang et al., 2020b): ContractGuard于2020年推出，是一种基于异常的入侵检测系统（IDS），旨在在部署后保护以太坊sc。它配置了上下文标记的非循环路径，并检测异常控制流以识别入侵。该工具针对的漏洞包括“显式重入”、“危险委托调用”、“算术Over&#x2F;Under Flows”、“默认可见性”、“未检查发送”、“Tx”。“起源认证”、“拒绝服务”和“逻辑错误”，当检测到异常时，通过回滚事务来提供实时防御攻击。</li>
+<li>Gas Gauge - identifier (Nassirzadeh et al., 2023): Gas Gauge于2023年发布，是一种安全分析工具，旨在检测以太坊sc中的“out -Gas (OOG) DoS漏洞”。它结合了静态分析、白盒模糊测试和运行时验证来识别、总结和纠正可能导致OOG错误的循环。Gas Gauge可以有效地分析合同循环，生成触发OOG错误的输入，并提出修复建议，以防止此类漏洞。</li>
+<li>SODA - identifier (Chen et al., 2020): SODA是evm兼容区块链上sc的通用在线检测框架。可以检测“可重入性”、“函数调用异常”、“输入数据无效”、“授权检查错误”、“合同调用后不检查”、“错过Transfer事件”、“严格检查余额”、“块号和时间戳依赖”等漏洞。它于2020年推出，将信息收集和攻击检测分开，允许用户快速开发用于各种攻击检测的应用程序。SODA为EVM提供了统一的接口和工具来收集必要的信息，便于对新的攻击做出快速反应。</li>
+<li>Solitor - identifier (Stegeman, 2018): Solitor是以太坊sc的运行时验证工具，于2018年开发。它使用注释来指定契约行为，并在运行时进行检查。这种方法通过允许开发人员直接在Solidity代码中定义和验证不变量、前提条件和后置条件等属性来增强安全性。</li>
+<li>TaintGuard - identifier (Wu et al., 2023b): TaintGuard是一种静态分析工具，旨在通过AST级别的污染跟踪来防止sc中的“隐式特权泄漏”。它于2023年推出，分析了Solidity合约，以识别和减轻与跨合约调用委托调用相关的漏洞，这些漏洞可能会篡改合约特权。TaintGuard集成了代码检测，在运行时监控契约状态，确保安全，防止恶意权限修改</li>
+</ol>
+</blockquote>
+<p>总而言之，运行时验证工具可以通过实时监控sc的执行来增强其安全性。尽管运行时验证需要额外的计算资源，但它提供了允许立即处理漏洞的优势。本节中介绍的工具显示了运行时验证对于保持sc系统安全是多么必要。</p>
+<h3 id="4-12-“符号执行”工具"><a href="#4-12-“符号执行”工具" class="headerlink" title="4.12. “符号执行”工具"></a>4.12. “符号执行”工具</h3><p>第十二类工具侧重于符号执行方法。这种方法通过象征性地执行程序而不是实际输入来分析程序。它允许同时探索多个执行路径，对于检测像以太坊sc这样的复杂系统中的漏洞特别有用。这些工具通常使用反编译、约束求解和控制流分析技术来识别重入性、气体效率低下和并发性漏洞。下面列出的前30个工具是使用符号执行的检测工具，而其余26个是识别工具。</p>
+<blockquote>
+<ol>
+<li>ABBE - detector (Nguyen et al., 2019): 2019年开发的以太坊异常行为检测（ABBE），通过交易分析识别攻击向量，检测以太坊sc中的异常行为。它使用反编译、符号执行和启发式方法检测各种漏洞，包括“重入性”、“无气体发送”、“自杀式强制发送以太网”、“整数溢出”、“数组溢出”、“未初始化存储指针”和“被委托调用覆盖”。</li>
+<li>consymm - osiris - detector (Yin et al., 2022): consymm - osiris是2022年推出的一种工具，用于软件系统的组合符号执行和突变测试。它旨在通过生成符号输入来探索不同的执行路径，从而识别和分析潜在的漏洞。该工具通过集成突变测试技术和系统地引入和测试代码变体来增强传统的符号执行，以发现隐藏的错误，包括“整数溢出和下溢”、“可重入性”、“算术错误”和“状态变量的错误处理”。</li>
+<li>CESC检测器（Li, 2019）：并发利用SCs （CESC）在2019年开发的以太坊sc中使用符号执行检测“并发利用”。它跟踪存储操作、合并访问流并验证潜在的并发性漏洞。CESC有效识别“TOD”、“未经授权的以太坊转账”、“国有污染”和“合同自毁”，提高了检测范围，减少了误报。</li>
+<li>etherresolve - detector (Pasqua等人，2023)：它使用符号执行从以太坊字节码重建精确的cfg。它通过象征性地执行操作数堆栈来解析跳转目的地，并已在现实世界的契约中得到验证。EtherSolve于2023年推出，可以检测“重入”和“Tx”。“起源”漏洞比其他字节码分析工具更准确。</li>
+<li>EthChecker-detector (Han et al., 2024)：它是一种结合模糊和符号执行的sc漏洞检测工具，于2024年开发。它采用上下文引导的遗传规划算法来提高代码覆盖率和有效地检测漏洞。它可以检测漏洞，包括“可重入性”，“时间戳依赖”，“整数溢出和下溢”和“未处理的异常”。</li>
+<li>Ethainter-detector (Brent et al., 2020)：这是一个创建于2020年的安全分析器，用于检测以太坊sc中的复合信息流违规。它对受污染的信息流进行建模，并评估保护条件的有效性，以识别漏洞，包括通过多个事务升级的“受污染的所有者变量”、“受污染的委托调用”、“可访问的自毁”、“受污染的自毁”和“未检查的受污染的静态调用”。</li>
+<li>ethrizer - detector (Kolluri等人，2019)：该工具于2019年开发，用于使用动态符号执行和happens-before关系识别以太坊sc中的“事件排序错误”。它使用符号执行、模糊分析和HB分析来减少搜索空间，并在重新排序事件下标记具有不同输出的契约，以实现高效检测。</li>
+<li>EXGEN - detector (Jin et al., 2023)：漏洞生成（EXGEN）于2022年发布，是一个用于自动生成安全漏洞的跨平台框架。它将以太坊和EOS合约转换为中间表示，生成符号攻击合约，并执行它们以查找漏洞，包括“重入”，“整数溢出和下溢”，“自杀”，“调用注入”和“任意值转移”。</li>
+<li>FSFC检测器（Wang et al., 2020a）：基于过滤器的以太坊sc安全框架（FSFC）是一个用于sc模糊测试的框架，将模糊测试与符号执行相结合，于2020年推出。它通过模糊测试生成初始输入，并使用符号执行对其进行细化，以探索更深层次的合约状态，并识别隐藏的漏洞，包括“可重入性”、“整数溢出”、“整数下溢”、“访问控制问题”、“自毁漏洞”和“DoS”。</li>
+<li>GasChecker - detector (Chen et al., 2021): GasChecker检测以太坊sc中的气体低效模式，例如“不透明谓词”、“死代码”、“循环中昂贵的操作”、“易解循环”、“循环中重复计算”、“循环中的单边比较”、“冗余SSTORE”、“SWAP1&#x3D;DUP2&#x3D;SWAP1模式”、“PUSHx&#x3D;POP模式”和“PUSH1&#x3D;NOT模式”，使用符号执行。GasChecker于2020年发布，通过使用MapReduce模型并行执行，可以扩展到分析数百万个合约，并采用基于反馈的负载平衡策略来优化资源使用。</li>
+<li>GASPER检测器（Chen et al., 2017）： GASPER是2017年设计的符号执行工具，用于自动发现以太坊sc字节码中的gas模式。它针对的模式包括“死代码”、“不透明的谓词”、“循环中的昂贵操作”、“循环的常量结果”、“循环融合”、“循环中的重复计算”和“与循环中的单边结果比较”。GASPER帮助开发商优化合同，减少不必要的天然气消耗。</li>
+<li>honeybader - detector (Torres et al., 2019)：这是一个于2019年开发的工具，使用符号执行和启发式方法检测以太坊sc中的“蜜罐”。它构建控制流程图，执行现金流分析，并通过分析字节码来识别蜜罐技术。</li>
+<li>Jyane-detector (Fang et al., 2021)：它使用路径分析检测sc中的“重入性”漏洞。它于2021年推出，从EVM字节码构建CFG，采用改进的Ball-Larus路径分析算法生成唯一路径id，并使用确定性有限自动机（DFA）识别可疑路径。</li>
+<li>MPro检测器（Zhang et al., 2019a）： MPro是2019年开发的一种工具，它结合了静态和符号分析，以增强SCs测试的可扩展性。它使用静态分析来识别潜在的漏洞，并使用符号执行来生成彻底探索这些站点的测试输入。MPro有效地检测深度n漏洞，如“重入”和“无限制自杀”，这需要特定的函数调用序列来利用。</li>
+<li>Mythril扩展用于无气发送问题检测检测器（Prechtel等人，2019）：该框架于2019年发布，增强了Mythril安全分析工具，以模拟以太坊sc中的气体使用并检测“无气发送”漏洞。通过模拟符号执行期间的gas消耗，它可以识别回退函数超过2,300 gas限制的合约，从而阻止它们接收以太币。</li>
+<li>NPChecker - detector (Wang et al., 2019b): NPChecker针对以太坊sc中的“不确定性支付漏洞”、“重入性”、“交易顺序依赖”、“失败的外部调用”和“系统属性依赖”等漏洞。它于2019年启动，系统地建模并检测影响合同付款的不确定性因素。使用信息流跟踪和模型检查，NPChecker可以识别由不可预测的事务调度和外部被调用方行为引起的漏洞。</li>
+<li>Pluto - detector (Ma et al., 2022): Pluto于2022年开发，通过构建一个合约间控制流图（ICFG）来检测合约间场景中的漏洞。对契约间路径约束进行了象征性的探索，推导出契约间路径约束（ICPC），以准确地检查执行路径的可达性。Pluto可以检测漏洞，包括“整数溢出”、“时间戳依赖”和“重入”。</li>
+<li>Rattle - detector (Crytic, 2024): Rattle是由Trail of Bits开发的用于分析以太坊sc的符号执行工具。它针对诸如“存储访问模式”、“外部调用”和“控制流劫持”等漏洞。Rattle将EVM字节码转换为SSA形式，从而可以在合同中进行详细的控制和数据流分析。它于2019年推出，提供了便利，通过提供简化原始字节码复杂性的中间表示来检测漏洞。</li>
+<li>ReDetect - detector (Yu et al., 2021a): ReDetect是一个基于符号执行的工具，用于在EVM字节码级别检测以太坊sc中的“重入性”漏洞，于2021年发布。它将源文件预处理为EVM汇编代码，构造控制流图，并使用符号执行来分析潜在的重入路径。ReDetect通过实现五个有效的路径过滤器显著减少误报。</li>
+<li>可重入性漏洞识别框架检测器（Fatima Samreen and Alalfi, 2020）：该框架于2020年引入，结合静态和动态分析来检测以太坊sc中的“可重入性”漏洞。它使用树转换语言（TXL）语法来解析solid代码，并根据应用程序二进制接口规范生成攻击者契约来模拟重入攻击</li>
+<li>SAILFISH - detector (Bose等人，2022)：利用增量和符号评估启发式（SAILFISH）的sc状态不一致分析框架，于2022年开发，是一种可扩展的工具，旨在检测以太坊sc中的状态不一致错误。它采用了一种混合的方法，结合了轻量级的探索阶段和精确的细化阶段，使用由新颖的价值总结分析指导的符号评估。SAILFISH可以有效地检测“重入性”和“TOD”等漏洞。</li>
+<li>Sereum探测器（Rodler等人，2018）：Sereum是一个运行时监控工具，旨在保护现有部署的sc免受重入攻击。使用动态污染跟踪，Sereum监视从存储变量到控制流决策的数据流，防止在可重入调用期间状态不一致。它于2019年推出，有效地检测和减轻了“重入攻击”，运行时开销可以忽略不计，误报率很低。</li>
+<li>Seraph - detector (Yang et al., 2020c): Seraph于2020年开发，是区块链sc的跨平台安全分析器，支持EVM和WASM运行时。它针对诸如“整数溢出”、“伪随机数生成器（PRNG）问题”、“不安全消息调用”和“DoS”等漏洞。Seraph使用符号语义图（SSG）来建模关键依赖关系，并使用连接器api来抽象虚拟机和区块链之间的交互。它支持自动安全分析，并通过探索符号执行路径生成全面的安全报告。</li>
+<li>SMARTEST - detector (Wu et ., 2023c): smart集成了深度学习语言模型和符号执行，以增强SCs测试。它专门针对诸如“整数溢出和下溢”、“除零”、“断言违规”和“ERC20标准违规”等漏洞。它于2023年开发，使用Transformer， GRU和RNN等神经网络架构来训练来自常见漏洞和暴露（CVE）基准的易受攻击事务序列的模型。</li>
+<li>SoMo - detector (Fang et al., 2023): SoMo于2023年发布，用于检测以太坊合约中的不安全修饰符。它构造了一个修饰符依赖图（MDG）来分析控制流和数据流，并使用符号执行来识别可绕过的修饰符。</li>
+<li>用于Solidity漏洞检测的静态分析器-检测器（Hwang和Ryu， 2020）：该工具使用静态分析来识别Solidity sc中的安全漏洞。它检测各种漏洞，包括“重入性”、“整数溢出和下溢”、“时间戳依赖”、“不受保护的自毁”、“未检查的调用返回值”、“拒绝服务”和“事务顺序依赖”，使用符号执行和数据流分析等技术。该工具于2020年推出，旨在通过提供有关已识别漏洞的详细报告并建议缓解策略来提高以太坊sc的安全性。</li>
+<li>基于符号执行的漏洞检测器-检测器（Yao et al., 2022）：该系统对Mythril符号执行工具进行了改进，通过优化剪枝算法来减少执行时间，并引入了针对“整数溢出和下溢”、“未检查调用返回值”、“重入”、“TOD”、“通过text .origin授权”、“块值作为时间代理”等漏洞的检测算法。它于2020年开发，还集成了基于LSTM网络的机器学习模型，用于初步漏洞检测。</li>
+<li>tether探测器（Krupp and Rossow, 2018）： tether于2018年发布，是一种旨在通过利用符号执行自动利用以太坊sc漏洞的工具。它识别导致执行CALL、CALLCODE、DELEGATECALL和SELFDESTRUCT等可利用指令的关键路径。Teether通过解析与这些路径相关的约束来生成漏洞，通过实际的漏洞展示漏洞的严重性。该工具可以检测“任意以太抽取”、“自毁漏洞”、“通过callcode和delegatcall注入代码”和“执行未经授权的代码”等漏洞。</li>
+<li>TransRacer - detector (Ma et al., 2023b): TransRacer是一种自动化工具，旨在检测以太坊sc中的“交易竞争”。它使用符号执行来分析函数依赖关系，并识别由于事务的不确定执行顺序而发生的竞争。TransRacer于2023年开发，通过修剪没有读写冲突的函数对，并通过具体执行验证已识别的竞争，从而有效地检测竞争状况。</li>
+<li>VerX检测器（Permenev et al., 2020）： VerX是2023年设计的自动验证器，用于证明以太坊sc的功能属性。它结合了符号执行和延迟谓词抽象来验证时间安全属性。VerX可以通过将时间属性验证减少到可达性检查来处理无限数量的交易和外部合约交互，确保对现实世界sc的精确验证。</li>
+<li>annotation - identifier (Weiss and sch&lt;e:1&gt;特，2019):annotation于2019年推出，是一个用于分析sc漏洞的全局执行框架。它支持开发者直接在Solidity源代码中编写的注释，从而能够分析事务间和合约间的控制流。注释将EVM字节码的符号执行与来自以太坊区块链的具体值的解析相结合，以识别漏洞，包括“重入性”，“算术溢出”，“未检查的发送返回”，“未初始化的状态变量”，“不可达代码”和“可见性修饰符错误”。</li>
+<li>Conkas - identifier (Veloso, 2024): Conkas是一个基于符号执行的EVM模块化静态分析工具，作为硕士论文的一部分介绍。它分析用Solidity编写的以太坊sc或编译的运行时字节码。Conkas使用Z3作为SMT求解器和一个修改版本的Rattle作为IR。它可以检测诸如“算术问题”、“可重入性”、“时间操纵”、“事务排序依赖”和“未检查的低级调用”等漏洞。</li>
+<li>DefectChecker - identifier (Chen et al., 2022): DefectChecker于2020年推出，通过分析EVM字节码，使用符号执行来检测以太坊sc中的漏洞。它确定的问题包括“事务状态依赖”、“受外部影响的DoS”、“严格平衡相等”、“可重入”、“嵌套调用”、“贪婪契约”、“未检查的外部调用”和“块信息依赖”。该工具及其数据集公开供社区使用。</li>
+<li>ETHBMC - identifier (Frank et al., 2020)：以太坊边界模型检查器（ETHBMC）于2020年发布，是以太坊sc使用符号执行的边界模型检查器为以太坊网络提供精确的建模。它支持契约间分析、内存建模和keccak256哈希函数。ETHBMC自动生成展示漏洞的具体输入，包括“任意以太提取”、“自杀式合约”、“控制流劫持”和“内存处理问题”。</li>
+<li>GASOL - identifier (Albert et al., 2020): GASOL于2020年发布，是以太坊sc的气体分析和优化工具。它使用静态分析和符号执行相结合的混合方法来识别和优化SCs的天然气消耗，特别是针对诸如“无气漏洞”、“未优化的存储模式”和“天然气昂贵的操作”等漏洞。GASOL优化循环和算术运算，以降低总天然气成本。</li>
+<li>HFCCT - identifier (Li et al., 2022b): Hyperledger Fabric Contract Code Tester （HFCCT）创建于2022年，是一个开源工具，结合了动态符号执行和静态AST分析来检测Hyperledger Fabric sc中的漏洞。该工具识别的问题包括“全局变量误用”、“随机数生成”、“系统时间戳”、“映射结构迭代”、“具体化对象地址”、“并发问题”、“web服务风险”、“外部库调用”、“系统命令执行”、“外部文件访问”、“范围查询风险”、“字段声明”、“跨通道链码调用”、“读写冲突”、“未检查输入参数”、“未处理错误”和“Golang语法错误”。</li>
+<li>Honeytoken-Detector-identifier (Liu and Cai, 2023)：这个基于符号执行的开源工具于2023年开发，旨在检测以太坊sc中的蜜罐令牌。它确定了六个常见的蜜罐问题，包括“令牌转移数量不一致”、“令牌转移限制”、“假日志”、“无限铸造”、“平衡操纵”和“代理令牌”。它通过解析字节码和生成控制流图，探索路径并执行符号执行来有效地分析sc。</li>
+<li>改进的基于符号执行的漏洞检测器-标识符（Yao et al., 2022）：这个增强的系统将Mythril的符号执行与LSTM网络集成在一起。它于2022年开发，支持源代码和字节码形式，自动检测六种sc漏洞。GitHub上有公共代码，它采用机器学习方法进行初始检测，然后通过符号执行进行精确的漏洞定位。这种混合方法利用机器学习的速度和符号执行的准确性来检测“整数溢出和下溢”、“未检查的调用返回值”、“重入”、“TOD”、“通过text .origin授权”和“块值作为时间代理”。</li>
+<li>kevm标识符（Hildenbrandt等人，2018）：这个开源工具于2017年推出，使用K框架提供了EVM的完整形式语义。KEVM能够对sc进行正式的分析和验证，并已成功通过官方EVM测试套件。它解决的漏洞包括“堆栈溢出”、“气外异常”、“算术溢出”、“除零”、“无效操作码”、“访问不存在的帐户数据”和“调用堆栈限制超出”。</li>
+<li>KEVM验证器-标识符（Park等人，2018）：这个使用K框架开发的开源工具于2018年推出。它提供了EVM的全面形式化语义，能够对sc进行严格的形式化分析和验证，包括ERC20令牌、以太坊Casper和DappHub MakerDAO等备受瞩目的sc。该工具解决的漏洞包括“算术溢出”、“哈希冲突”、“字节操作错误”和“功能规范的不正确实现”。</li>
+<li>MAIAN-identifier (Nikolic等人，2018)：该工具使用符号分析来识别sc执行轨迹中的漏洞，明确针对“贪婪”、“浪子”和“自杀”合同。它分析字节码并标记带有这些漏洞的合同，利用自定义以太坊虚拟机进行符号执行。MAIAN创建于2018年，可以识别诸如“无限期锁定资金”、“未经授权的资金转移”和“任意终止合同”等漏洞。它的开源代码可以在GitHub上获得，以供进一步的研究和开发。</li>
+<li>Manticore - identifier (Mossberg et al., 2019): Manticore是一个为二进制文件和以太坊sc设计的动态符号执行框架。这个开源工具于2019年推出，允许系统地探索程序状态空间，以识别漏洞而不会产生误报。该工具支持各种执行环境，包括以太坊，并可以检测“重入”，“整数溢出”，“断言失败”，“未处理的异常”和“内存安全违规”。</li>
+<li>MOPS - identifier (Fu et al., 2019b)：于2019年开发的多目标导向路径搜索（Multi-Objective Oriented Path Search， MOPS），通过静态和动态分析相结合，优化了SCs的漏洞检测。它专注于涉及以太坊传输的关键路径，从而提高效率并减少误报。MOPS采用动态符号执行和污点分析来识别安全问题，包括“重入性”、“整数溢出”、“滥用delegatecall”、“事务顺序依赖”、“自杀式合同漏洞”、“可预测变量依赖”、“错误处理异常”和“未检查返回值”。</li>
+<li>Mythril - identifier (ConsenSys, 2018): Mythril是2018年推出的安全分析工具，分析EVM字节码，以检测多个EVM兼容区块链中的sc漏洞。使用符号执行、SMT求解和污染分析，Mythril识别出包括“重入性”、“整数溢出和下溢”、“不受限制的以太流”、“不受保护的自毁”、“任意存储写入”、“未处理的异常”、“时间戳依赖”、“事务顺序依赖”和“使用txt .origin”在内的问题。它支持链上和链下合约分析，为安全评估提供了灵活的选择。</li>
+<li>MythX - identifier (Mueller, 2020): MythX是一个全面的sc安全分析API，支持以太坊和其他兼容evm的区块链。它于2020年推出，结合了静态分析、符号执行和输入模糊检测来检测安全漏洞并验证sc的正确性。MythX集成了各种开发工具，包括Remix IDE、Truffle和Visual Studio Code，并提供命令行工具和持续集成支持。它识别的漏洞包括“重入性”、“整数溢出和下溢”、“时间戳依赖”、“无保护的自毁”、“无保护的以太取款”、“弱随机性”、“断言违规”、“写入任意存储位置”、“跳转到任意目的地”和“未初始化存储指针”。</li>
+<li>NFTGuard - identifier (Yang等人，2023a): NFTGuard是一种基于符号执行的工具，旨在检测不可替代令牌（NFT） sc中的缺陷。它于2023年推出，确定了五个具体缺陷：“风险可变代理”、“ERC-721可重入性”、“无限铸造”、“缺失需求”和“公共燃烧”。NFTGuard将源代码级信息与字节码分析相结合，有效地定位和报告sc中的这些缺陷。</li>
+<li>Osiris - identifier (Torres et al., 2018): Osiris是一个符号执行工具，旨在检测以太坊sc中的各种整数错误。它结合了符号执行和污点分析来识别“算术”、“截断”和“签名错误”。Osiris于2018年发布，有效定位EVM字节码中的漏洞，提供详细分析，确保sc安全。</li>
+<li>Oyente - identifier (Luu et al., 2016): Oyente是一个符号执行工具，旨在分析以太坊sc。它通过直接分析EVM字节码来检测潜在的安全漏洞，而不需要高级表示。2016年推出的Oyente识别了“事务顺序依赖”、“时间戳依赖”、“错误处理的异常”和“可重入性漏洞”等漏洞。</li>
+<li>Pakala - identifier (Keoleian, 2024): Pakala是EVM的开源符号执行工具，于2018年推出。在Python中实现，它使用带有添加的SHA3层的Z3来分析字节码的漏洞。Pakala采用两步流程：首先执行字节码以找到结果，然后分析这些结果以检测诸如“调用自杀（）”和“过度以太传输”之类的漏洞。</li>
+<li>Park - identifier (Zheng et al., 2022): Park是sc的象征性执行框架，于2022年引入。它使用并行分叉符号执行，通过利用多个CPU内核来提高漏洞检测的效率。Park实现了动态分叉算法和自适应进程限制来解决性能问题，并与现有工具（如Oyente和Mythril）集成以加快漏洞检测。它可以检测“事务顺序依赖”、“时间戳依赖”、“错误处理的异常”和“可重入漏洞”。</li>
+<li>RA - identifier (Chinen et al., 2020): reentrancy Analyzer （RA）是2020年开发的静态分析工具，用于检测以太坊sc中的“reentrancy漏洞”。它结合了符号执行和SMT求解器技术来分析EVM字节码，而不需要事先了解攻击模式。RA支持契约间行为分析，针对诸如“重入攻击”、“利用回退函数”和“跨功能调用”等漏洞。</li>
+<li>sCompile - identifier (Chang et al., 2019): sCompile是一个用C语言实现的工具，旨在识别sc中的关键程序路径。它于2019年推出，结合了控制流图构建和符号执行，以优先考虑和分析涉及货币交易的路径。它的重点是避免不存在的地址，确保合约不是只能接收但不能发送以太币的黑洞，防止合约的不当自毁，防止交易超过转移限制。</li>
+<li>SolSEE - identifier (Lin et al., 2022): SolSEE是Solidity sc的源代码级符号执行引擎。它于2022年推出，对源代码执行符号执行，而不是字节码，保留高级语义信息。SolSEE支持先进的Solidity语言功能，并为可视化和调试等交互式分析任务提供基于web的用户界面。它可以检测漏洞，包括“整数下溢”、“整数溢出”和“断言违规”。</li>
+<li>Solar - identifier (Feng et al., 2020): Solar是一个自动合成对抗性合同的系统，可以利用受害SCs中的漏洞。它于2020年推出，采用基于摘要的符号评估技术，可显着减少符号评估的指令数量，同时保持检测漏洞的准确性。Solar对常见漏洞进行编码，包括“重入性”、“时间操纵”、“恶意访问控制”和“批量溢出漏洞”，并高效地合成攻击程序。</li>
+<li>Symvalic - identifier (Smaragdakis et al., 2021): Symvalic是一种结合具体值和符号表达式来模拟SCs行为的静态分析方法。它于2021年推出，通过传统静态分析不动点计算和符号求解器之间的共生关系，实现了程序语义的深度建模。Symvalic对于高价值的以太坊sc特别有效，可以识别重入和溢出等漏洞。</li>
+<li>WANA - identifier (Jiang et al., 2021): WebAssembly ANalysis （WANA）是一个符号执行引擎，用于检测sc中的漏洞，明确针对EOSIO等平台中使用的WebAssembly （Wasm）字节码。它于2021年推出，通过处理完整的Wasm指令集，有效检测“假EOS转账”、“伪造转账通知”、“块信息依赖”、“贪婪”、“危险的委托调用”、“错误处理的异常”和“可重入漏洞”等漏洞。WANA也可以扩展到其他区块链平台，如以太坊。</li>
+</ol>
+</blockquote>
+<p>最终，符号执行工具提供了一种强大的方法，通过探索多个执行路径来识别sc中的漏洞。通过模拟各种场景，这些工具可以检测微妙和复杂的问题。这里强调的工具展示了符号执行在提高sc可靠性方面的价值。</p>
+<h3 id="4-13-“污点分析”工具"><a href="#4-13-“污点分析”工具" class="headerlink" title="4.13. “污点分析”工具"></a>4.13. “污点分析”工具</h3><p>第13个工具类别侧重于污染分析。该技术跟踪通过sc的数据流，以识别潜在的漏洞和安全风险。污点分析有助于理解数据如何在合约中传播，从而能够检测诸如重入、溢出和坏随机性等问题。这些工具可以通过标记和跟踪受污染的数据来有效地识别和降低风险。这里有5个</p>
+<blockquote>
+<ol>
+<li>Clairvoyance - identifier (Xue et al., 2020): Clairvoyance于2020年推出，采用交叉契约静态污染分析来检测SCs中的“可重入性漏洞”。它通过总结路径保护技术（PPTs）和执行轻量级符号分析来减少误报和误报。</li>
+<li>DoSChecker - identifier (Xu et al., 2023): DoSChecker于2023年推出，是一种用于检测sc中“DoS漏洞”的工具。它定义了四种DoS漏洞模式：“带有异常指令的循环（LWEI）”、“无界批高Gas指令（UBHGI）”、“带有不可支付回退函数的传输过程（TPWNPFF）”和“严格平衡相等（SBE）”。使用符号执行，DoSChecker分析sc字节码来识别这些漏洞。</li>
+<li>EASYFLOW - identifier (Gao et al., 2019b): EASYFLOW于2019年推出，旨在检测以太坊sc中的“溢出漏洞”。它使用污染分析来跟踪事务执行期间的数据传播，识别已显示的、受保护的和潜在的溢出。EASYFLOW生成事务以触发潜在的溢出，并通过扩展EVM解释器支持动态分析。</li>
+<li>RNVulDet - identifier (Qian et al., 2023a)：随机性漏洞检测（RNVulDet）是2023年开发的一种污染分析工具，用于识别以太坊sc中的“坏随机性漏洞”。它模拟EVM运行时环境，使用堆栈状态检查、内存分段、存储键值对比较和事务重放来检测漏洞。RNVulDet擅长精确定位随机数生成中的漏洞。</li>
+<li>SESCon - identifier (Ali et al., 2021): SESCon是一个静态分析工具，利用污染分析和XPath查询来检测以太坊sc中的漏洞。它于2021年推出，遵循以太坊社区定义的标准模式，以识别包括“重入性”，“TOD”，“tx”在内的问题。“，”块。“时间戳使用”、“不安全使用自毁指令”和“DAO漏洞”。</li>
+<li>sigward - identifier (Zhang et al., 2023a)：该工具于2023年推出，使用符号执行和污染分析来识别sc中与签名相关的漏洞。它为字节码构造一个CFG，模拟EVM，并跟踪与签名相关的数据流。通过检查外部调用目的地和签名验证过程，SIGUARD检测和验证潜在的漏洞，包括“无状态签名验证”和“未分离签名域”。</li>
+<li>SmartScan - identifier (Samreen and Alalfi, 2021): smarscan是一种旨在检测以太坊sc中的“DoS漏洞”的工具。结合静态和动态分析，它识别潜在漏洞的模式，并通过动态交互确认其可利用性。SmartScan于2021年推出，旨在针对意外恢复造成的DoS漏洞。</li>
+</ol>
+</blockquote>
+<p>总体而言，污染分析工具为跟踪数据流和检测sc中的漏洞提供了一种有效的方法。通过标记和监视受污染的数据，这些工具可以揭示传统分析可能忽略的安全问题。这里列出的工具强调了污染分析如何有助于维护安全的sc。</p>
+<h3 id="4-14-“可视化分析”工具"><a href="#4-14-“可视化分析”工具" class="headerlink" title="4.14. “可视化分析”工具"></a>4.14. “可视化分析”工具</h3><p>第14类工具使用可视化分析。该方法包括创建SCs的可视化表示，以促进对其结构、行为和潜在漏洞的理解。这些工具将代码转换为图形格式，帮助开发人员和审计人员深入了解合同的操作并更有效地识别问题。下面列表中的前六个工具将可视化分析应用于漏洞检测，而最后一个工具用于sc内的漏洞识别。</p>
+<blockquote>
+<ol>
+<li>e -EVM检测器（Norvill等人，2018年）：EEVM于2018年发布，模拟并可视化了以太坊sc在EVM上的执行。它直观地表示了每个执行步骤的合约控制流图、操作码和堆栈状态，帮助用户理解EVM操作和合约行为。该工具可以方便地识别循环、优化候选项和跟踪执行路径，从而帮助检测诸如“重新进入问题”和“无效跳转目的地”之类的漏洞。</li>
+<li>Erays-detector (Zhou et al., 2018b)：于2018年开发，它是一个用Python实现的逆向工程工具，旨在将以太坊sc从EVM字节码反编译为高级伪代码。Erays增强了对不透明sc的理解，提供了对代码复杂性和代码重用的洞察，并为没有公开可用源代码的合同启用了部分源代码恢复。</li>
+<li>eir - detector (Albert et al., 2018): EthIR（以太坊中间表示）是2018年引入的用于以太坊字节码高级分析的框架。它使用Oyente生成的cfg分析以太坊字节码，并生成字节码的基于规则的表示（RBR）。EthIR检测诸如“与气体相关的低效率”、“无界循环”和“潜在的拒绝服务攻击”等漏洞。</li>
+<li>InvCon - detector (Liu and Li, 2022): InvCon是以太坊sc的动态不变性检测工具。它使用历史事务数据来推断不变量，帮助逆向工程和遵从性检查。InvCon于2022年发布，具有基于web的界面和Python和Java的后端，用于数据跟踪生成和不变量检测。InvCon帮助识别漏洞，如不变性违规、与ERC20标准规范的不一致，以及SCs实现中潜在的不合规问题。</li>
+<li>Smart-Graph - detector (Pierro, 2021): Smart-Graph是2021年开发的一种基于网络的工具，可为Solidity sc生成增强的统一建模语言（UML）类图。它使用后端API来获取合约源代码，并创建可视化表示，其中包括特定于solid的功能，如函数修饰符和回退函数。Smart-Graph帮助开发人员可视化合同架构，帮助识别诸如“代码过于复杂”和“潜在交互流问题”等问题。</li>
+<li>SolGraph - detector (Revere, 2018): SolGraph于2018年发布，生成DOT图，以可视化Solidity合约中函数的控制流，并突出潜在的安全漏洞。它用不同的颜色标记函数和操作，以表示它们的类型，例如外部发送、常量函数和传输。SolGraph通过图形表示帮助开发人员理解合约行为并识别漏洞。</li>
+<li>Slither - identifier (Feist等人，2019):Slither是以太坊sc的静态分析框架，可将solid代码转换为称为SlithIR的中间表示。这种表示使用SSA形式来保存语义信息，促进数据流和污染跟踪分析。Slither于2019年推出，提供自动漏洞检测、代码优化和增强的代码理解。它可以检测“重入”、“变量阴影”、“未初始化变量”、“自杀式合约”、“锁定以太币”和“任意发送以太币”。</li>
+</ol>
+</blockquote>
+<p>可视化分析工具通过将代码转换为可视化表示，为检查和解释SCs提供了一种有价值的方法。这种转换有助于识别潜在的缺陷，并深入了解契约逻辑和执行流程。这里列出的工具展示了可视化如何支持sc分析，使复杂的代码结构更容易理解。</p>
+<p>总之，本节探讨了用于分析和保护sc的各种工具和方法，例如运行时验证、符号执行和模糊测试。如表3所示，每种方法中工具的数量突出了基于人工智能的方法和符号执行的重要性，它们的数量最高，分别为57和56个工具。这表明，这些方法在解决复杂的SCs脆弱性方面具有很强的适应性和有效性。另一方面，像代码插装和控制流分析这样的方法有更少的工具，这表明潜在的差距或对这些方法的依赖更少。这一分析不仅强调了人工智能和象征性执行在该领域的主导作用，还指出了可能需要进一步发展和创新的领域，以为SCs安全提供更全面的工具包。</p>
+<p>为了更好地理解景观，图3将呈现的信息可视化。这个系统的组织提供了一个全面的路线图，帮助开发人员和研究人员快速导航可用的工具，选择那些最能满足他们特定需求的工具，并识别现有方法中的潜在差距。这种有组织的视图有助于将工具选择与特定的安全目标结合起来，最终提高sc实现的安全性。</p>
+<p>本节确定了由不同工具检测到的各种各样的漏洞。由于存在大量的漏洞，因此将它们划分为更广泛的组，如表5和表6所示。第一个表侧重于功能漏洞，而第二个表则突出了结构或设计漏洞。这种分类允许进行更加结构化和精确的分析，从而更容易地评估哪些工具和方法在检测特定类型的漏洞时最有效。</p>
+<p>此外，表4清楚地概述了各种方法如何处理不同类别的漏洞。诸如基于人工智能的方法、模糊测试、运行时验证、符号执行、形式化验证、模式匹配和语法分析等方法都展示了显著的适应性。由于这些方法可以处理多种类型的漏洞，因此当需要全面的漏洞检测策略时，它们特别有效。在必须应对不同类型风险的情况下，这些方法可能至关重要，为SCs提供更全面的保护。</p>
+<p>相比之下，抽象解释、控制流分析、反汇编分析和可视化分析等方法的适用性有限，只关注较少的漏洞类型。这可能意味着在漏洞检测中扮演更专业的角色，在分析中提供深度而不是广度。这些类别的总体覆盖范围显示了对常见问题的优先级，如与气体相关的漏洞、可重入性和调用问题、访问控制、安全性以及逻辑或数据流问题。然而，像地址和函数调用问题、可见性和范围问题以及数学和计算错误等领域显示出跨方法的最小检测，表明当前工具可能不那么有效的潜在差距。这为进一步研究和开发工具提供了机会，以提高代表性不足地区的覆盖率。</p>
+<p>虽然一些方法提供了广泛的覆盖范围，但没有一种方法能够全面地解决所有的漏洞。这强调了需要一种组合方法，集成多种方法来有效地覆盖代码级和系统级漏洞。通过认识每种方法的优势和局限性，研究人员和开发人员可以专注于未来的工作，以增强SCs的安全性，填补已发现的空白，并推动漏洞检测欠发达领域的创新。</p>
+<h2 id="5-评估标准、分析和讨论"><a href="#5-评估标准、分析和讨论" class="headerlink" title="5 评估标准、分析和讨论"></a>5 评估标准、分析和讨论</h2><p>评估SCs检测工具需要有条理的方法来确保准确性和相关性。在通过搜索和筛选确定一套全面的工具后，进行系统评估。已确定的工具分为两组：工业工具和学术工具。这种划分允许进行更详细的评估，因为这两个领域中工具的优先级和需求有很大的不同。因此，每个小组都使用一套特定的标准进行评估，以确保进行彻底的评估，以满足工业界和学术界的特定需求。本节中的评估基于各自作者在工具的技术文档中提供的详细信息。以下小节分析了静态、动态和混合类别，并彻底解释了用于他们比较的标准。之所以选择这种分类，是因为它与SCs分析中使用的核心技术相一致，使其成为评估的实用框架。</p>
+<h3 id="5-1-评估学术工具"><a href="#5-1-评估学术工具" class="headerlink" title="5.1. 评估学术工具"></a>5.1. 评估学术工具</h3><p>在SCs安全领域，学术工具在研究和分析中发挥着至关重要的作用，因为它们推动了创新的边界，并为新出现的漏洞提供了更深入的见解。为了评估这些工具的有效性和能力，我们采用了一套针对学术研究的独特要求量身定制的特定标准。这些标准确保这些工具在识别漏洞方面是有效的，适应于不同的研究场景，充分记录透明度和可重复性，并能够与现有的研究基础设施集成。本评估确定并采用以下标准：</p>
+<ul>
+<li>灵活性：评估了该工具对各种SCs平台的适应性，因为这对于其在各种研究中的适用性至关重要的的场景</li>
+<li>详细的文档和出版物：评估文档和出版物的可用性和全面性，反映工具的透明度和可靠性。</li>
+<li>集成能力：该工具与现有系统和工具集成的能力被考虑在内，促进其无缝集成到研究工作流程中。</li>
+<li>全面覆盖：评估了该工具有效处理大范围SCs漏洞的能力，确保了彻底的分析。</li>
+<li>自动化：评估该工具以确定它是否提供自动化功能，这可以显著影响学术研究过程的效率。</li>
+<li>可靠的测试和评估：使用真实世界的SCs数据集进行测试和验证评估。这个评估展示了该工具对实际场景的适用性。</li>
+<li>可扩展性：考虑了工具的扩展和定制潜力。这突出了它对不断发展的研究需求和未来应用的适应性。</li>
+</ul>
+<h4 id="5-1-1-评估静态分析工具"><a href="#5-1-1-评估静态分析工具" class="headerlink" title="5.1.1. 评估静态分析工具"></a>5.1.1. 评估静态分析工具</h4><p>静态分析工具在评估SCs安全性的学术工具中尤为重要，因为它们可以在不执行代码的情况下分析代码。本节侧重于静态学术工具，检查它们在检测sc漏洞方面的能力和有效性。对静态学术工具的评估对于理解它们的能力和需要改进的领域是至关重要的。表7提供了这些工具的比较细节。</p>
+<p>在此评估中，前20%的工具始终满足大多数或所有标准，显示出高总体质量。这些工具，如ESCORT和SoliDetector，具有出色的灵活性、全面的文档和强大的集成能力。它们在自动化和可扩展性方面也表现良好，使它们对各种应用程序具有高度的适应性和效率。跨多个标准的一致性表明这些工具是健壮且开发良好的，为用户提供了重要的价值。</p>
+<p>中间60%的工具表现出对标准的适度遵从，通常在某些领域表现出色，而在其他领域则缺乏。像sCompile和Zeus这样的工具通常展示了良好的灵活性和集成能力，但通常缺乏可扩展性。这种可变性表明，虽然这些工具很有用，但它们可能需要额外的功能或改进才能完全满足所有用户的需求。这些领域突出了有针对性的改进机会，以提高其整体有效性。</p>
+<p>底部20%的工具满足的标准最少，这表明有很大的改进空间。孔隙度和ecker通常缺乏自动化、全面覆盖和可扩展性。这些缺陷限制了它们在更复杂或要求更高的场景中的可用性和适用性。分析表明，这些工具需要大量的开发来解决这些缺点，并更紧密地与用户的期望和需求保持一致。</p>
+<p>从这个评估中产生了几个关键的见解。首先，许多工具在灵活性、文档和集成能力方面的实力令人鼓舞，这表明开发人员优先考虑用户适应性和易用性。然而，许多工具普遍缺乏自动化和全面覆盖是一个问题。这些差距意味着用户在分析中可能面临大量的手工工作和有限的范围，从而降低了整体效率。此外，许多工具缺乏可扩展性，限制了它们未来的可伸缩性和对不断变化的需求的适应性。</p>
+<p>为了解决这些问题，未来的开发工作应该集中在增强工具的自动化和全面覆盖上。合并更多的自动化流程可以显著减少用户工作量并提高效率。扩大覆盖范围可确保工具能够处理更广泛的场景和问题，提供更全面的解决方案。此外，增加工具的可扩展性将允许更好地适应新的挑战并集成到不同的系统中。这些增强将有助于开发更健壮、通用和用户友好的工具，以满足学术界不断发展的需求。</p>
+<h4 id="5-1-2-动态分析工具的评估"><a href="#5-1-2-动态分析工具的评估" class="headerlink" title="5.1.2. 动态分析工具的评估"></a>5.1.2. 动态分析工具的评估</h4><p>评估用于SCs安全的动态学术工具对于确定其优势和需要改进的领域至关重要，因为这些工具可以检测运行时漏洞。这些工具的能力及其在检测安全系统内漏洞方面的有效性。这些工具的详细比较见表8。</p>
+<p>前25%的工具，如ContractLarva、ModCon和SODA，表现出高度的灵活性、详细的文档和发布、集成能力、自动化和全面的覆盖。这些工具展示了对各种SCs平台的适应性，使其适用于各种研究场景。它们提供透明的文档，确保可靠性和易用性。它们的集成能力非常强大，可以无缝地集成到现有的研究工作流程中。此外，这些工具提供了自动化功能，显著提高了学术研究过程的效率。它们的全面覆盖确保了对广泛的安全漏洞进行彻底分析，使其成为详细研究的必要条件。</p>
+<p>中间50%的工具，包括GFuzzer、DappGuard和EVMFuzzer，在各个类别中都表现出优势和劣势。虽然这些工具通常提供灵活性和全面的覆盖范围，但它们在使用可靠的测试、评估和可扩展性等方面往往存在不足。文档的质量各不相同，有些工具提供详细的指导，而有些工具缺乏足够的信息。集成功能是足够的，但不如顶级工具中的功能健壮。自动化是存在的，但没有得到一致的实施，这表明在提高研究效率方面还有改进的余地。这些工具可以处理许多sc漏洞，但需要在其他领域进行增强才能充分发挥其潜力。</p>
+<p>底层25%的工具，如RLRep、SeqFuzz和EVM，通常缺乏多个关键领域，包括灵活性、集成能力以及可靠测试和评估的使用。这些工具通常具有有限的文档，使得用户难以采用和有效地利用它们。自动化特性很少，需要更多的人工干预，这可能导致更多的错误和低效率。它们的全面覆盖限制了对不同SCs漏洞的适用性。此外，它们缺乏可扩展性适应未来研究需求和发展的挑战，使它们在不断变化的情况下不那么通用。</p>
+<p>可以提出一些建议，以提高动态学术工具的整体效用。首先，增加对真实数据集的集成将提高这些工具的实用性和可靠性。其次，增强所有工具之间的文档将支持用户采用和有效利用。第三，提高集成能力将促进更容易的采用和更广泛的使用。此外，增加自动化功能将提高效率并减少人工干预。最后，扩展工具的可扩展性将确保它们随着时间的推移保持相关性和有用性，以适应不断发展的研究需求和未来的应用。</p>
+<h4 id="5-1-3-混合分析工具的评估"><a href="#5-1-3-混合分析工具的评估" class="headerlink" title="5.1.3. 混合分析工具的评估"></a>5.1.3. 混合分析工具的评估</h4><p>混合学术工具对于sc分析至关重要，因为它们结合了静态和动态分析技术来解决漏洞并增强安全性。这些工具利用了这两种方法的优点，为检测sc中的问题提供了更全面的解决方案。研究人员可以通过比较混合工具来发现它们的优缺点，从而开发出更好的工具。这些工具的比较见表9。</p>
+<p>排名前30%的混合学术工具，如SmartBugs、KEVM、Vultron、WANA和FSPVM-E，在灵活性、详细的文档和发布、集成能力、自动化、全面覆盖、真实数据集使用和可扩展性方面表现出色。这些工具很好地适应了各种sc平台，并提供了大量文档，确保了可靠性和易用性。它们可以顺利地集成到现有的工作流程中，并提供自动化以提高研究效率。它们的全面覆盖允许对SCs的脆弱性进行彻底分析。使用可靠的测试和评估确保了实用性，其可扩展性支持了未来的研究需求。</p>
+<p>中间的50%的工具，包括MuSc、孔子、ESAF、SecSEC和Smartian，显示出优点和缺点的混合。这些工具通常提供灵活性和文档，但与顶级工具相比，它们的集成和自动化特性不那么健壮。虽然它们处理了许多SCs的漏洞，但覆盖范围并不广泛。它们的可靠测试和评估用途各不相同，限制了一些的实际适用性。可扩展性是另一个需要改进的领域，因为许多工具不容易适应未来的研究需求。</p>
+<p>排名最后20%的工具，如TEEther、solidaudit和HAM，在多个关键领域都缺乏。这些工具通常具有有限的灵活性、最少的文档和较弱的集成能力，使得它们难以在现有工作流中使用。自动化是有限的，需要大量的手工工作，导致错误和效率低下。他们的全面覆盖受到限制，降低了他们处理各种安全漏洞的能力。缺乏真实数据集的使用和可扩展性限制了它们的实际使用和对未来需求的适应性。</p>
+<p>基于上述分析，可以总结出几种改进混合学术工具的方法。第一，增强工具的灵活性，使其适应不同的SCs平台。应该改进文档以支持用户采用并提供必要的指导。应该增强集成功能，以便更容易地在工作流中采用。最后，将可靠的测试与评估相结合，提高这些工具的可靠性和实用性。</p>
+<p>对学术sc漏洞工具的综合分析基于七个关键特征对每个工具进行评估。该评估确定了这些工具中存在的显著差异。值得注意的是，大多数学术工具在诸如详细的文档和出版（237个工具）、自动化（223个工具）、可靠的测试和评估（214个工具）以及全面的覆盖（192个工具）等方面表现出色。然而，在灵活性（24个工具）和集成能力（50个工具）等类别中观察到明显的不足。可扩展性也显示出改进的空间，只有62个工具符合这一标准。</p>
+<p>总之，虽然学术工具通常提供健壮的文档和自动化，但迫切需要增强它们的灵活性、集成能力和可扩展性。未来在开发学术SCs漏洞工具方面的努力应该改进这些方面，以确保更广泛的适用性，无缝集成到研究工作流程中，并能够适应不断变化的研究需求。</p>
+<h3 id="5-2-评估行业工具"><a href="#5-2-评估行业工具" class="headerlink" title="5.2. 评估行业工具"></a>5.2. 评估行业工具</h3><p>对SCs漏洞检测工具的评估超越了学术兴趣，满足了现实世界应用的实际需求。在安全性和可靠性至关重要的行业环境中，对这些工具的全面评估涉及更广泛的标准集。此评估旨在确保所选择的工具有效地识别漏洞并与业务的操作需求保持一致。本评估确定并采用以下标准：</p>
+<ul>
+<li>灵活性：评估了该工具对各种SCs平台的适应性，因为这对于其在不同行业环境中的适用性至关重要。</li>
+<li>可用性和用户体验：评估工具的易用性和整体用户体验，因为这些因素对于专业环境中的采用和有效利用至关重要。</li>
+<li>可伸缩性和性能：评估了该工具有效处理大规模SCs分析的能力，这是企业级应用程序的关键需求。</li>
+<li>集成能力：评估了该工具与现有系统和工作流无缝集成的能力，这可以节省时间并改善安全操作。</li>
+<li>支持：检查用户支持的可用性，包括文档、教程和客户服务。在工业环境中，有效的用户支持对于故障排除和最大化工具的有效性至关重要。</li>
+<li>维护和更新：评估定期更新计划的存在，确保工具保持有效和最新。</li>
+<li>详细的文档和出版：评估文档的可用性和清晰度。清晰的文档可以促进用户理解，促进采用，并增强工具的可信度。</li>
+<li>自动化：对该工具进行评估，以确定它是否提供自动化功能，从而加快行业设置中的漏洞检测过程</li>
+<li>全面覆盖：评估了该工具检测大范围SCs漏洞的能力，确保其识别潜在风险的有效性。</li>
+<li>可靠的测试和评估：评估工具以确定它是否使用真实世界的数据集进行验证和测试。该评估表明了该工具对真实场景的适用性。</li>
+<li>可用性和开源：工具的可用性，无论是开放的还是商业许可的，都要考虑，因为这会影响可访问性和透明度。</li>
+<li>详细的漏洞报告：评估工具为修复或减轻检测到的漏洞提供可操作建议的能力，这对修复工作有很大帮助</li>
+<li>修复&#x2F;缓解建议：评估工具为修复或缓解检测到的漏洞提供实用建议的能力，因为这可以显著加快修复过程。</li>
+<li>可扩展性：考虑了该工具合并其他功能或特性的潜力，确保其对该领域未来需求和进步的适应性。</li>
+</ul>
+<p>与用于学术工具的方法类似，我们使用相同的方法来比较行业工具。这些工具分为三类：静态5.2.1、动态5.2.2和混合5.2.3，每种工具都附有一个比较表（表10、11和12）。根据上述标准对它们进行二元评估（是&#x2F;否），以确定是否存在特定特征。然后根据它们满足的标准数量对工具进行排序，满足更多标准的工具排名更高。这确保了公平和清晰的比较，突出每个工具的优点和缺点，并为未来的改进提供有价值的见解。</p>
+<h4 id="5-2-1-评估静态分析工具"><a href="#5-2-1-评估静态分析工具" class="headerlink" title="5.2.1. 评估静态分析工具"></a>5.2.1. 评估静态分析工具</h4><p>对SCs脆弱性的静态行业工具的评估揭示了一个具有优势和劣势的景观。如表10所示，一个值得注意的观察是，详细的文档和自动化在工具中广泛可用。这是令人鼓舞的，因为完整的文档可以帮助用户有效地理解和利用这些工具，而自动化功能减少了手工工作并简化了流程。Slither、SoMo和SmartCheck等工具体现了这一趋势，为用户提供指导和自动化功能。</p>
+<p>然而，在其他领域存在显著差距。灵活性和集成功能通常不会在工具之间共享，这可能会限制它们对不同用户需求和环境的适应性。例如，虽然SmartCheck因其集成能力而脱颖而出，但许多其他工具都存在不足，这可能会阻碍它们在各种场景中的可用性。此外，诸如可伸缩性和性能之类的质量仅在一些工具（如SoMo）中得到强调，这表明需要更健壮的解决方案来有效地处理大规模应用程序。</p>
+<p>另一个值得关注的领域是对可用性和用户体验的有限关注。尽管Ethlint和Solhint在这方面做出了显著的努力，但大多数工具都没有优先考虑用户友好的界面或体验，这可能成为广泛采用的障碍，特别是对于可能不太懂技术的用户。此外，全面覆盖和真实世界数据库并不是广泛实现的特性，只有Slither和Cider在这些方面表现出优势。缺乏广泛的覆盖意味着许多工具可能无法解决所有潜在的漏洞或场景，从而降低了它们的有效性。</p>
+<p>支持和维护也是许多工具可以改进的关键领域。虽然像Rattle和Solhint这样的工具提供了良好的支持和定期更新，确保用户可以依靠它们来满足持续的需求，但许多其他工具并没有提供相同级别的承诺。这可能导致使用过时的工具，并使用户感到沮丧，因为他们缺乏解决问题的帮助，或者无法及时了解最新的安全挑战。</p>
+<p>必须采取综合办法来解决这些缺点。首先，增加这些工具的灵活性和集成能力将使它们在各种环境中更具适应性和价值。开发人员应该考虑模块化体系结构并提供api，以便更好地与其他系统集成。其次，增强可用性和性能将使这些工具更易于访问和高效，从而鼓励更广泛的采用。应该优先考虑定期的性能优化和用户界面改进。</p>
+<p>此外，扩大覆盖范围和整合真实世界的数据库将提高工具分析的准确性和相关性，使它们在解决漏洞方面更加可靠。维护文档和提供支持对于用户满意度和工具可靠性也是必不可少的。最后，创建更多的开源工具可以促进社区的贡献和改进，从而产生更好的工具。通过解决这些问题，静态行业工具的开发和采用可以得到显著改进，从而产生更好的安全性实践。</p>
+<h4 id="5-2-2-动态分析工具的评估"><a href="#5-2-2-动态分析工具的评估" class="headerlink" title="5.2.2. 动态分析工具的评估"></a>5.2.2. 动态分析工具的评估</h4><p>探索动态行业工具对SCs脆弱性的评估揭示了其优势和不足。如表11所示，在四种工具（manticore、Echidna、Harvey和pakala）中，某些特性始终存在，突出了它们的优势。所有工具都提供了详细的文档，并且是开源的。这些共同的品质确保了这些工具为用户提供全面的指导，并且是可访问和透明的。Manticore、Echidna和Harvey共享可扩展性和性能、集成能力、维护和更新、详细文档、自动化、全面覆盖、可靠的测试和评估以及可扩展性。这些特征表明它们能够处理大规模分析，与其他系统无缝集成，定期更新，自动化功能，广泛的漏洞检测，适用于现实世界的场景，以及未来增强的潜力，使它们成为各种场景的健壮选项。</p>
+<p>尽管有这些优势，评估也揭示了这些工具的不足之处。最重要的差距是修复&#x2F;缓解建议类别，没有任何工具提供这一类别。这对于帮助用户处理和修复已识别的漏洞至关重要。此外，Harvey和Pakala缺乏支持类别，影响了用户获得帮助和有效解决问题的能力。在Echinda和Harvey中缺少详细的漏洞报告，限制了它们彻底评估漏洞的能力。灵活性是另一个问题，Echinda、Harvey和Pakala没有提供此功能，这可能会影响工具对各种平台的适应性。</p>
+<p>关键是要解决已确定的弱点，以提高未来动态行业工具的有效性。集成修复&#x2F;缓解建议将通过提供可操作的步骤来解决检测到的漏洞，从而提高工具的实用性。加强支持服务，确保用户可以获得必要的帮助，以优化工具的使用。详细的漏洞报告应该是提供洞察力的标准特性。此外，提高灵活性将使工具更适应各种平台。通过解决这些问题，未来的工具可以变得更加健壮、用户友好和有效。</p>
+<h4 id="5-2-3-混合分析工具的评估"><a href="#5-2-3-混合分析工具的评估" class="headerlink" title="5.2.3. 混合分析工具的评估"></a>5.2.3. 混合分析工具的评估</h4><p>评估用于SCs分析的混合行业工具突出了用于SCs分析的四种混合行业工具中的几个优势。如表12所示，这四种工具在灵活性、自动化、全面覆盖和可扩展性方面表现出色。这些优点表明该工具可以处理各种SCs分析任务。其中三个工具还因其可伸缩性和性能、集成能力、支持和开源可用性而脱颖而出。这些方面表明，这些工具可以有效地处理大规模分析，与现有系统很好地集成，提供可靠的用户支持，并且作为开源解决方案保持可访问性和透明性。这些特性使得这些工具在管理各种行业环境中的漏洞方面可靠而有效。</p>
+<p>然而，尽管有这些优势，评估也揭示了可能影响这些工具整体效用的重大差距。一些工具缺乏详细的文档，阻碍了用户的理解和有效的利用。具体的工具中也缺少详细的漏洞报告和修复建议，这些工具对于帮助用户快速解决已识别的问题至关重要。可用性和用户体验是需要改进的领域；糟糕的设计会阻碍用户效率和满意度。这些差距突出了需要改进的领域，以确保这些工具符合工业环境中实际使用所需的高标准。</p>
+<p>可以提出一些建议来解决这些缺点并提高SCs分析工具的有效性。改进详细的文档将增强用户的理解并促进工具的使用。结合详细的漏洞报告和修复建议可以极大地帮助用户快速解决已确定的问题。增强用户体验设计将使工具更直观，更容易导航，提高整体用户满意度。通过专注于这些改进，混合行业工具可以更好地满足用户需求，并在未来提供更高效的SCs分析。</p>
+<p>在分析行业SCs漏洞工具时，考虑了专业应用所必需的各种关键类别。大多数工业工具在自动化（19个工具）、详细文档和发布（16个工具）以及全面覆盖（15个工具）方面表现出色。然而，在灵活性（4个工具）、可用性和用户体验（8个工具）、修复&#x2F;缓解建议（8个工具）和可扩展性（8个工具）方面发现了重大差距。</p>
+<p>总之，尽管行业工具通常在自动化和文档化方面表现良好，但是在灵活性、用户体验和提供可操作的漏洞修复建议方面仍有迫切的需求。未来的开发工作应该改进工具的适应性、易用性和减少漏洞的有效性。通过解决这些不足，行业工具可以更好地满足企业级应用的需求，为网络安全提供更全面的解决方案。</p>
+<h2 id="6-SCs漏洞工具的实用分析"><a href="#6-SCs漏洞工具的实用分析" class="headerlink" title="6 SCs漏洞工具的实用分析"></a>6 SCs漏洞工具的实用分析</h2><p>本节介绍了sc漏洞检测工具的实际分析。工具的选择最初是基于它们从上一节的分数。对于行业工具，在14分中得分最高的是13分和11分，而对于学术工具，在7分中得分最高的是6分和7分。考虑的行业工具包括Mythril、Manticore、Echidna、Slither和Securify，考虑的学术工具包括SoliDetector、SIF、SMARTBUGS、KEVM、Vultron、Solc-Verify、WANA、FSPVM、ESCORT、FSolidM、MuSc、ConFuzzius、ESAF、SecSEC、SMARTBUGS 2.0、ModCon、sFuzz、SODA、WASAIUP、Vandal和Seraph。</p>
+<p>在测试期间，由于技术限制，一些工具无法执行。例如，Echidna需要Solidity 4.25或更高版本，这与我们数据集中使用早期版本的许多sc不兼容。此外，一些工具，如SoliDetector、Solc-Verify、ESAF、SecSEC、SmartBugs 2.0、WASAIUP、Seraph、SODA、Vultron和ESCORT，由于缺乏公开可用的代码或文档不足而被排除在外。一些工具，包括SIF、KEVM、MuSc和ModCon，没有进行测试，因为它们没有直接关注漏洞检测，而漏洞检测是本分析的主要目标。WANA虽然在理论上是灵活的，但也被排除在外，因为它依赖于特定的Solidity版本来将合同转换为WASM，这与我们数据集中的版本不兼容。最终，测试的工具——四个行业工具（Manticore、Mythril、Slither和Securify）和三个学术工具（ConFuzzius、sFuzz和Vandal）——是根据它们的可用性、与我们数据集中的solid版本的兼容性以及与漏洞检测的主要目标的一致性来选择的。</p>
+<p>用于测试的数据集基于HajiHosseinKhani等人（2024）提供的数据集。该数据集选择了1998个随机安全合约和1998个随机脆弱合约。更大的合约池可用于易受攻击的合约，每个合约都与特定类别的漏洞相关联。从这个池中，从9个合约中各选择相同数量的唯一随机合约漏洞类别：ExternalBug、GasException、MishandledException、Timestamp、TOD、UnusedReturn、CallToUnknown、Integer Under&#x2F;Overflow （IntegerUO）和Reentrancy。这些合同被合并成1998年脆弱合同的最后一套。测试在两个系统上进行：一个是英特尔酷睿i7-1370P CPU和32gb内存，另一个是英特尔酷睿i5-1240P CPU和30gb内存，都运行Ubuntu 22.04。这些工具在Docker环境（版本24.0.7）中执行，以确保一致的性能，并在执行期间减少系统特定的变化。</p>
+<p>这些工具的性能使用标准漏洞检测指标进行评估，包括真阳性（TP）、真阴性（TN）、假阳性（FP）和假阴性（FN）。TP衡量的是正确识别的漏洞，FN指的是错过的漏洞，TN指的是正确识别为无漏洞的安全合约，FP错误计算了那些被标记的漏洞。准确性表示正确识别的实际漏洞的百分比，从而深入了解每个工具在检测漏洞方面的有效性。计算精度是为了评估识别的准确性。召回用于衡量检测到多少实际漏洞。F1-Score平衡了准确率和召回率，作为这两个指标的调和平均值计算。执行时间，每个工具用于分析合约的持续时间被记录为最终度量。</p>
+<p>工具评估的结果显示在表13和14中，反映了测量漏洞检测性能的两种不同方法。在表12中，评估的重点是整体检测性能，不区分漏洞类型。在这里，每个工具都在数据集上运行，以查看它是否可以检测到一般的漏洞。如果一个工具将一个文件识别为易受攻击，不管具体的漏洞类型是什么，它都被视为真阳性（TP）。例如，如果一个文件包含可重入性漏洞，并且工具将其标记为易受攻击—而不必将其标识为可重入性—这将导致表13中的TP计数。此表中的假阴性（FN）表示有漏洞但被工具遗漏的文件，这意味着它根本没有检测到任何漏洞。真阴性（TN）和假阳性（FP）在两个表中是一致的，因为对非易受攻击文件和不正确标志的评估在两种方法之间不会改变。</p>
+<p>然而，在表14中，使用了一种更细粒度的方法，侧重于跨特定漏洞类型（多类分类）的检测准确性。在这里，数据集的结构与代表九个漏洞类别中的每一个的平等契约。在这种情况下，对于True Positive，工具必须检测漏洞并正确识别其类型。例如，如果合约包含GasException漏洞，那么只有当工具将其识别为GasException时，它才会是一个TP。如果工具检测到一个漏洞，但错误地标记了该类型，则不会将其计算为TP，而是将其添加到FN计数中。这种方法为每个工具准确识别不同类型漏洞的能力提供了更详细的视图。</p>
+<p>这七种漏洞检测工具的比较揭示了它们在功能上的显著差异，每个工具都显示出特定的优势和劣势。这些工具在检测精度、执行速度以及误报和误报率方面进行了不同的权衡，突出了创建一个安全的测试系统的挑战漏洞检测综合解决方案。</p>
+<p>Slither在二值分类中表现最好，准确率最高，达到92.3%，如表13和图4所示。这使得Slither能够有效地识别漏洞，特别是在时间有限的情况下，它的平均执行时间仅为2.5秒。然而，高误报率意味着用户必须花费额外的时间手动验证检测到的漏洞，从而降低了其有效性。这一限制表明，尽管Slither对第一次评估很有帮助，但它的输出需要大量的后续工作，这使得它在精度至关重要的环境中不太实用。</p>
+<p>与Slither相比，Manticore和Securify在二进制分类任务中表现不佳。Manticore的准确率仅为18.8%，Securify的准确率为33.9%。这两种工具的误报率和误报率也较高，这会影响它们检测漏洞的可靠性。Manticore的执行时间长达4439.0 s，这进一步限制了它的性能，使其不适合快速或大规模的分析。安全性的执行时间更快，为357.7秒，更接近Slither的速度，但它的低召回率表明它错过了许多漏洞，降低了它作为独立工具的有效性。尽管Manticore的表现在这些指标中似乎很弱，但其符号执行方法提供了更深入的分析，这在具体的详细审计场景中可能很有价值。</p>
+<p>此外，sFuzz提供了更平衡的性能，在保持中等精度和召回分数的同时，在二值分类中实现了67.5%的合理准确率。这种平衡表明，sFuzz可能适合于检测能力和总体准确性至关重要的用例。相比之下，Mythril的准确率相对较低（47.7%），并且执行时间较长，如图7所示，这可能会限制其实用价值，特别是在需要快速分析的场景中。高假阴性率进一步表明，Mythril经常无法识别许多漏洞，从而降低了其可靠性。Vandal的准确率仅为25.5%，在所有重要指标上的效用有限，检测质量差，速度慢，不如其他工具有效。</p>
+<p>在更复杂的多类分类场景中，如表14和图4所示，所有工具的性能都显著下降。在二元分类方面表现出色的Slither的准确率大幅下降，降至26.8%，这表明它在区分特定类型的漏洞方面存在困难。Manticore的准确率甚至进一步下降到12.0%，突出了它在分类复杂性增加方面的特殊挣扎。Securify在这方面也表现不佳，准确率仅为3.0%，是所有工具中最低的。Mythril在多类分类中达到了28.1%的最高准确率，但这个数字仍然很低，这表明即使是性能最好的工具也很难精确地识别特定类型的漏洞。所有工具的下降表明当前漏洞检测技术存在更大的局限性——随着复杂性的增加，无法保持准确性。</p>
+<p>详细查看特定漏洞的检测率，如表15和图5所示，显示了工具专门化的变化。Mythril在识别Integer Under&#x2F;Overflow漏洞方面表现出色（83.3%），并且在错误处理方面表现良好异常（68.0%），使得它适合于关注这些问题的用例。Slither对时间戳依赖性（41.4%）、GasException（27.5%）和错误处理异常（65.8%）的检测率相对较高，表明即使其总体覆盖范围有限，它也可以针对这些漏洞进行有效的检测。Manticore在Integer Under&#x2F;Overflow方面取得了不错的性能（40.5%），但对其他漏洞的检测率通常较低，这表明专业化程度较窄。</p>
+<p>相比之下，Securify和其他工具，包括confzzius、sFuzz和Vandal，显示出有限的有效性，在大多数类别中始终具有较低的检测率。例如，Securify在任何漏洞类型中的检测率都不超过5%，这限制了其作为独立检测工具的实用性。在所有工具中，某些漏洞，例如ExternalBug和Unused Return，具有特别低或不支持的检测率，突出了全面覆盖的总体限制。这一分析表明，虽然一些工具具有特定的优势，但组合多个工具或改进检测能力对于覆盖更大范围的漏洞是必要的。</p>
+<p>图6所示的执行时间进一步说明了这些工具的实际适用性。Slither和Vandal比它们的同类要快得多，这使得它们可能适合处理更大的数据集，或者在速度至关重要的情况下使用。然而，根据图7和图8，这种速度优势并没有转化为强大的检测性能，因为这两种工具在两种分类中都具有较低的准确性。相比之下，Manticore, confucius， sFuzz和Mythril的执行时间要长得多。Mythril确实达到了中等的准确性，但与其他方法一样，其较慢的速度并不能显著提高检测率，这表明速度和准确性之间的权衡是有限的。安全处于中间地带，速度适中，但准确性较低，难以在效率和有效的漏洞检测之间取得平衡。这些工具都没有达到理想的平衡，突出了增强工具开发或组合使用以提高覆盖率和准确性的需要。</p>
+<p>如图9所示，二元分类和多类分类的准确率、召回率和f1分数的比较进一步突出了这些工具的局限性。而在二元分类中表现出相对平衡的f1分的孔子则急剧下降在多类分类过程中的性能。这种模式表明，虽然这些工具可能能够识别一般漏洞，但它们缺乏准确区分特定类型漏洞所需的复杂性。有限的精度和高假阳性率，特别是在复杂的分类中，使得依赖这些工具进行详细的、多类别的漏洞分析具有挑战性。</p>
+<p>总之，本分析突出了当前SCs漏洞检测工具的优势和不足，显示出相当大的改进空间。Mythril是检测特定漏洞（如Integer Under&#x2F;Overflow）最强大的工具。该方法在多类分类中达到了最高的准确率，但其较长的执行时间限制了其快速分析的实用性。Slither以其在二进制分类中的高准确性和快速的执行速度而着称，使其适用于快速，广泛的评估。尽管如此，它的高假阳性率需要大量的人工验证。其他工具，如sFuzz、ConFuzzius和Vandal，显示出有限的有效性，低检测率和较慢的性能限制了它们的整体效用。Manticore在符号执行方面提供了一些深度，但在更广泛的漏洞检测方面存在执行时间长和准确性低的问题。总的来说，没有一个单一的工具可以达到全面脆弱性评估的准确性、速度和可靠性的理想平衡。未来的发展应该集中在提高检测精度、减少误报和提高分类精度上，使这些工具在现实世界的SCs安全中更加强大和实用。</p>
+<h2 id="7-讨论与限制"><a href="#7-讨论与限制" class="headerlink" title="7 讨论与限制"></a>7 讨论与限制</h2><p>本研究全面回顾了用于检测和识别sc漏洞的工具，解决了区块链安全的一个重要方面。通过评估一系列方法中的256种工具，这项工作抓住了现有方法的优势和局限性，并确定了需要进一步关注的差距。下面的讨论探讨了这些工具如何应对漏洞检测的挑战，它们的结果揭示了该领域的当前状态，以及改进的机会在哪里。</p>
+<p>以往对SCs漏洞检测工具的调查往往提供了有限的分析，侧重于特定的工具，而没有建立它们之间、使用的方法和漏洞解决之间的明确联系。许多调查以一般术语讨论漏洞，但未能指定哪些工具能够检测它们，或者这些工具在有效性方面如何比较。此外，很少有调查对这些工具进行理论和实验比较，这对于了解它们的实际适用性和性能至关重要。有些人还忽略了关键的方法，或者只提到一般的方法，而没有探索工具和它们的方法之间的关系。这种全面评价的缺乏在文献中留下了严重的空白。本研究通过对工具进行分类、分析它们针对的漏洞、使用的方法、系统比较它们的理论基础和实验结果，解决了这些缺陷。通过解决这些差距，本研究提供了关键的见解，使其成为该领域的杰出贡献，并支持SCs漏洞检测的未来发展。</p>
+<p>本调查中的理论分析表明，不同的方法在解决SCs脆弱性方面的能力各不相同。诸如基于人工智能的方法、模糊测试、运行时验证、符号执行、形式化验证和模式匹配等技术显示了显著的多功能性。这些方法可以处理多个类别的漏洞，使它们对综合检测策略有效。它们的适应性使得它们在需要覆盖不同安全问题的场景中必不可少。</p>
+<p>相比之下，抽象解释、控制流分析、拆卸分析和可视化分析等方法的关注点受到限制。这些方法处理特定的漏洞类型，并且可能在分析中提供深度而不是广度。虽然它们在特定领域表现良好，但在处理地址和函数调用、可见性和作用域以及数学错误等问题时效率较低，这些问题仍然很少得到解决。这种不平衡的覆盖突出了现有方法的差距，强调了对综合方法的需要。整合不同技术的优势可以弥合这些差距，为SCs安全提供更强大、更有效的解决方案。</p>
+<p>在对Scs漏洞检测学术工具的理论比较中，出现了几个关键发现。这些工具在文档、自动化和可靠测试等领域表现出色，使它们成为推进研究的有力贡献者。然而，它们在灵活性、集成能力和可扩展性方面存在局限性，这限制了它们对不同工作流的适应性。静态工具通常缺乏自动化和广泛的覆盖，要求用户做手工工作。动态工具虽然具有实际应用的潜力，但需要更好的文档和与数据集更强的集成，以提高实际适用性。混合工具有效地结合了各种方法，但需要更大的灵活性和改进的集成，以适应广泛的研究和实际应用。应对这些挑战将使学术工具能够满足未来SCs安全的需求。</p>
+<p>用于sc漏洞检测的行业工具在自动化、文档化和覆盖方面表现出色，但往往缺乏灵活性、可用性和可修复性建议和可扩展性。静态工具如Slither和SmartCheck在自动化方面表现良好，但缺乏适应性和可扩展性。动态工具，如Manticore和Echidna，提供强大的测试和覆盖，但缺乏修复建议和详细的报告。混合工具结合了灵活性和可扩展性，但需要更好的可用性和文档。解决这些差距将有助于行业工具满足企业需求并提高SCs的安全性。</p>
+<p>在实验分析和比较中，从理论评估中选择的首选工具，观察到它们的能力差异。每种工具都有其独特的优点和缺点，并在检测准确性、执行速度、误报率和负报率方面进行了权衡。Slither和Vandal在执行速度方面表现出色，适合快速评估，但他们的低准确性限制了他们在详细分析方面的有效性。相比之下，Mythril、Manticore和sFuzz等工具实现了中等精度，但执行时间较长，突出了平衡效率和精度的挑战。这些工具都没有达到理想的权衡，强调需要进步或结合方法来提高覆盖率和准确性。</p>
+<p>此外，这些工具在多类分类方面也存在问题，因为与二元分类相比，它们的性能都出现了显著下降。Mythril是该类别中表现最好的工具，准确率仅为28.1%，这强调了识别特定漏洞的难度。特定漏洞的检出率也有很大差异。例如，Mythril在检测整数under&#x2F;overflow漏洞方面表现出色，而Slither在时间戳依赖和gas异常方面表现一般。相比之下，像Securify和Vandal这样的工具的检测率一直很低，限制了它们作为独立解决方案的实用性。这些发现强调了开发新工具或整合现有工具的优势并提高其准确性，速度和可靠性以满足现实世界sc安全需求的必要性。</p>
+<p>尽管sc漏洞检测工具取得了进步，但一些限制阻碍了它们的广泛采用。这些问题包括与准确性、效率、灵活性和可用性相关的问题，这些问题仍然是关键的障碍。这些限制可分为以下几类：</p>
+<ul>
+<li>高假阳性率和低多类分类准确率：许多工具使用保守的分析方法，导致高假阳性，需要大量的人工审查。由于某些漏洞类型的模式重叠和数据有限，准确的多类分类（对于识别一系列漏洞至关重要）仍然很困难。未来的研究应该探索先进的机器学习和人工智能，以更好地区分良性模式和真实威胁，改进分类模型，扩展标记数据集，以提高跨多个漏洞的准确性。</li>
+<li>长执行时间和有限的漏洞覆盖：像符号执行这样的技术，虽然彻底，但通常是资源密集型的，导致缓慢的处理时间不适合实时分析。此外，大多数工具都侧重于常见的漏洞，为更罕见或新出现的威胁留下了空白。研究人员可以探索混合方法，将符号执行与轻量级静态和动态分析相结合，以加快检测速度。通过集成人工智能、符号执行和正式验证来扩展检测方法也可以提高不同漏洞类型的覆盖率。</li>
+<li>有限的灵活性、集成和用户体验：许多学术工具是独立的解决方案，限制了它们的适应性和与其他安全系统或工作流集成的便利性。复杂的工作流程和有限的用户友好界面使非专业人员难以访问它们。未来的开发应该关注模块化、灵活的体系结构，支持插件扩展，增强适应性和集成。优先考虑以用户为中心的设计，使用直观的界面和改进的文档，可以在不牺牲技术深度的情况下使这些工具更容易访问。</li>
+<li>缺乏标准化的基准和数据集：缺乏普遍接受的基准和数据集使得很难客观地评估和比较工具，这影响了安全评估的一致性和透明度。建立标准化基准和管理数据集将实现更可靠的比较，促进创新，并在工具开发中实现严格的质量保证。</li>
+<li>漏洞的快速演变：区块链和sc景观正在迅速发展，迅速引入新的漏洞。这使得现有工具难以保持当前状态。为了跟上步伐，未来的研究应该集中在能够快速整合新威胁数据的自适应检测模型上，可能通过自动更新或在不断更新的数据集上训练机器学习模型。</li>
+<li>有限的补救指导：虽然许多工具有效地检测漏洞，但它们通常缺乏关于如何修复问题的可操作指导，使用户依赖于重要的专业知识。未来的工具应该优先考虑修复建议或自动缓解建议，可能使用人工智能生成特定于上下文的指导，帮助用户有效地解决漏洞。</li>
+</ul>
+<p>总之，虽然目前的工具已经取得了重大进展，但解决尚未解决的挑战对于提高其可靠性和实用性至关重要。未来的研究应侧重于提高检测精度，扩大漏洞覆盖范围，提供可操作的补救指导，并建立标准化的评估指标。这些进步对于制造这些工具至关重要。在研究和行业中更加强大、可扩展和可访问，最终加强SCs的安全实践。</p>
+<h2 id="8-未来发展方向及研究问题"><a href="#8-未来发展方向及研究问题" class="headerlink" title="8 未来发展方向及研究问题"></a>8 未来发展方向及研究问题</h2><p>SCs安全领域取得重大进展，但仍面临诸多挑战。这些挑战限制了当前工具的准确性、效率和可用性。解决这些问题对于跟上区块链技术及其漏洞的快速发展至关重要。本节强调了指导sc漏洞检测未来进展的重要问题。</p>
+<ul>
+<li>如何利用人工智能等技术降低误报率，提高多类分类检测漏洞的准确率？</li>
+<li>在改进对罕见和新出现漏洞的检测的同时，可以开发哪些混合方法来平衡彻底性和速度？</li>
+<li>如何设计具有用户友好界面的工具，以改进专家和非专家的集成、适应性和可访问性？</li>
+<li>可以使用哪些策略来创建标准化基准和数据集，以一致地评估漏洞检测工具？</li>
+<li>如何开发自适应检测模型来快速处理新的漏洞数据并跟上不断发展的区块链生态系统？</li>
+<li>如何使用人工智能和其他技术来提供有效的修复或缓解建议，以解决检测到的漏洞？</li>
+</ul>
+<p>总之，研究人员、行业专业人士和开发人员之间的合作对于克服现有的SCs安全挑战至关重要。协同工作可以开发出更准确、更高效、更易于使用的工具，同时跟上快速变化的bbb环境。这一共同努力将有助于确保南海的未来更安全、更可靠。</p>
+<h2 id="9-结论"><a href="#9-结论" class="headerlink" title="9 结论"></a>9 结论</h2><p>本文调查了2018年至2024年间开发的256种工具，用于分析sc中的漏洞，并通过模糊测试和符号执行等方法对其进行分类。每个工具都根据其检测功能进一步分类，提供对特定应用程序的见解。该研究分解了每种工具可以检测到的漏洞类型，揭示了它们的覆盖范围和支持区块链安全的差距。评估是两层的：首先，一个理论分析，根据来源（学术或行业）和方法（静态、动态或混合）对工具进行分组，使用定制的评估标准。然后，在真实世界的数据集上对所选工具进行实验评估，这需要大量的时间和计算资源。</p>
+<p>研究结果揭示了不同工具的独特优势和劣势。学术工具优先考虑文档、灵活性和适应性，使它们适合不同的研究，而工业工具侧重于生产环境的速度和集成。Slither和Mythril等工具可以准确地检测到漏洞，但会遇到误报和速度较慢的问题。这些结果强调，尽管个别工具在特定领域表现出色，但没有一个工具能够完全覆盖漏洞。这凸显了在工具精度、执行速度和可靠性方面不断改进的需求，以有效地解决一系列SCs漏洞。</p>
+<p>总之，本调查为研究人员和从业人员提供了宝贵的资源，为SCs漏洞检测工具的现状提供了清晰的地图，确定了覆盖范围的差距，并提出了未来的改进建议。有了这些见解，我们计划开发一种解决这些限制的工具，旨在实现更高的准确性、更快的执行速度和更广泛的漏洞检测功能。这个工具将结合基于人工智能的技术和符号执行，以减少误报，提高多类分类的准确性。它还将解决未被充分代表的漏洞，例如地址和函数调用问题。此外，它将有一个用户友好的界面和可操作的维修建议，使其实际使用的现实世界。该工具旨在通过适应性强、高效和彻底来提高SCs的安全性，最终帮助区块链技术在快速变化的数字世界中更加可靠。</p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 智能合约漏洞检测工具的综合调查：技术和方法</li>
+        <li><strong>Author:</strong> A1ex</li>
+        <li><strong>Created at
+                :</strong> 2025-11-12 21:21:24</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-11-13 17:14:07
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/12/智能合约漏洞检测工具的综合调查：技术和方法/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87/">#智能合约论文</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/11/10/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E7%BB%BC%E8%BF%B0/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">区块链安全大语言模型：系统文件综述</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'havenoideal123/giscus_storage',
+                'data-repo-id': 'R_kgDOQMJJcA',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDOQMJJcM4CxQZl',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'bottom',
+                'data-loading': 'not-lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">智能合约漏洞检测工具的综合调查：技术和方法</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%9A%84%E7%BB%BC%E5%90%88%E8%B0%83%E6%9F%A5%EF%BC%9A%E6%8A%80%E6%9C%AF%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-text">智能合约漏洞检测工具的综合调查：技术和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%90%9C%E7%B4%A2%E6%96%B9%E6%B3%95"><span class="nav-text">2 搜索方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%B0%83%E6%9F%A5%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2%E6%96%B9%E6%B3%95"><span class="nav-text">2.1. 调查文献检索方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8A%80%E6%9C%AF%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2%E6%96%B9%E6%B3%95"><span class="nav-text">2.2. 技术文献检索方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B9%8B%E5%89%8D%E7%9A%84%E8%B0%83%E6%9F%A5%E5%88%86%E6%9E%90%E5%92%8C%E5%8A%A8%E6%9C%BA"><span class="nav-text">3 之前的调查分析和动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%88%86%E6%9E%90%E5%8F%AF%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-text">4 智能合约分析可用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E2%80%9C%E6%8A%BD%E8%B1%A1%E8%A7%A3%E9%87%8A%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.1 “抽象解释”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E2%80%9C%E5%9F%BA%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E2%80%9D%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-text">4.2. “基于人工智能”的工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E2%80%9C%E4%BB%A3%E7%A0%81%E6%8F%92%E6%A1%A9%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.3. “代码插桩”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E2%80%9C%E6%8E%A7%E5%88%B6%E6%B5%81%E5%88%86%E6%9E%90%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.4. “控制流分析”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E2%80%9C%E5%8F%8D%E6%B1%87%E7%BC%96%E5%88%86%E6%9E%90%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.5. “反汇编分析”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E2%80%9C%E5%90%88%E8%A7%84%E9%AA%8C%E8%AF%81%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.6. “合规验证”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-%E2%80%9C%E6%A8%A1%E7%B3%8A%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.7. “模糊”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-%E2%80%9C%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%B5%8B%E8%AF%95%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.8. “基于模型的测试”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-%E2%80%9C%E7%AA%81%E5%8F%98%E6%B5%8B%E8%AF%95%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.9. “突变测试”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-%E2%80%9C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E5%92%8C%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.10. “模式匹配和语法分析”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-%E2%80%9C%E8%BF%90%E8%A1%8C%E6%97%B6%E9%AA%8C%E8%AF%81%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.11. “运行时验证”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-12-%E2%80%9C%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.12. “符号执行”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-%E2%80%9C%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.13. “污点分析”工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-14-%E2%80%9C%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90%E2%80%9D%E5%B7%A5%E5%85%B7"><span class="nav-text">4.14. “可视化分析”工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86%E3%80%81%E5%88%86%E6%9E%90%E5%92%8C%E8%AE%A8%E8%AE%BA"><span class="nav-text">5 评估标准、分析和讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E8%AF%84%E4%BC%B0%E5%AD%A6%E6%9C%AF%E5%B7%A5%E5%85%B7"><span class="nav-text">5.1. 评估学术工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E8%AF%84%E4%BC%B0%E8%A1%8C%E4%B8%9A%E5%B7%A5%E5%85%B7"><span class="nav-text">5.2. 评估行业工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-SCs%E6%BC%8F%E6%B4%9E%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%9E%E7%94%A8%E5%88%86%E6%9E%90"><span class="nav-text">6 SCs漏洞工具的实用分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%AE%A8%E8%AE%BA%E4%B8%8E%E9%99%90%E5%88%B6"><span class="nav-text">7 讨论与限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91%E5%8F%8A%E7%A0%94%E7%A9%B6%E9%97%AE%E9%A2%98"><span class="nav-text">8 未来发展方向及研究问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E7%BB%93%E8%AE%BA"><span class="nav-text">9 结论</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">A1ex</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        6 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
