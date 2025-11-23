@@ -492,7 +492,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -532,7 +532,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -547,6 +547,169 @@
 			<div class="main-content">
 				<div class="home-content-container">
     <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">
+                            yunsee入群测试
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            前几天无意看到一个公众号文章，看到博主在招新，但是进群有验证，验证码需要提交flag。访问这个ip发现是个靶场，我刚好在学pwn，为了检验自己学的咋样顺便就做了pwn的题。
+WP这题给我好好的上了一课，由于学了很多高级手法，总想着用什么高深的技术来解决，但其实往往需要回归本质来看待问题，许多你认为的东西需要不断的实践才能出真知。
+1.老样子，查看文件的属性，发现并没有什么特殊属性，也没开ca...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Nov 23 2025 21:52:57 GMT+0800">
+                
+                    2025-11-23
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">Read more<span class="seo-reader-text">yunsee入群测试</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/23/grehack-ctf-2017-beerfighter/">
+                            grehack-ctf-2017_beerfighter
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            GreHack-CTF-2017_beerfighter这个题目主要难点在于结合SROP以及栈转移，需要构造两次SROP来完成。
+WP1.老规矩还是首先看程序的二进制属性，发现只是个静态链接的二进制。
+2.使用ida分析后，发现在sub_400568函数中存在栈溢出。分配大小为0x410，但是复制过去2048
+3.可以简单的使用一下程序，发现只有在功能1，才有输入角色名的功能，也就是漏洞出现...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Nov 23 2025 16:14:58 GMT+0800">
+                
+                    2025-11-23
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/11/23/grehack-ctf-2017-beerfighter/">Read more<span class="seo-reader-text">grehack-ctf-2017_beerfighter</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/11/23/rop-Emporium-pivot/">
+                            rop-Emporium-pivot
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            ROP_Emporium 挑战之pivot本挑战分为64位和32位的，核心思路是由于溢出的空间不足，因此需要使用stack pivoting的技术进行栈转移，将程序流转移到足够我们利用的空间
+wp32位pivot1.我们拿到程序后，首先还是检查他的二进制文件的保护设置，题目给了3个文件，分别是flag、lib和二进制程序，我们查看二进制程序发现只开启了NX，而lib开启了随机化。
+2.使用i...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Nov 23 2025 14:33:47 GMT+0800">
+                
+                    2025-11-23
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/11/23/rop-Emporium-pivot/">Read more<span class="seo-reader-text">rop-Emporium-pivot</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
         
             <li class="home-article-item">
 
@@ -928,105 +1091,11 @@ wp首先，下载messager后，我们使用命令查看该程序的文件属性�
                 </div>
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/03/%E2%80%9C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%8E%8B%E7%88%BD%EF%BC%88%E7%AC%AC4%E7%89%88%EF%BC%89-%E5%AE%9E%E9%AA%8C13%E2%80%9D/">
-                            “汇编语言王爽（第4版）--实验13”
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            该实验为编写并安装int 7ch中断例程，显示一个用0结束的字符串，并将中断例程安装到0:200处
-测试程序t1.asm用于触发7ch中断
-123456789101112131415161718assume cs:codedata segment  db &quot;welcome to masm! &quot;,0data endscode segment  start: mov dh,1...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Mon Nov 03 2025 19:47:15 GMT+0800">
-                
-                    2025-11-03
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/learning-rookie/">learning-rookie</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/03/%E2%80%9C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%8E%8B%E7%88%BD%EF%BC%88%E7%AC%AC4%E7%89%88%EF%BC%89-%E5%AE%9E%E9%AA%8C13%E2%80%9D/">Read more<span class="seo-reader-text">“汇编语言王爽（第4版）--实验13”</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/10/30/helloworld-md/">
-                            helloworld.md
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Thu Oct 30 2025 21:07:58 GMT+0800">
-                
-                    2025-10-30
-                
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a href="/2025/10/30/helloworld-md/">Read more<span class="seo-reader-text">helloworld.md</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
     </ul>
 
     <div class="home-paginator px-7 py-5">
         <div class="paginator">
-	<span class="page-number current">1</span>
+	<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa-regular fa-angle-right"></i></a>
 </div>
   
     </div>
@@ -1052,7 +1121,7 @@ wp首先，下载messager后，我们使用命令查看该程序的文件属性�
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        9 posts in total
+                        12 posts in total
                     </span>
                     
                 </p>
