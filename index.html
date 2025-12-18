@@ -492,7 +492,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">16</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -532,7 +532,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">16</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -547,6 +547,121 @@
 			<div class="main-content">
 				<div class="home-content-container">
     <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/12/17/sleeply-holder/">
+                            sleeply-holder
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            本题是secret holder的变体，在这题中，huge 一旦创建就无法删除了，我们需要利用fastbin dup consolidate方法进行unlink
+WP与secret holder的逆向代码没多大的区别，主要是huge创建后会lock，然后也无法wipe
+因为存在一次large bin的申请，会触发__malloc_consolidate，而且存在UAF漏洞，可以通过fastb...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Dec 17 2025 21:32:55 GMT+0800">
+                
+                    2025-12-17
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/12/17/sleeply-holder/">Read more<span class="seo-reader-text">sleeply-holder</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/12/17/BUUCTF-secret-holder/">
+                            BUUCTF-secret_holder
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            本题主要想考察的知识点为unlink
+WP
+unlink在堆中，bins（非fast bin）是以双向链表形式存在，而我们从这个链表中获取一个chunk时，会触发链表节点的删除操作
+FD = node->fd;
+BK = node->bk;
+FD->bk = BK;
+BK->fd = FD;
+
+
+如果我们想往一个地址(target_addr)写入任意值(my_value), 那么我们可以修改...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Dec 17 2025 19:19:05 GMT+0800">
+                
+                    2025-12-17
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/12/17/BUUCTF-secret-holder/">Read more<span class="seo-reader-text">BUUCTF-secret_holder</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
         
             <li class="home-article-item">
 
@@ -980,115 +1095,6 @@ wp32位pivot1.我们拿到程序后，首先还是检查他的二进制文件的
                 </div>
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/20/hitcon2017-pwn200/">
-                            hitcon2017-pwn200
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            HITCON CMT 2017: pwn200本题目主要是结合格式化字符串泄漏canary，然后再利用栈溢出导致任意函数执行。相对简单，因为题目给了system，而不用自己再去找libc。
-wp题目源码：
-12345678910111213141516#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;void canary_protect_me...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Thu Nov 20 2025 20:23:28 GMT+0800">
-                
-                    2025-11-20
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/20/hitcon2017-pwn200/">Read more<span class="seo-reader-text">hitcon2017-pwn200</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/18/NJCTF2017-messager-wp/">
-                            NJCTF2017-messager-wp
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            NJCTF2017-messager-wp最近在看校友写的《CTF竞赛权威指南-pwn》，学习了爆破金丝雀的一个案例
-题目程序：https://github.com/D4rkD0g/REPL/blob/master/Canary/NJCTF2017_messager/messager
-wp首先，下载messager后，我们使用命令查看该程序的文件属性，发现是起用了Canary和NX的
-1pw...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Tue Nov 18 2025 16:25:02 GMT+0800">
-                
-                    2025-11-18
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/18/NJCTF2017-messager-wp/">Read more<span class="seo-reader-text">NJCTF2017-messager-wp</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
     </ul>
 
     <div class="home-paginator px-7 py-5">
@@ -1119,7 +1125,7 @@ wp首先，下载messager后，我们使用命令查看该程序的文件属性�
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        16 posts in total
+                        18 posts in total
                     </span>
                     
                 </p>

