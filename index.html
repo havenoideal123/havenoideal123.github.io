@@ -492,7 +492,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">20</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -532,7 +532,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">18</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">20</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -547,6 +547,117 @@
 			<div class="main-content">
 				<div class="home-content-container">
     <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/12/30/tinypad/">
+                            tinypad
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            本题主要考察hoe的用法，
+WP详细解释可以参考一下https://www.52pojie.cn/thread-1828388-1-1.html
+这里主要解释几个关键问题
+
+1.本题最后利用的时候，我这边环境问题导致始终无法成功执行gadget，使用realloc_hook做中转也未能成功。
+2.由于本提自带打印chunk中的内容，所以泄漏内存地址很简单，构造一个进入unsorted bin...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue Dec 30 2025 15:55:05 GMT+0800">
+                
+                    2025-12-30
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/12/30/tinypad/">Read more<span class="seo-reader-text">tinypad</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/12/22/asis-ctf2016-b00ks/">
+                            asis-ctf2016-b00ks
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            本题主要考察off-by-one的利用，其他的手法都差不多
+WP核心在于ida逆向可以看到，在以下代码处，存在off-by-one
+12345678910111213141516171819202122232425262728293031323334353637__int64 __fastcall sub_9F5(_BYTE *a1, int a2)&#123;  int i; // [rs...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Dec 22 2025 21:05:07 GMT+0800">
+                
+                    2025-12-22
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/12/22/asis-ctf2016-b00ks/">Read more<span class="seo-reader-text">asis-ctf2016-b00ks</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
         
             <li class="home-article-item">
 
@@ -987,114 +1098,6 @@ WP1.老规矩还是首先看程序的二进制属性，发现只是个静态链�
                 </div>
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/23/rop-Emporium-pivot/">
-                            rop-Emporium-pivot
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            ROP_Emporium 挑战之pivot本挑战分为64位和32位的，核心思路是由于溢出的空间不足，因此需要使用stack pivoting的技术进行栈转移，将程序流转移到足够我们利用的空间
-wp32位pivot1.我们拿到程序后，首先还是检查他的二进制文件的保护设置，题目给了3个文件，分别是flag、lib和二进制程序，我们查看二进制程序发现只开启了NX，而lib开启了随机化。
-2.使用i...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun Nov 23 2025 14:33:47 GMT+0800">
-                
-                    2025-11-23
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/23/rop-Emporium-pivot/">Read more<span class="seo-reader-text">rop-Emporium-pivot</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/21/njctf2017-pingme/">
-                            njctf2017-pingme
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            NJCTF2017-pingme这个题目还挺有意思，我们需要在没有二进制文件，只有端口和ip的情况下进行pwn。
-核心思路：
-123451.判断是什么类型：栈溢出、格式字符串等2.获取类型后，发现是格式字符串，利用该漏洞进行二进制dump3.dump后就能获取printf的文件地址，可以泄漏对应的got。4.要么在libc-database中查、要么使用DynELF在没有获得libc信息时利...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Fri Nov 21 2025 16:04:42 GMT+0800">
-                
-                    2025-11-21
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/21/njctf2017-pingme/">Read more<span class="seo-reader-text">njctf2017-pingme</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
     </ul>
 
     <div class="home-paginator px-7 py-5">
@@ -1125,7 +1128,7 @@ wp32位pivot1.我们拿到程序后，首先还是检查他的二进制文件的
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        18 posts in total
+                        20 posts in total
                     </span>
                     
                 </p>
