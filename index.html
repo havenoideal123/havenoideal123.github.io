@@ -484,7 +484,7 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
@@ -492,7 +492,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">21</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -524,7 +524,7 @@
 </div>
                 <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
@@ -532,7 +532,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">21</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -547,6 +547,58 @@
 			<div class="main-content">
 				<div class="home-content-container">
     <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2026/04/05/cve-2024-51015-rce%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%88%86%E6%9E%90/">
+                            cve-2024-51015_rce复现与分析
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            cve-2024-51015 &amp; CVE-2024-35520这个cve目前在网上没有搜到exp，应该是需要认证后触发所以并不是很致命（无人在意QAQ），笔者刚好最近在研究netgear r7000路由器的相关漏洞，找到了这个cve，这个cve对于r7000p影响点是一样的，有个思路就是看看r7000p有什么漏洞、用在r7000上应该也是适用的。..&#x2F;..&#x2F;..&...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Apr 05 2026 17:18:06 GMT+0800">
+                
+                    2026-04-05
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/netgear-exploit/">netgear exploit</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2026/04/05/cve-2024-51015-rce%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%88%86%E6%9E%90/">Read more<span class="seo-reader-text">cve-2024-51015_rce复现与分析</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
         
             <li class="home-article-item">
 
@@ -657,6 +709,64 @@ WP详细解释可以参考一下https://www.52pojie.cn/thread-1828388-1-1.html
     </div>
 
     <a href="/2025/12/30/tinypad/">Read more<span class="seo-reader-text">tinypad</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/12/24/plaidDB/">
+                            plaidDB
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            本题即可以通过修改prev_size来做，也可以通过修改size来做
+https://www.cnblogs.com/damoxilai/p/15886839.html
+WP细节部分可以参考上述的文章
+这里对一些个人在实战中遇到的问题做一些解释
+
+1.为什么要连续申请又释放多个堆块？
+为了填满特定大小fastbin，因为这道题每使用一次put，会伴生申请结构体，会影响我门创建的连续的堆块，而...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Dec 24 2025 10:59:16 GMT+0800">
+                
+                    2025-12-24
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/PWN/">PWN</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/12/24/plaidDB/">Read more<span class="seo-reader-text">plaidDB</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
                 </div>
@@ -993,113 +1103,6 @@ wp （参考https://bbs.kanxue.com/thread-269105.htm）house of Atum共有4个�
                 </div>
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/12/02/gundam/">
-                            gundam
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            HITB CTF 2018 gundam这题整体利用没有那么难，主要是要理解整个Tache机制和每步的逻辑，整体来说很有意思的一道堆题，更多详细细节可以参考https://bbs.kanxue.com/thread-269017.htm 写的文章，里面有调试过程
-wp123456789101112131415161718192021222324252627282930313233343536...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Tue Dec 02 2025 11:19:17 GMT+0800">
-                
-                    2025-12-02
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/12/02/gundam/">Read more<span class="seo-reader-text">gundam</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">
-                            yunsee入群测试
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            
-                            前几天无意看到一个公众号文章，看到博主在招新，但是进群有验证，验证码需要提交flag。访问这个ip发现是个靶场，我刚好在学pwn，为了检验自己学的咋样顺便就做了pwn的题。
-WP这题给我好好的上了一课，由于学了很多高级手法，总想着用什么高深的技术来解决，但其实往往需要回归本质来看待问题，许多你认为的东西需要不断的实践才能出真知。
-1.老样子，查看文件的属性，发现并没有什么特殊属性，也没开ca...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun Nov 23 2025 21:52:57 GMT+0800">
-                
-                    2025-11-23
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/PWN/">PWN</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2025/11/23/yunsee%E5%85%A5%E7%BE%A4%E6%B5%8B%E8%AF%95/">Read more<span class="seo-reader-text">yunsee入群测试</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
     </ul>
 
     <div class="home-paginator px-7 py-5">
@@ -1130,7 +1133,7 @@ WP这题给我好好的上了一课，由于学了很多高级手法，总想着
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        21 posts in total
+                        23 posts in total
                     </span>
                     
                 </p>

